@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C9433152-1C2D-4F56-9C7A-1FBCA2E5D65F}</ProjectGuid>
+    <RootNamespace>IEX2009</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(DXSDK_DIR)include;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(DXSDK_DIR)lib/x86;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(DXSDK_DIR)include;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(DXSDK_DIR)lib/x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>./IEX/;./SOURCE/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>./IEX/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="source\brendanimation\BlendAnimationMesh.cpp" />
+    <ClCompile Include="source\character\CharacterBase.cpp" />
+    <ClCompile Include="source\character\CharacterFunction.cpp" />
+    <ClCompile Include="source\character\CharacterMoveClass.cpp" />
+    <ClCompile Include="source\character\CharacterRenderer.cpp" />
+    <ClCompile Include="source\character\Renderer.cpp" />
+    <ClCompile Include="source\character\TennisPlayer.cpp" />
+    <ClCompile Include="source\character\TennisPlayerState.cpp" />
+    <ClCompile Include="source\GameObject.cpp" />
+    <ClCompile Include="source\sceneGamePlay.cpp" />
+    <ClCompile Include="source\sceneMain.cpp" />
+    <ClCompile Include="source\system\Framework.cpp" />
+    <ClCompile Include="source\system\GameController.cpp" />
+    <ClCompile Include="source\system\System.cpp" />
+    <ClCompile Include="source\system\WinMain.cpp" />
+    <ClCompile Include="IEX\IEX_2DObject.cpp" />
+    <ClCompile Include="IEX\IEX_3DObject.cpp" />
+    <ClCompile Include="IEX\IEX_Audio.cpp" />
+    <ClCompile Include="IEX\IEX_Direct3D.cpp" />
+    <ClCompile Include="IEX\IEX_Input.cpp" />
+    <ClCompile Include="IEX\IEX_Light.cpp" />
+    <ClCompile Include="IEX\IEX_Math.cpp" />
+    <ClCompile Include="IEX\IEX_Mesh.cpp" />
+    <ClCompile Include="IEX\IEX_Particle.cpp" />
+    <ClCompile Include="IEX\IEX_Polygon.cpp" />
+    <ClCompile Include="IEX\IEX_RenderState.cpp" />
+    <ClCompile Include="IEX\IEX_Shader.cpp" />
+    <ClCompile Include="IEX\IEX_SkinMesh.cpp" />
+    <ClCompile Include="IEX\IEX_System.cpp" />
+    <ClCompile Include="IEX\IEX_Texture.cpp" />
+    <ClCompile Include="IEX\IEX_View.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\brendanimation\BlendAnimationMesh.h" />
+    <ClInclude Include="source\character\CharacterBase.h" />
+    <ClInclude Include="source\character\CharacterFunction.h" />
+    <ClInclude Include="source\character\CharacterMoveClass.h" />
+    <ClInclude Include="source\character\CharacterRenderer.h" />
+    <ClInclude Include="source\character\CharacterStateTemplate.h" />
+    <ClInclude Include="source\character\Renderer.h" />
+    <ClInclude Include="source\character\TennisPlayer.h" />
+    <ClInclude Include="source\character\TennisPlayerState.h" />
+    <ClInclude Include="source\Collision.h" />
+    <ClInclude Include="source\debug\DebugFunction.h" />
+    <ClInclude Include="source\ForwardDecl.h" />
+    <ClInclude Include="source\GameObject.h" />
+    <ClInclude Include="source\GameSystem.h" />
+    <ClInclude Include="source\SceneGamePlay.h" />
+    <ClInclude Include="source\StateTemplate.h" />
+    <ClInclude Include="source\system\Framework.h" />
+    <ClInclude Include="source\system\GameController.h" />
+    <ClInclude Include="source\system\Scene.h" />
+    <ClInclude Include="source\sceneMain.h" />
+    <ClInclude Include="source\system\System.h" />
+    <ClInclude Include="IEX\iextreme.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DATA\Shader\2D.fx" />
+    <CustomBuild Include="DATA\Shader\3DEx.fx">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
