@@ -4,7 +4,7 @@
 //
 //*****************************************************************************************************************************
 #pragma once
-#include "system\Scene.h"
+#include "../IexSystem/Scene.h"
 
 class	sceneGamePlay : public Scene
 {

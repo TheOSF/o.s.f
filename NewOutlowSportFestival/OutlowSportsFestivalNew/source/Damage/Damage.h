@@ -2,7 +2,7 @@
 #define __DAMAGE_H__
 
 #include "iextreme.h"
-#include "ForwardDecl.h"
+#include "../GameSystem/ForwardDecl.h"
 #include <map>
 
 //*************************************************************
@@ -47,6 +47,8 @@ class DamageShpere :public DamageBase
 public:
 	bool			m_Enable;	//このダメージが有効かどうか
 	ShpereParam		m_Param;	//このダメージの球の構造体
+
+	DamageShpere();
 private:
 	bool HitCheckSphere(const ShpereParam* sp);
 };
@@ -77,6 +79,7 @@ public:
 		);
 
 private:
+	friend class DamageBase;
 	typedef std::map<DamageBase*, DamageBase*> DamageBaseMap;
 	
 	static DamageManager*	m_pInstance;
@@ -90,6 +93,6 @@ private:
 };
 
 
-#define DefDamageMgr (DamageManager::GetInstance());
+#define DefDamageMgr (DamageManager::GetInstance())
 
 #endif

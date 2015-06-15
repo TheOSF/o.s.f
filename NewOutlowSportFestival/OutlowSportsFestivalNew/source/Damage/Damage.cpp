@@ -9,14 +9,12 @@ type(_WeekDamage),
 Value(1),
 vec(Vector3Zero)
 {
-
+	MyAssert(DefDamageMgr.AddDamage(this), "ダメージ登録の失敗");
 }
 
-
-
-DamageShpere::~DamageShpere()
+DamageBase::~DamageBase()
 {
-
+	MyAssert(DefDamageMgr.EraceDamage(this), "ダメージ削除の失敗");
 }
 
 
@@ -32,6 +30,8 @@ bool DamageShpere::HitCheckSphere(const ShpereParam* sp)
 //*************************************************************
 //		ダメージ判定マネージャ
 //*************************************************************
+
+DamageManager* DamageManager::m_pInstance = nullptr;
 
 DamageManager& DamageManager::GetInstance()
 {

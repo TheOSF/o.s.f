@@ -4,7 +4,7 @@
 #include <map>
 #include <list>
 #include "iextreme.h"
-#include "ForwardDecl.h"
+#include "../GameSystem/ForwardDecl.h"
 
 //*****************************************************
 //		玉ベースクラス

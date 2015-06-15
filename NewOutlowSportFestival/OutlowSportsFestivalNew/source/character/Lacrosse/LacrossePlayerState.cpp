@@ -1,5 +1,5 @@
 #include "LacrossePlayerState.h"
-#include "../../system/GameController.h"
+#include "../../GameSystem/GameController.h"
 #include "../CharacterFunction.h"
 
 //*************************************************************

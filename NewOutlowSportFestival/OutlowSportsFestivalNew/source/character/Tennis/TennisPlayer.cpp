@@ -1,5 +1,5 @@
 #include "TennisPlayer.h"
-#include "../../Damage.h"
+#include "../../Damage/Damage.h"
 
 
 //*************************************************************
