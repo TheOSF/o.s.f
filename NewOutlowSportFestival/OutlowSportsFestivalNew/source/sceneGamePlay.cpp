@@ -36,6 +36,10 @@ bool sceneGamePlay::Initialize()
 	
 	pStage = new iexMesh("DATA\\STAGE\\Stage.IMO");
 
+
+
+	//キャラクタ作成
+
 	CharacterBase::PlayerInfo pl;
 
 	pl.chr_type = CharacterType::_Tennis;
@@ -43,7 +47,9 @@ bool sceneGamePlay::Initialize()
 	pl.player_type = PlayerType::_Player;
 	pl.strong_type = StrongType::__ErrorType;
 	
+	//テニスを作成し、動きとしてプレイヤー操作クラスをセット
 	(new TennisPlayer(pl))->SetState(new TennisState_PlayerControll_Move());
+
 
 	return true;
 }

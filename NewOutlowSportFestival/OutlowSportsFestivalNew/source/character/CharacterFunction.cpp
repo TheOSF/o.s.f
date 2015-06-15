@@ -33,8 +33,8 @@ void chr_func::XZMoveDown(CharacterBase*p, float t)
 	t = max(t, 0);
 	t = 1 - t;
 
-	p->m_Params.move.x *= 1 - t;
-	p->m_Params.move.z *= 1 - t;
+	p->m_Params.move.x *= t;
+	p->m_Params.move.z *= t;
 }
 
 //‚w‚y•ûŒü‚ÌˆÚ“®—Ê‚ªmax_speed‚ğ’´‚¦‚Ä‚¢‚½‚çAmax_speed‚Éİ’è‚·‚é

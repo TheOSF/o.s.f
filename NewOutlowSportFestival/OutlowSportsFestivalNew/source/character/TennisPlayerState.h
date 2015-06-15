@@ -13,7 +13,7 @@
 class TennisState_PlayerControll_Move :public TennisState
 {
 private:
-	CharacterUsualMove* m_pMoveClass;
+	CharacterUsualMove*		m_pMoveClass;
 public:
 	void Enter(TennisPlayer* t);
 	void Execute(TennisPlayer* t);

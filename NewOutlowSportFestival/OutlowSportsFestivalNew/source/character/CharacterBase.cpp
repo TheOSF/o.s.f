@@ -8,6 +8,7 @@ CharacterBase::CharacterBase(const PlayerInfo& info):
 m_PlayerInfo(info)
 {
 	m_Params.pos = Vector3Zero;
+	m_Params.move = Vector3Zero;
 	m_Params.hitScale = 1;
 	m_Params.angle = 0;
 	m_Params.HP = 100;

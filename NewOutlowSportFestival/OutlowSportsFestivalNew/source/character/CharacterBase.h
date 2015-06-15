@@ -9,7 +9,6 @@
 //***************************************************
 //		キャラクタクラス
 //***************************************************
-as; dfjas;:ofiaje:pfoaekf:aepk
 
 class CharacterBase :public GameObjectBase
 {
