@@ -43,6 +43,9 @@
     <Filter Include="キャラクター\共通">
       <UniqueIdentifier>{759b7ee8-56fb-4914-8678-13cecc33e66e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="キャラクター\Lacrosse">
+      <UniqueIdentifier>{5b4f8917-ade7-4d2b-94b7-915bec9a8bac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\system\Framework.cpp">
@@ -147,6 +150,12 @@
     <ClCompile Include="source\Ball.cpp">
       <Filter>ソース ファイル\GameSource</Filter>
     </ClCompile>
+    <ClCompile Include="source\character\Lacrosse\LacrossePlayer.cpp">
+      <Filter>キャラクター\Lacrosse</Filter>
+    </ClCompile>
+    <ClCompile Include="source\character\Lacrosse\LacrossePlayerState.cpp">
+      <Filter>キャラクター\Lacrosse</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEX\iextreme.h">
@@ -223,6 +232,12 @@
     </ClInclude>
     <ClInclude Include="source\UsualBall.h">
       <Filter>ヘッダー ファイル\GameHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="source\character\Lacrosse\LacrossePlayer.h">
+      <Filter>キャラクター\Lacrosse</Filter>
+    </ClInclude>
+    <ClInclude Include="source\character\Lacrosse\LacrossePlayerState.h">
+      <Filter>キャラクター\Lacrosse</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

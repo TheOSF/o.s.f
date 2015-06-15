@@ -5,6 +5,9 @@
 #include	"character\TennisPlayer.h"
 #include	"character\TennisPlayerState.h"
 
+#include "character\Lacrosse\LacrossePlayer.h"
+#include "character\Lacrosse\LacrossePlayerState.h"
+
 
 //*****************************************************************************************************************************
 //
@@ -39,17 +42,30 @@ bool sceneGamePlay::Initialize()
 
 
 	//キャラクタ作成
+	{
+		CharacterBase::PlayerInfo pl;
 
-	CharacterBase::PlayerInfo pl;
+		pl.chr_type = CharacterType::_Tennis;
+		pl.number = (PlayerNum::Value)0;
+		pl.player_type = PlayerType::_Player;
+		pl.strong_type = StrongType::__ErrorType;
 
-	pl.chr_type = CharacterType::_Tennis;
-	pl.number = (PlayerNum::Value)0;
-	pl.player_type = PlayerType::_Player;
-	pl.strong_type = StrongType::__ErrorType;
-	
-	//テニスを作成し、動きとしてプレイヤー操作クラスをセット
-	(new TennisPlayer(pl))->SetState(new TennisState_PlayerControll_Move());
+		//テニスを作成し、動きとしてプレイヤー操作クラスをセット
+		(new TennisPlayer(pl))->SetState(new TennisState_PlayerControll_Move());
+	}
 
+	//キャラクタ作成
+	{
+		CharacterBase::PlayerInfo pl;
+
+		pl.chr_type = CharacterType::_Tennis;
+		pl.number = (PlayerNum::Value)0;
+		pl.player_type = PlayerType::_Player;
+		pl.strong_type = StrongType::__ErrorType;
+
+		//テニスを作成し、動きとしてプレイヤー操作クラスをセット
+		(new LacrossePlayer(pl))->SetState(new LacrosseState_PlayerControllMove());
+	}
 
 	return true;
 }
