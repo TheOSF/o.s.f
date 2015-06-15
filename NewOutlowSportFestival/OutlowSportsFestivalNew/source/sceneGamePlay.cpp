@@ -2,8 +2,8 @@
 #include	"system/system.h"
 #include	"debug\DebugFunction.h"
 #include	"sceneGamePlay.h"
-#include	"character\TennisPlayer.h"
-#include	"character\TennisPlayerState.h"
+#include	"character\Tennis\TennisPlayer.h"
+#include	"character\Tennis\TennisPlayerState.h"
 
 
 //*****************************************************************************************************************************
@@ -37,9 +37,7 @@ bool sceneGamePlay::Initialize()
 	pStage = new iexMesh("DATA\\STAGE\\Stage.IMO");
 
 
-
 	//ƒLƒƒƒ‰ƒNƒ^ì¬
-
 	CharacterBase::PlayerInfo pl;
 
 	pl.chr_type = CharacterType::_Tennis;

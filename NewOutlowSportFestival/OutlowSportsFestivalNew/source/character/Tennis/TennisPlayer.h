@@ -1,9 +1,9 @@
 #ifndef __TENNIS_PLAYER_H__
 #define __TENNIS_PLAYER_H__
 
-#include "CharacterBase.h"
-#include "CharacterRenderer.h"
-#include "CharacterStateTemplate.h"	
+#include "../CharacterBase.h"
+#include "../CharacterRenderer.h"
+#include "../CharacterStateTemplate.h"	
 
 class TennisPlayer;
 

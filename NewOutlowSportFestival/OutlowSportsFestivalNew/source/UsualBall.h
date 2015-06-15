@@ -12,11 +12,6 @@
 class UsualBall :public GameObjectBase
 {
 public:
-	struct Params
-	{
-		Character*	pParent;	//発射したキャラクタへのポインタ
-
-	};
 	UsualBall();
 	~UsualBall();
 

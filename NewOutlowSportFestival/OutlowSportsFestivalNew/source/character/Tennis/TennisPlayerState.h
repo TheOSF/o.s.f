@@ -2,7 +2,7 @@
 #define __TENNIS_PLAYER_STATE_H__
 
 #include "TennisPlayer.h"
-#include "CharacterMoveClass.h"
+#include "../CharacterMoveClass.h"
 
 
 //****************************************************
