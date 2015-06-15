@@ -114,6 +114,8 @@
     <ClCompile Include="source\character\CharacterFunction.cpp" />
     <ClCompile Include="source\character\CharacterMoveClass.cpp" />
     <ClCompile Include="source\character\CharacterRenderer.cpp" />
+    <ClCompile Include="source\character\Lacrosse\LacrossePlayer.cpp" />
+    <ClCompile Include="source\character\Lacrosse\LacrossePlayerState.cpp" />
     <ClCompile Include="source\character\Renderer.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayer.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayerState.cpp" />
@@ -152,6 +154,8 @@
     <ClInclude Include="source\character\CharacterMoveClass.h" />
     <ClInclude Include="source\character\CharacterRenderer.h" />
     <ClInclude Include="source\character\CharacterStateTemplate.h" />
+    <ClInclude Include="source\character\Lacrosse\LacrossePlayer.h" />
+    <ClInclude Include="source\character\Lacrosse\LacrossePlayerState.h" />
     <ClInclude Include="source\character\Renderer.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayer.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayerState.h" />
