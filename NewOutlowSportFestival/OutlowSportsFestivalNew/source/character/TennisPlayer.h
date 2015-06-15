@@ -19,6 +19,12 @@ typedef ChrState<TennisPlayer, CharacterBase::MsgType>TennisState;
 class TennisPlayer:public CharacterBase
 {
 public:
+	enum MotionType
+	{
+		_mt_Stand,
+		_mt_Run,
+	};
+
 	TennisPlayer(const CharacterBase::PlayerInfo& info);
 	~TennisPlayer();
 
@@ -29,8 +35,7 @@ public:
 	bool Msg(MsgType mt);
 
 private:
-	TennisStateMachine*	m_pStateMachine;
-
+	TennisStateMachine*		m_pStateMachine;
 };
 
 

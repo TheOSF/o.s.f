@@ -7,5 +7,8 @@
 
 class Character;
 typedef Character* LpCharacter;
+
+class BallBase;
+typedef BallBase* LpBallBase;
 	 
 #endif

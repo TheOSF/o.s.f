@@ -138,6 +138,15 @@
     <ClCompile Include="source\character\CharacterMoveClass.cpp">
       <Filter>キャラクター\共通</Filter>
     </ClCompile>
+    <ClCompile Include="source\UsualBall.cpp">
+      <Filter>ソース ファイル\GameSource</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Camera.cpp">
+      <Filter>ソース ファイル\GameSource</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Ball.cpp">
+      <Filter>ソース ファイル\GameSource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEX\iextreme.h">
@@ -204,6 +213,15 @@
       <Filter>キャラクター\Tennis</Filter>
     </ClInclude>
     <ClInclude Include="source\system\GameController.h">
+      <Filter>ヘッダー ファイル\GameHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="source\brendanimation\Camera.h">
+      <Filter>ヘッダー ファイル\GameHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Ball.h">
+      <Filter>ヘッダー ファイル\GameHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UsualBall.h">
       <Filter>ヘッダー ファイル\GameHeader</Filter>
     </ClInclude>
   </ItemGroup>

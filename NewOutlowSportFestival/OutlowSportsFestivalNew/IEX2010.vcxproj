@@ -107,7 +107,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\Ball.cpp" />
     <ClCompile Include="source\brendanimation\BlendAnimationMesh.cpp" />
+    <ClCompile Include="source\Camera.cpp" />
     <ClCompile Include="source\character\CharacterBase.cpp" />
     <ClCompile Include="source\character\CharacterFunction.cpp" />
     <ClCompile Include="source\character\CharacterMoveClass.cpp" />
@@ -118,6 +120,7 @@
     <ClCompile Include="source\GameObject.cpp" />
     <ClCompile Include="source\sceneGamePlay.cpp" />
     <ClCompile Include="source\sceneMain.cpp" />
+    <ClCompile Include="source\UsualBall.cpp" />
     <ClCompile Include="source\system\Framework.cpp" />
     <ClCompile Include="source\system\GameController.cpp" />
     <ClCompile Include="source\system\System.cpp" />
@@ -140,7 +143,9 @@
     <ClCompile Include="IEX\IEX_View.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Ball.h" />
     <ClInclude Include="source\brendanimation\BlendAnimationMesh.h" />
+    <ClInclude Include="source\brendanimation\Camera.h" />
     <ClInclude Include="source\character\CharacterBase.h" />
     <ClInclude Include="source\character\CharacterFunction.h" />
     <ClInclude Include="source\character\CharacterMoveClass.h" />
@@ -162,6 +167,7 @@
     <ClInclude Include="source\sceneMain.h" />
     <ClInclude Include="source\system\System.h" />
     <ClInclude Include="IEX\iextreme.h" />
+    <ClInclude Include="source\UsualBall.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DATA\Shader\2D.fx" />
