@@ -82,6 +82,7 @@
     <ClCompile Include="source\IexSystem\Framework.cpp" />
     <ClCompile Include="source\IexSystem\System.cpp" />
     <ClCompile Include="source\IexSystem\WinMain.cpp" />
+    <ClCompile Include="source\character\Lacrosse\LacrosseAttackClose.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEX\iextreme.h">
@@ -114,6 +115,7 @@
     <ClInclude Include="source\IexSystem\System.h" />
     <ClInclude Include="source\utillity\Collision.h" />
     <ClInclude Include="source\utillity\StateTemplate.h" />
+    <ClInclude Include="source\character\Lacrosse\LacrosseAttackClose.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DATA\Shader\2D.fx">

@@ -32,6 +32,10 @@ public:
 	{
 		mt_Stand,
 		mt_Run,
+
+		mt_AttackClose_1,  // ‹ß‹——£‚P’i–Ú
+		mt_AttackClose_2,  // ‹ß‹——£‚Q’i–Ú
+		mt_AttackClose_3,  // ‹ß‹——£‚R’i–Ú
 	};
 
 public:
