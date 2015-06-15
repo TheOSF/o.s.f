@@ -292,6 +292,21 @@ inline float Vector3LengthSq(const Vector& v)
 	return (v.x*v.x + v.y*v.y + v.z*v.z);
 }
 
+inline float Vector3XYLength(const Vector& v)
+{
+	return sqrtf(v.x*v.x + v.y*v.y );
+}
+
+inline float Vector3XZLength(const Vector& v)
+{
+	return sqrtf(v.x*v.x + v.z*v.z);
+}
+
+inline float Vector3YZLength(const Vector& v)
+{
+	return sqrtf(v.z*v.z + v.y*v.y);
+}
+
 //------------------------------------------------------
 //	æZ
 //------------------------------------------------------
