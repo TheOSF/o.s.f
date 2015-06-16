@@ -5,10 +5,6 @@
 
 class LacrossePlayer;
 
-// ダメージ(仮)
-class DamageObject;
-typedef DamageObject DamageObject;
-
 
 //***************************************************
 //		ラクロス用近距離攻撃クラス
@@ -33,10 +29,10 @@ public:
 	{
 	public:
 		virtual~Event(){}
-		virtual void Update() = 0;       // 更新
+		virtual void Update() = 0;           // 更新
 		virtual void DamageStart() = 0; // ダメージ開始
-		virtual void AttackStart() = 0; // 攻撃開始
-		virtual void AttackEnd() = 0;   // 攻撃終了
+		virtual void AttackStart() = 0;    // 攻撃開始
+		virtual void AttackEnd() = 0;      // 攻撃終了
 	};
 
 	// コンストラクタ
@@ -53,7 +49,7 @@ public:
 	bool Update();
 
 	// スティックの値セット
-	void SetStickValue(CrVector2 StickValue);
+	void SetStickValue(CrVector2 stickValue);
 
 	// コンボできるかどうか
 	bool CanDoCombo()const;

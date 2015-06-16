@@ -2,6 +2,10 @@
 #include "../../GameSystem/GameController.h"
 #include "../CharacterFunction.h"
 
+#include "../CharacterMoveClass.h"
+#include "LacrosseAttackClose.h"
+#include "LacrosseEvasionClass.h"
+
 //*************************************************************
 //
 //		ラクロスの操作クラス
@@ -15,7 +19,7 @@
 //***************************************************
 
 // 移動時のイベントクラス作成
-CharacterUsualMove::MoveEvent* LacrosseState_PlayerControllMove::CreateMoveEvent(LacrossePlayer* t)
+CharacterUsualMove* LacrosseState_PlayerControllMove::CreateMoveClass(LacrossePlayer* t)
 {
 	class LacrosseMoveEvent : public CharacterUsualMove::MoveEvent
 	{
@@ -43,13 +47,6 @@ CharacterUsualMove::MoveEvent* LacrosseState_PlayerControllMove::CreateMoveEvent
 		}
 	};
 
-	return new LacrosseMoveEvent(t);
-}
-
-
-// ステート開始
-void LacrosseState_PlayerControllMove::Enter(LacrossePlayer* t)
-{
 	// 移動パラメータ設定
 	CharacterUsualMove::Params p;
 	p.Acceleration = 0.2f;
@@ -57,9 +54,15 @@ void LacrosseState_PlayerControllMove::Enter(LacrossePlayer* t)
 	p.TurnSpeed = 0.3f;
 	p.DownSpeed = 0.2f;
 
-	// 移動クラス作成
-	m_pMoveClass = new CharacterUsualMove(t, p, this->CreateMoveEvent(t));
+	return new CharacterUsualMove(t, p, new LacrosseMoveEvent(t));
+}
 
+
+// ステート開始
+void LacrosseState_PlayerControllMove::Enter(LacrossePlayer* t)
+{
+	// 移動クラス作成
+	m_pMoveClass = this->CreateMoveClass(t);
 }
 
 
@@ -72,9 +75,14 @@ void LacrosseState_PlayerControllMove::Execute(LacrossePlayer* t)
 	m_pMoveClass->Update();
 	chr_func::CreateTransMatrix(t, 0.05f, &t->m_Renderer.m_TransMatrix);
 
+	if (controller::GetTRG(controller::button::batu, t->m_PlayerInfo.number))
+	{// ×で回避へ
+		t->SetState(new LacrosseState_PlayerControllEvasion());
+		return;
+	}
 
 	if (controller::GetTRG(controller::button::shikaku, t->m_PlayerInfo.number))
-	{
+	{// □で近接攻撃へ
 		t->SetState(new LacrosseState_PlayerControllAttackClose(0));
 		return;
 	}
@@ -99,7 +107,8 @@ const int LacrosseState_PlayerControllAttackClose::kComboMax = 3;
 // コンストラクタ
 LacrosseState_PlayerControllAttackClose::LacrosseState_PlayerControllAttackClose(int combo) :
 m_ComboCount(combo),
-m_DoCombo(false)
+m_DoCombo(false),
+m_pAttackClass(nullptr)
 {
 
 }
@@ -114,6 +123,7 @@ void LacrosseState_PlayerControllAttackClose::Enter(LacrossePlayer* t)
 		lacrosse_player::mt_AttackClose_3
 	};
 
+	// 攻撃クラス作成
 	m_pAttackClass = CreateAttackClass(t, motion_type[m_ComboCount]);
 }
 
@@ -179,12 +189,15 @@ LacrosseAttackClose* LacrosseState_PlayerControllAttackClose::CreateAttackClass(
 			m_pLacrosse->m_Renderer.Update(1.0f);
 
 			// 転送行列更新
-			chr_func::CreateTransMatrix(m_pLacrosse, 0.05f, &m_pLacrosse->m_Renderer.m_TransMatrix);
+			chr_func::CreateTransMatrix(
+				m_pLacrosse,
+				0.05f,
+				&m_pLacrosse->m_Renderer.m_TransMatrix);
 		}
 
 		// ダメージ開始
 		void DamageStart()
-		{
+		{// とりあえず置いておく
 
 		}
 
@@ -207,5 +220,109 @@ LacrosseAttackClose* LacrosseState_PlayerControllAttackClose::CreateAttackClass(
 		t, 
 		new AttackCloseEvent(t, motion), 
 		combo_params[m_ComboCount]);
+}
+
+
+
+
+//***************************************************
+//		プレイヤー操作の回避クラス
+//***************************************************
+
+// コンストラクタ
+LacrosseState_PlayerControllEvasion::LacrosseState_PlayerControllEvasion() :
+m_pEvasionClass(nullptr)
+{
+
+}
+
+
+// ステート開始
+void LacrosseState_PlayerControllEvasion::Enter(LacrossePlayer* t)
+{
+	// 回避クラス作成
+	m_pEvasionClass = this->CreateEvasionClass(t);
+}
+
+
+// ステート実行
+void LacrosseState_PlayerControllEvasion::Execute(LacrossePlayer* t)
+{
+	// スティックの値セット
+	m_pEvasionClass->SetStickValue(
+		controller::GetStickValue(controller::stick::left, t->m_PlayerInfo.number));
+
+	// 更新
+	if (m_pEvasionClass->Update() == false)
+	{
+		return;
+	}
+}
+
+
+// ステート終了
+void LacrosseState_PlayerControllEvasion::Exit(LacrossePlayer* t)
+{
+	delete m_pEvasionClass;
+}
+
+
+// 回避クラス作成
+LacrosseEvasion* LacrosseState_PlayerControllEvasion::CreateEvasionClass(LacrossePlayer* t)
+{
+	class EvasionEvent : public LacrosseEvasion::Event
+	{
+		LacrossePlayer* m_pLacrosse; // ラクロス
+	public:
+		// コンストラクタ
+		EvasionEvent(LacrossePlayer* pLacrosse) :
+			m_pLacrosse(pLacrosse){}
+
+
+		// 更新
+		void Update()override
+		{
+			// モデル更新
+			m_pLacrosse->m_Renderer.Update(1.0f);
+
+			// 転送行列更新
+			chr_func::CreateTransMatrix(
+				m_pLacrosse, 
+				0.05f, 
+				&m_pLacrosse->m_Renderer.m_TransMatrix);
+		}
+
+
+		// 回避行動開始
+		void EvasionStart()override
+		{
+			m_pLacrosse->m_Renderer.SetMotion(lacrosse_player::mt_Evasion);
+		}
+
+
+		// 回避行動終了
+		void EvasionEnd()override
+		{
+			// 通常移動へ
+			m_pLacrosse->m_Renderer.SetMotion(lacrosse_player::mt_Stand);
+			m_pLacrosse->SetState(new LacrosseState_PlayerControllMove());
+		}
+	};
+
+	// 回避パラメータ設定
+	LacrosseEvasion::EvasionParams params;
+	params.AllFrame                      = 35;         // 全35フレーム
+	params.MaxTurnRadian            = PI / 4;    // 45°
+	params.MoveDownSpeed         = 0.2f;      // 減速割合
+	params.MoveSpeed                  = 0.25f;    // 移動スピード
+	params.NoDamageStartFrame = 3;          // 開始3フレームで無敵開始
+	params.NoDamageEndFrame   = 20;       // 開始20フレームで無敵終了
+
+	// 作成
+	return new LacrosseEvasion(
+		t,
+		new EvasionEvent(t),
+		params
+		);
 }
 

@@ -26,6 +26,9 @@ namespace lacrosse_player
 		mt_AttackClose_1,  // ‹ß‹——£‚P’i–Ú
 		mt_AttackClose_2 = 15,  // ‹ß‹——£‚Q’i–Ú
 		mt_AttackClose_3 = 16,  // ‹ß‹——£‚R’i–Ú
+
+
+		mt_Evasion = 5,  // ‰ñ”ð
 	};
 
 

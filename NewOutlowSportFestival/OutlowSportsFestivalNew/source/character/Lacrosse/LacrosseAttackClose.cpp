@@ -35,6 +35,7 @@ bool LacrosseAttackClose::Update()
 {
 	if (m_Timer == 0)
 	{// 攻撃開始
+		m_pEvent->AttackStart();
 
 		// 移動
 		chr_func::AddMoveFront(
@@ -42,19 +43,19 @@ bool LacrosseAttackClose::Update()
 			m_ComboParams.MoveSpeed,
 			m_ComboParams.MoveSpeed);
 
+		// 移動方向補正
 		chr_func::AddXZMove(
 			m_pLacrossePlayer,
 			m_StickValue.x,
 			m_StickValue.y,
 			m_ComboParams.MoveSpeed);
 
+		// 向き補正
 		chr_func::AngleControll(
 			m_pLacrossePlayer,
-			m_pLacrossePlayer->m_Params.pos + Vector3(m_StickValue.x, 0, m_StickValue.y),
+			m_pLacrossePlayer->m_Params.pos + m_pLacrossePlayer->m_Params.move,
 			m_ComboParams.MaxTurnRadian
 			);
-
-		m_pEvent->AttackStart();
 	}
 
 	// 座標更新
@@ -89,9 +90,9 @@ bool LacrosseAttackClose::Update()
 
 
 // スティックの値セット
-void LacrosseAttackClose::SetStickValue(CrVector2 StickValue)
+void LacrosseAttackClose::SetStickValue(CrVector2 stickValue)
 {
-	m_StickValue = StickValue;
+	m_StickValue = stickValue;
 }
 
 
