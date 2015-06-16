@@ -42,7 +42,8 @@ public:
 class LacrosseState_PlayerControllAttackClose : public LacrosseState
 {
 public:
-
+	// コンストラクタ
+	LacrosseState_PlayerControllAttackClose(int combo);
 
 	// ステート開始
 	void Enter(LacrossePlayer* t)override;
@@ -54,8 +55,11 @@ public:
 	void Exit(LacrossePlayer* t)override;
 
 private:
+	static const int            kComboMax;        // 最大コンボ数
+	const int                     m_ComboCount;  // コンボ数
 	LacrosseAttackClose* m_pAttackClass;  // 近接攻撃クラス
+	bool                            m_DoCombo;      // コンボするかどうか
 
 	// 近接攻撃クラス作成
-	LacrosseAttackClose* CreateAttackClass(LacrossePlayer* t);
+	LacrosseAttackClose* CreateAttackClass(LacrossePlayer* t, lacrosse_player::MotionType motion);
 };

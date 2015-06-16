@@ -2,12 +2,6 @@
 #include "LacrosseAttackClose.h"
 #include "../CharacterFunction.h"
 
-namespace lacrosse_player
-{
-	// とりあえず定数
-	static const int AttackCloseStartFrame = 0;
-	static const int AttackCloseEndFrame = 60;
-}
 
 //***************************************************
 //		ラクロス用近距離攻撃クラス
@@ -16,8 +10,10 @@ namespace lacrosse_player
 // コンストラクタ
 LacrosseAttackClose::LacrosseAttackClose(
 	LacrossePlayer* pLacrossePlayer,
-	Event* pEvent
+	Event* pEvent,
+	const ComboParams& combo_params
 	) :
+	m_ComboParams(combo_params), 
 	m_StickValue(0, 0),
 	m_pLacrossePlayer(pLacrossePlayer),
 	m_Timer(0),
@@ -35,26 +31,60 @@ LacrosseAttackClose::~LacrosseAttackClose()
 
 
 // 更新
-void LacrosseAttackClose::Update()
+bool LacrosseAttackClose::Update()
 {
-	// 動かないように
-	chr_func::SetMaxXZspeed(m_pLacrossePlayer, 0.0f);
+	if (m_Timer == 0)
+	{// 攻撃開始
 
-	if (m_Timer == lacrosse_player::AttackCloseStartFrame)
-	{
+		// 移動
+		chr_func::AddMoveFront(
+			m_pLacrossePlayer,
+			m_ComboParams.MoveSpeed,
+			m_ComboParams.MoveSpeed);
+
+		chr_func::AddXZMove(
+			m_pLacrossePlayer,
+			m_StickValue.x,
+			m_StickValue.y,
+			m_ComboParams.MoveSpeed);
+
+		chr_func::AngleControll(
+			m_pLacrossePlayer,
+			m_pLacrossePlayer->m_Params.pos + Vector3(m_StickValue.x, 0, m_StickValue.y),
+			m_ComboParams.MaxTurnRadian
+			);
+
 		m_pEvent->AttackStart();
 	}
 
-	if (m_Timer == lacrosse_player::AttackCloseEndFrame)
-	{
-		m_pEvent->AttackEnd();
+	// 座標更新
+	chr_func::PositionUpdate(m_pLacrossePlayer);
+
+	// 減速
+	chr_func::XZMoveDown(
+		m_pLacrossePlayer,
+		m_ComboParams.MoveDownSpeed);
+
+	// 更新
+	m_pEvent->Update();
+
+	
+
+	if (m_Timer == m_ComboParams.DamageOutbreakFrame)
+	{// ダメージ発生フレーム
+		m_pEvent->DamageStart();
 	}
 
-	m_pEvent->Update();
+	if (m_Timer >= m_ComboParams.AllFrame)
+	{// 攻撃終了
+		m_pEvent->AttackEnd();
+		return false;
+	}
 
 	// タイマー更新
 	m_Timer++;
 
+	return true;
 }
 
 
@@ -62,5 +92,19 @@ void LacrosseAttackClose::Update()
 void LacrosseAttackClose::SetStickValue(CrVector2 StickValue)
 {
 	m_StickValue = StickValue;
+}
+
+
+// コンボできるかどうか
+bool LacrosseAttackClose::CanDoCombo()const
+{
+	return (m_Timer >= m_ComboParams.CanDoComboFrame);
+}
+
+
+// コンボ実行できるかどうか
+bool LacrosseAttackClose::CanGoNextCombo()const
+{
+	return (m_Timer >= m_ComboParams.GoNextComboFrame);
 }
 
