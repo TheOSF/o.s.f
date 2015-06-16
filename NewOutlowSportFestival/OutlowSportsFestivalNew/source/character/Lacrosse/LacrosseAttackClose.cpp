@@ -1,7 +1,13 @@
-
+#include "LacrossePlayer.h"
 #include "LacrosseAttackClose.h"
+#include "../CharacterFunction.h"
 
-
+namespace lacrosse_player
+{
+	// とりあえず定数
+	static const int AttackCloseStartFrame = 0;
+	static const int AttackCloseEndFrame = 60;
+}
 
 //***************************************************
 //		ラクロス用近距離攻撃クラス
@@ -10,14 +16,12 @@
 // コンストラクタ
 LacrosseAttackClose::LacrosseAttackClose(
 	LacrossePlayer* pLacrossePlayer,
-	const Params& param,
-	AttackEvent* pAttackEvent
+	Event* pEvent
 	) :
-	m_pAttackEvent(pAttackEvent),
 	m_StickValue(0, 0),
 	m_pLacrossePlayer(pLacrossePlayer),
 	m_Timer(0),
-	m_Params(param)
+	m_pEvent(pEvent)
 {
 
 }
@@ -26,30 +30,30 @@ LacrosseAttackClose::LacrosseAttackClose(
 // デストラクタ
 LacrosseAttackClose::~LacrosseAttackClose()
 {
-	delete m_pAttackEvent;
+
 }
 
 
 // 更新
 void LacrosseAttackClose::Update()
 {
+	// 動かないように
+	chr_func::SetMaxXZspeed(m_pLacrossePlayer, 0.0f);
+
+	if (m_Timer == lacrosse_player::AttackCloseStartFrame)
+	{
+		m_pEvent->AttackStart();
+	}
+
+	if (m_Timer == lacrosse_player::AttackCloseEndFrame)
+	{
+		m_pEvent->AttackEnd();
+	}
+
+	m_pEvent->Update();
+
 	// タイマー更新
 	m_Timer++;
-
-	if (m_Timer == m_Params.DamageOutbreakFrame)
-	{// ダメージ発生
-		m_pAttackEvent->DamageStart();
-	}
-
-	if (m_Timer == m_Params.EndFrame)
-	{// 攻撃終了
-		m_pAttackEvent->AttackEnd();
-	}
-
-	// 更新
-	m_pAttackEvent->Update();
-
-
 
 }
 
@@ -59,3 +63,4 @@ void LacrosseAttackClose::SetStickValue(CrVector2 StickValue)
 {
 	m_StickValue = StickValue;
 }
+

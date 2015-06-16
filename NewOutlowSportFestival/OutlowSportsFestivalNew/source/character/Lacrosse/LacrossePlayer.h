@@ -15,6 +15,34 @@ typedef ChrStateMachine<LacrossePlayer, CharacterBase::MsgType> LacrosseStateMac
 typedef ChrState<LacrossePlayer, CharacterBase::MsgType> LacrosseState;
 
 
+namespace lacrosse_player
+{
+	// モーションタイプ
+	enum MotionType
+	{
+		mt_Stand,
+		mt_Run,
+
+		mt_AttackClose_1,  // 近距離１段目
+		mt_AttackClose_2,  // 近距離２段目
+		mt_AttackClose_3,  // 近距離３段目
+	};
+
+
+#if 0
+	// できる行動のタイプ
+	enum StateType
+	{
+		st_UsualMove,  // 通常移動
+
+		st_AttackClose_1, // 近距離１段目
+		st_AttackClose_2, // 近距離２段目
+		st_AttackClose_3, // 近距離３段目
+	};
+#endif
+
+}
+
 
 //***************************************************
 //		ラクロスプレイヤー
@@ -26,17 +54,6 @@ private:
 
 public:
 	CharacterRenderer	m_Renderer;  // レンダラ
-
-	// モーションタイプ
-	enum MotionType
-	{
-		mt_Stand,
-		mt_Run,
-
-		mt_AttackClose_1,  // 近距離１段目
-		mt_AttackClose_2,  // 近距離２段目
-		mt_AttackClose_3,  // 近距離３段目
-	};
 
 public:
 	LacrossePlayer(const CharacterBase::PlayerInfo& info);

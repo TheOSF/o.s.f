@@ -66,7 +66,6 @@
     <ClCompile Include="source\brendanimation\BlendAnimationMesh.cpp" />
     <ClCompile Include="source\Camera\Camera.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrossePlayer.cpp" />
-    <ClCompile Include="source\character\Lacrosse\LacrossePlayerState.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayer.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayerState.cpp" />
     <ClCompile Include="source\character\CharacterBase.cpp" />
@@ -83,6 +82,7 @@
     <ClCompile Include="source\IexSystem\System.cpp" />
     <ClCompile Include="source\IexSystem\WinMain.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseAttackClose.cpp" />
+    <ClCompile Include="source\character\Lacrosse\LacrossePlayerState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEX\iextreme.h">
@@ -93,7 +93,6 @@
     <ClInclude Include="source\brendanimation\BlendAnimationMesh.h" />
     <ClInclude Include="source\Camera\Camera.h" />
     <ClInclude Include="source\character\Lacrosse\LacrossePlayer.h" />
-    <ClInclude Include="source\character\Lacrosse\LacrossePlayerState.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayer.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayerState.h" />
     <ClInclude Include="source\character\CharacterBase.h" />
@@ -116,6 +115,7 @@
     <ClInclude Include="source\utillity\Collision.h" />
     <ClInclude Include="source\utillity\StateTemplate.h" />
     <ClInclude Include="source\character\Lacrosse\LacrosseAttackClose.h" />
+    <ClInclude Include="source\character\Lacrosse\LacrossePlayerState.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DATA\Shader\2D.fx">

@@ -10,6 +10,7 @@
 
 #include "LacrossePlayer.h"
 #include "../CharacterMoveClass.h"
+#include "LacrosseAttackClose.h"
 
 //***************************************************
 //		プレイヤー操作の移動クラス
@@ -40,13 +41,9 @@ public:
 //***************************************************
 class LacrosseState_PlayerControllAttackClose : public LacrosseState
 {
-private:
-	CharacterUsualMove* m_pMoveClass;  // キャラクター共通の移動クラス
-
-	// 移動時のイベントクラス作成
-	CharacterUsualMove::MoveEvent* CreateMoveEvent(LacrossePlayer* t);
-
 public:
+
+
 	// ステート開始
 	void Enter(LacrossePlayer* t)override;
 
@@ -56,4 +53,9 @@ public:
 	// ステート終了
 	void Exit(LacrossePlayer* t)override;
 
+private:
+	LacrosseAttackClose* m_pAttackClass;  // 近接攻撃クラス
+
+	// 近接攻撃クラス作成
+	LacrosseAttackClose* CreateAttackClass(LacrossePlayer* t);
 };
