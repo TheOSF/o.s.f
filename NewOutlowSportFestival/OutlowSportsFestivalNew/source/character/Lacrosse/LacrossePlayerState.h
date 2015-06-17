@@ -12,7 +12,7 @@
 
 class CharacterUsualMove;
 //***************************************************
-//		プレイヤー操作の移動クラス
+//		プレイヤー操作の 移動クラス
 //***************************************************
 class LacrosseState_PlayerControllMove : public LacrosseState
 {
@@ -37,7 +37,7 @@ private:
 
 class LacrosseAttackClose;
 //***************************************************
-//		プレイヤー操作の近距離攻撃クラス
+//		プレイヤー操作の 近距離攻撃クラス
 //***************************************************
 class LacrosseState_PlayerControllAttackClose : public LacrosseState
 {
@@ -67,7 +67,7 @@ private:
 
 class LacrosseEvasion;
 //***************************************************
-//		プレイヤー操作の回避クラス
+//		プレイヤー操作の 回避クラス
 //***************************************************
 class LacrosseState_PlayerControllEvasion : public LacrosseState
 {
@@ -89,4 +89,31 @@ private:
 
 	// 回避クラス作成
 	LacrosseEvasion* CreateEvasionClass(LacrossePlayer* t);
+};
+
+
+class LacrosseHitBallAttack;
+//***************************************************
+//		プレイヤー操作の 遠距離攻撃 (ボール打ち出し) クラス
+//***************************************************
+class LacrosseState_PlayerControllHitBallAttack : public LacrosseState
+{
+public:
+	// コンストラクタ
+	LacrosseState_PlayerControllHitBallAttack();
+
+	// ステート開始
+	void Enter(LacrossePlayer* t)override;
+
+	// ステート実行
+	void Execute(LacrossePlayer* t)override;
+
+	// ステート終了
+	void Exit(LacrossePlayer* t)override;
+
+private:
+	LacrosseHitBallAttack* m_pAttackClass; // 回避クラス
+
+	// 回避クラス作成
+	LacrosseHitBallAttack* CreateAttackClass(LacrossePlayer* t);
 };

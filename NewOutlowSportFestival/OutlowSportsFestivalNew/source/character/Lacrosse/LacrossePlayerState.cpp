@@ -5,6 +5,7 @@
 #include "../CharacterMoveClass.h"
 #include "LacrosseAttackClose.h"
 #include "LacrosseEvasionClass.h"
+#include "LacrosseHitBallAttackClass.h"
 
 //*************************************************************
 //
@@ -84,6 +85,12 @@ void LacrosseState_PlayerControllMove::Execute(LacrossePlayer* t)
 	if (controller::GetTRG(controller::button::shikaku, t->m_PlayerInfo.number))
 	{// □で近接攻撃へ
 		t->SetState(new LacrosseState_PlayerControllAttackClose(0));
+		return;
+	}
+
+	if (controller::GetTRG(controller::button::sankaku, t->m_PlayerInfo.number))
+	{// △で遠距離攻撃へ
+		t->SetState(new LacrosseState_PlayerControllHitBallAttack());
 		return;
 	}
 }
@@ -326,3 +333,108 @@ LacrosseEvasion* LacrosseState_PlayerControllEvasion::CreateEvasionClass(Lacross
 		);
 }
 
+
+
+
+//***************************************************
+//		プレイヤー操作の 遠距離攻撃 (ボール打ち出し) クラス
+//***************************************************
+
+// コンストラクタ
+LacrosseState_PlayerControllHitBallAttack::LacrosseState_PlayerControllHitBallAttack() :
+m_pAttackClass(nullptr)
+{
+
+}
+
+
+// ステート開始
+void LacrosseState_PlayerControllHitBallAttack::Enter(LacrossePlayer* t)
+{
+	m_pAttackClass = this->CreateAttackClass(t);
+}
+
+
+// ステート実行
+void LacrosseState_PlayerControllHitBallAttack::Execute(LacrossePlayer* t)
+{
+	// スティックの値セット
+	m_pAttackClass->SetStickValue(
+		controller::GetStickValue(controller::stick::left, t->m_PlayerInfo.number)
+		);
+
+	// 更新
+	if (m_pAttackClass->Update() == false)
+	{
+		return;
+	}
+}
+
+
+// ステート終了
+void LacrosseState_PlayerControllHitBallAttack::Exit(LacrossePlayer* t)
+{
+	delete m_pAttackClass;
+}
+
+
+// 回避クラス作成
+LacrosseHitBallAttack* LacrosseState_PlayerControllHitBallAttack::CreateAttackClass(LacrossePlayer* t)
+{
+	class HitBallEvent : public LacrosseHitBallAttack::Event
+	{
+		LacrossePlayer* m_pLacrosse; // ラクロス
+	public:
+		// コンストラクタ
+		HitBallEvent(LacrossePlayer* pLacrossePlayer) :
+			m_pLacrosse(pLacrossePlayer){}
+
+		// 更新
+		void Update()override
+		{
+			// モデル更新
+			m_pLacrosse->m_Renderer.Update(1.0f);
+
+			// 転送行列更新
+			chr_func::CreateTransMatrix(
+				m_pLacrosse,
+				0.05f,
+				&m_pLacrosse->m_Renderer.m_TransMatrix);
+		}
+
+		// ダメージ判定開始
+		void DamageStart()
+		{// とりあえず置いておく
+
+		}
+
+
+		// 攻撃開始
+		void AttackStart()override
+		{
+			m_pLacrosse->m_Renderer.SetMotion(lacrosse_player::mt_AttackHitBall);
+		}
+
+		// 攻撃終了
+		void AttackEnd()override
+		{
+			// 通常移動へ
+			m_pLacrosse->m_Renderer.SetMotion(lacrosse_player::mt_Stand);
+			m_pLacrosse->SetState(new LacrosseState_PlayerControllMove());
+		}
+	};
+
+	// 攻撃パラメータ作成
+	LacrosseHitBallAttack::AttackParams params;
+	params.AllFrame                        = 30;     // 全30フレーム
+	params.AttackPower                  = 10.0f; // 攻撃力
+	params.DamageOutbreakFrame = 5;       // 開始5フレームで球発射
+	params.MaxTurnRadian              = PI / 4; // 45°
+	params.MoveDownSpeed           = 0.2f;   // 減速割合
+
+	// 生成して返す
+	return new LacrosseHitBallAttack(
+		t,
+		new HitBallEvent(t),
+		params);
+}

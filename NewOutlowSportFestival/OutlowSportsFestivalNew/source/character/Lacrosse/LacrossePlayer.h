@@ -29,6 +29,8 @@ namespace lacrosse_player
 
 
 		mt_Evasion = 5,  // ‰ñ”ğ
+
+		mt_AttackHitBall = 3, // ‰“‹——£UŒ‚
 	};
 
 

@@ -133,6 +133,7 @@
     <ClCompile Include="source\character\CharacterRenderer.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseAttackClose.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseEvasionClass.cpp" />
+    <ClCompile Include="source\character\Lacrosse\LacrosseHitBallAttackClass.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrossePlayer.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrossePlayerState.cpp" />
     <ClCompile Include="source\character\Renderer.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="source\character\CharacterRenderer.h" />
     <ClInclude Include="source\character\CharacterStateTemplate.h" />
     <ClInclude Include="source\character\Lacrosse\LacrosseAttackClose.h" />
+    <ClInclude Include="source\character\Lacrosse\LacrosseHitBallAttackClass.h" />
     <ClInclude Include="source\character\Lacrosse\LacrosseEvasionClass.h" />
     <ClInclude Include="source\character\Lacrosse\LacrossePlayer.h" />
     <ClInclude Include="source\character\Lacrosse\LacrossePlayerState.h" />
