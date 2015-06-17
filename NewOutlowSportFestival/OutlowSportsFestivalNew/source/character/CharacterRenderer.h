@@ -1,7 +1,7 @@
 #ifndef __CHARACTER_RENDERER_H__
 #define __CHARACTER_RENDERER_H__
 
-#include "Renderer.h"
+#include "../Render/Renderer.h"
 #include "../brendanimation/BlendAnimationMesh.h"
 #include <vector>
 

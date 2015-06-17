@@ -17,8 +17,9 @@ struct ShpereParam
 	float		size;
 };
 
-
-//ダメージクラス(コンストラクタ・デストラクタで自動的に登録・削除をする)
+//**************************************************************************
+//	ダメージクラス(コンストラクタ・デストラクタで自動的に登録・削除をする)
+//**************************************************************************
 class DamageBase
 {
 public:
@@ -29,7 +30,7 @@ public:
 		_UpDamage,		//上に吹き飛ぶ(バレーとか)追撃可能
 	};
 
-	LpCharacter		pParent;	//このダメージ判定の元のキャラクタ
+	LpCharacterBase	pParent;	//このダメージ判定の元のキャラクタ
 	LpBallBase		pBall;		//この判定についているボール(ボールでなければnull)
 	Type			type;		//このダメージのタイプ
 	float			Value;		//値
@@ -41,7 +42,9 @@ public:
 };
 
 
-//ダメージクラス(球)
+//*************************************************************
+//	ダメージクラス(球)
+//*************************************************************
 class DamageShpere :public DamageBase
 {
 public:
@@ -72,7 +75,7 @@ public:
 		virtual void Hit(DamageBase* pDmg) = 0;	//当たった時に呼ばれる関数
 	};
 
-	//球のダメージ判定をとる
+	//球でダメージ判定を取得する
 	void HitCheckSphere(
 		const ShpereParam&	sp,
 		HitEventBase&		HitEvent

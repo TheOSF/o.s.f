@@ -29,6 +29,9 @@ namespace chr_func
 
 	//現在の位置、現在のangle、Scaleをもとに変換行列を生成する
 	void CreateTransMatrix(CharacterBase* p, float Scale, Matrix* pOutMatrix);
+
+	//前方向ベクトルを得る
+	void GetFront(CharacterBase* p, Vector3* pOut);
 }
 
 #endif

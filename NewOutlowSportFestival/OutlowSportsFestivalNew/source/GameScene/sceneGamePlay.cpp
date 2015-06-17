@@ -2,11 +2,11 @@
 #include	"../IexSystem/System.h"
 #include	"debug\DebugFunction.h"
 #include	"sceneGamePlay.h"
-#include	"character\Tennis\TennisPlayer.h"
-#include	"character\Tennis\TennisPlayerState.h"
+#include	"../character/Tennis/TennisPlayer.h"
+#include	"../character/Tennis/TennisPlayerState.h"
+#include	"../character/Soccer/SoccerPlayer.h"
+#include	"../character/Soccer/SoccerPlayerState.h"
 
-#include "../character/Lacrosse/LacrossePlayer.h"
-#include "../character/Lacrosse/LacrossePlayerState.h"
 
 //*****************************************************************************************************************************
 //
@@ -39,19 +39,19 @@ bool sceneGamePlay::Initialize()
 	pStage = new iexMesh("DATA\\STAGE\\Stage.IMO");
 
 
+
 	//キャラクタ作成
+
 	CharacterBase::PlayerInfo pl;
 
-	pl.chr_type = CharacterType::_Tennis;
+	pl.chr_type = CharacterType::_Soccer;
 	pl.number = (PlayerNum::Value)0;
 	pl.player_type = PlayerType::_Player;
 	pl.strong_type = StrongType::__ErrorType;
 	
 	//テニスを作成し、動きとしてプレイヤー操作クラスをセット
-	//(new TennisPlayer(pl))->SetState(new TennisState_PlayerControll_Move());
-
-	// ラクロス作成
-	(new LacrossePlayer(pl))->SetState(new LacrosseState_PlayerControllMove());
+	(new TennisPlayer(pl))->SetState(new TennisState_PlayerControll_Move());
+	(new SoccerPlayer(pl))->SetState(new SoccerState_PlayerControll_Move());
 
 	return true;
 }

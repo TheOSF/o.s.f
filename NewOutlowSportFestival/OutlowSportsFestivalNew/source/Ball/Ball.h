@@ -26,10 +26,10 @@ public:
 	//パラメータ構造体
 	struct Params
 	{
-		Character*	pParent;	//発射したキャラクタへのポインタ
-		Type		type;		//玉のタイプ
-		Vector3		pos;		//場所
-		Vector3		move;		//移動量
+		CharacterBase*	pParent;	//発射したキャラクタへのポインタ
+		Type			type;		//玉のタイプ
+		Vector3			pos;		//場所
+		Vector3			move;		//移動量
 	};
 
 	Params	m_Params;

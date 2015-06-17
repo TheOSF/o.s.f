@@ -9,7 +9,7 @@ GameObjectBase::GameObjectBase()
 
 GameObjectBase::~GameObjectBase()
 {
-	MyAssert(DefGameObjMgr.Erace(this), "íœŽ¸”s");
+	
 }
 
 GameObjectManager& GameObjectManager::GetInstance()
@@ -33,13 +33,14 @@ void GameObjectManager::Release()
 void GameObjectManager::Update()
 {
 	GameObjectMap::iterator it = m_GameObjectMap.begin();
-		
+
 	while(it != m_GameObjectMap.end())
 	{
 		if (it->second->Update() == false)
 		{
 			delete it->second;
 			it = m_GameObjectMap.erase(it);
+			
 			continue;
 		}
 		++it;
@@ -55,19 +56,6 @@ bool GameObjectManager::Add(LpGameObjectBase pObj)
 
 	m_GameObjectMap.insert(GameObjectMap::value_type(pObj, pObj));
 
-	return true;
-}
-
-bool GameObjectManager::Erace(LpGameObjectBase pObj)
-{
-	GameObjectMap::iterator it = m_GameObjectMap.find(pObj);
-
-	if (it == m_GameObjectMap.end())
-	{
-		return false;
-	}
-
-	m_GameObjectMap.erase(it);
 	return true;
 }
 
