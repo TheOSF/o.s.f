@@ -133,7 +133,8 @@
     <ClCompile Include="source\character\CharacterRenderer.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrossePlayer.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrossePlayerState.cpp" />
-    <ClCompile Include="source\character\Renderer.cpp" />
+    <ClCompile Include="source\Render\MeshRenderer.cpp" />
+    <ClCompile Include="source\Render\Renderer.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayer.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayerState.cpp" />
     <ClCompile Include="source\Damage\Damage.cpp" />
@@ -158,7 +159,8 @@
     <ClInclude Include="source\character\CharacterStateTemplate.h" />
     <ClInclude Include="source\character\Lacrosse\LacrossePlayer.h" />
     <ClInclude Include="source\character\Lacrosse\LacrossePlayerState.h" />
-    <ClInclude Include="source\character\Renderer.h" />
+    <ClInclude Include="source\Render\MeshRenderer.h" />
+    <ClInclude Include="source\Render\Renderer.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayer.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayerState.h" />
     <ClInclude Include="source\Damage\Damage.h" />

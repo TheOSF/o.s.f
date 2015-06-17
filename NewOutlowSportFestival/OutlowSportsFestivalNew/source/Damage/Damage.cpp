@@ -17,6 +17,12 @@ DamageBase::~DamageBase()
 	MyAssert(DefDamageMgr.EraceDamage(this), "ダメージ削除の失敗");
 }
 
+DamageShpere::DamageShpere():
+m_Enable(true)
+{
+	m_Param.pos = Vector3Zero;
+	m_Param.size = 1;
+}
 
 //ダメージクラス(球)
 bool DamageShpere::HitCheckSphere(const ShpereParam* sp)

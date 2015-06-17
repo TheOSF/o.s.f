@@ -4,6 +4,7 @@
 #include	"sceneGamePlay.h"
 #include	"character\Tennis\TennisPlayer.h"
 #include	"character\Tennis\TennisPlayerState.h"
+#include	"../Camera/Camera.h"
 
 
 //*****************************************************************************************************************************
@@ -11,7 +12,7 @@
 //	グローバル変数
 //
 //*****************************************************************************************************************************
-static iexView* m_pView;
+
 static LPIEXMESH pStage;
 
 //*****************************************************************************************************************************
@@ -31,11 +32,10 @@ bool sceneGamePlay::Initialize()
 	dir.Normalize();
 	iexLight::DirLight(shader, 0, &dir, 0.8f, 0.8f, 0.8f);
 
-	m_pView = new iexView;
-	m_pView->Set(Vector3(0, 40, -55), Vector3(0, 4, 0));
-	
 	pStage = new iexMesh("DATA\\STAGE\\Stage.IMO");
 
+	DefCamera.m_Position = Vector3(0, 40, -55);
+	DefCamera.m_Target = Vector3(0, 4, 0);
 
 	//キャラクタ作成
 	CharacterBase::PlayerInfo pl;
@@ -60,9 +60,9 @@ bool sceneGamePlay::Initialize()
 
 sceneGamePlay::~sceneGamePlay()
 {
-	delete m_pView;
 	delete pStage;
 
+	DefCamera.Release();
 	DefRendererMgr.Release();
 	DefGameObjMgr.Release();
 }
@@ -74,8 +74,7 @@ sceneGamePlay::~sceneGamePlay()
 //*****************************************************************************************************************************
 void	sceneGamePlay::Update()
 {
-	m_pView->Activate();
-
+	DefCamera.Update();
 	DefGameObjMgr.Update();
 }
 
@@ -87,7 +86,7 @@ void	sceneGamePlay::Update()
 
 void	sceneGamePlay::Render()
 {
-	m_pView->Clear();
+	DefCamera.Clear();
 
 	pStage->Render();
 

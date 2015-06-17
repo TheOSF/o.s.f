@@ -73,7 +73,6 @@
     <ClCompile Include="source\character\CharacterFunction.cpp" />
     <ClCompile Include="source\character\CharacterMoveClass.cpp" />
     <ClCompile Include="source\character\CharacterRenderer.cpp" />
-    <ClCompile Include="source\character\Renderer.cpp" />
     <ClCompile Include="source\Damage\Damage.cpp" />
     <ClCompile Include="source\GameScene\sceneGamePlay.cpp" />
     <ClCompile Include="source\GameScene\sceneMain.cpp" />
@@ -82,6 +81,8 @@
     <ClCompile Include="source\IexSystem\Framework.cpp" />
     <ClCompile Include="source\IexSystem\System.cpp" />
     <ClCompile Include="source\IexSystem\WinMain.cpp" />
+    <ClCompile Include="source\Render\Renderer.cpp" />
+    <ClCompile Include="source\Render\MeshRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEX\iextreme.h">
@@ -100,7 +101,6 @@
     <ClInclude Include="source\character\CharacterMoveClass.h" />
     <ClInclude Include="source\character\CharacterRenderer.h" />
     <ClInclude Include="source\character\CharacterStateTemplate.h" />
-    <ClInclude Include="source\character\Renderer.h" />
     <ClInclude Include="source\Damage\Damage.h" />
     <ClInclude Include="source\debug\DebugFunction.h" />
     <ClInclude Include="source\GameScene\SceneGamePlay.h" />
@@ -114,6 +114,8 @@
     <ClInclude Include="source\IexSystem\System.h" />
     <ClInclude Include="source\utillity\Collision.h" />
     <ClInclude Include="source\utillity\StateTemplate.h" />
+    <ClInclude Include="source\Render\Renderer.h" />
+    <ClInclude Include="source\Render\MeshRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DATA\Shader\2D.fx">

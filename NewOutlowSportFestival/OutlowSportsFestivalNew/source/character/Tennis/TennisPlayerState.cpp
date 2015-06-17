@@ -1,6 +1,7 @@
 #include "TennisPlayerState.h"
 #include "../../GameSystem/GameController.h"
 #include "../CharacterFunction.h"
+#include "../../Ball/UsualBall.h"
 
 void TennisState_PlayerControll_Move::Enter(TennisPlayer* t)
 {
@@ -46,6 +47,20 @@ void TennisState_PlayerControll_Move::Execute(TennisPlayer* t)
 	m_pMoveClass->Update();
 
 	chr_func::CreateTransMatrix(t, 0.05f, &t->m_Renderer.m_TransMatrix);
+
+
+	if (controller::GetTRG(controller::button::sankaku, t->m_PlayerInfo.number))
+	{
+		BallBase::Params param;
+
+		chr_func::GetFront(t, &param.move);
+		param.move *= 0.5f;
+		param.pos = t->m_Params.pos;
+		param.pParent = t;
+		param.type = BallBase::Type::_Usual;
+
+		new UsualBall(param, DamageBase::Type::_WeekDamage, 1);
+	}
 }
 
 void TennisState_PlayerControll_Move::Exit(TennisPlayer* t)
