@@ -29,7 +29,7 @@ public:
 	{
 	public:
 		virtual~Event(){}
-		virtual void Update() = 0;           // 更新
+		virtual void Update() = 0;          // 更新
 		virtual void DamageStart() = 0; // ダメージ開始
 		virtual void AttackStart() = 0;    // 攻撃開始
 		virtual void AttackEnd() = 0;      // 攻撃終了

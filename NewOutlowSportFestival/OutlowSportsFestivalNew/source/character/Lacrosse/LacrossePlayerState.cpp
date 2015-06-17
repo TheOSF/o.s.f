@@ -6,6 +6,7 @@
 #include "LacrosseAttackClose.h"
 #include "LacrosseEvasionClass.h"
 #include "LacrosseHitBallAttackClass.h"
+#include "LacrosseCounterPoseClass.h"
 
 //*************************************************************
 //
@@ -77,20 +78,26 @@ void LacrosseState_PlayerControllMove::Execute(LacrossePlayer* t)
 	chr_func::CreateTransMatrix(t, 0.05f, &t->m_Renderer.m_TransMatrix);
 
 	if (controller::GetTRG(controller::button::batu, t->m_PlayerInfo.number))
-	{// ×で回避へ
+	{// [×] で [回避]
 		t->SetState(new LacrosseState_PlayerControllEvasion());
 		return;
 	}
 
 	if (controller::GetTRG(controller::button::shikaku, t->m_PlayerInfo.number))
-	{// □で近接攻撃へ
+	{// [□] で [近接攻撃]
 		t->SetState(new LacrosseState_PlayerControllAttackClose(0));
 		return;
 	}
 
 	if (controller::GetTRG(controller::button::sankaku, t->m_PlayerInfo.number))
-	{// △で遠距離攻撃へ
+	{// [△] で [遠距離攻撃]
 		t->SetState(new LacrosseState_PlayerControllHitBallAttack());
+		return;
+	}
+
+	if (controller::GetTRG(controller::button::_R1, t->m_PlayerInfo.number))
+	{// [R1] で [カウンター構え]
+		t->SetState(new LacrosseState_PlayerControllCounterPose());
 		return;
 	}
 }
@@ -438,3 +445,111 @@ LacrosseHitBallAttack* LacrosseState_PlayerControllHitBallAttack::CreateAttackCl
 		new HitBallEvent(t),
 		params);
 }
+
+
+//***************************************************
+//		プレイヤー操作の カウンター構えクラス
+//***************************************************
+
+// コンストラクタ
+LacrosseState_PlayerControllCounterPose::LacrosseState_PlayerControllCounterPose() :
+m_pCounterPose(nullptr)
+{
+
+}
+
+
+// ステート開始
+void LacrosseState_PlayerControllCounterPose::Enter(LacrossePlayer* t)
+{
+	// カウンター構えクラス作成
+	m_pCounterPose = this->CreateCounterPoseClass(t);
+}
+
+
+// ステート実行
+void LacrosseState_PlayerControllCounterPose::Execute(LacrossePlayer* t)
+{
+	// スティックの値セット
+	m_pCounterPose->SetStickValue(
+		controller::GetStickValue(controller::stick::left, t->m_PlayerInfo.number)
+		);
+
+	if (controller::GetLeave(controller::button::_R1, t->m_PlayerInfo.number))
+	{// [R1離した] で [カウンター] ※今は[通常移動]へ
+		t->m_Renderer.SetMotion(lacrosse_player::mt_Stand);
+		t->SetState(new LacrosseState_PlayerControllMove());
+		return;
+	}
+
+	if (m_pCounterPose->Update() == false)
+	{
+		return;
+	}
+}
+
+
+// ステート終了
+void LacrosseState_PlayerControllCounterPose::Exit(LacrossePlayer* t)
+{
+	delete m_pCounterPose;
+}
+
+
+// カウンター構えクラス作成
+LacrosseCounterPose* LacrosseState_PlayerControllCounterPose::CreateCounterPoseClass(LacrossePlayer* t)
+{
+	class CounterPoseEvent : public LacrosseCounterPose::Event
+	{
+		LacrossePlayer* m_pLacrosse; // ラクロス
+	public:
+		// コンストラクタ
+		CounterPoseEvent(LacrossePlayer* pLacrossePlayer) :
+			m_pLacrosse(pLacrossePlayer){}
+
+		// 更新
+		void Update()override
+		{
+			// モデル更新
+			m_pLacrosse->m_Renderer.Update(1.0f);
+
+			// 転送行列更新
+			chr_func::CreateTransMatrix(
+				m_pLacrosse,
+				0.05f,
+				&m_pLacrosse->m_Renderer.m_TransMatrix);
+		}
+
+
+		// 構え開始
+		void PoseStart()override
+		{
+			// モーションセット
+			m_pLacrosse->m_Renderer.SetMotion(lacrosse_player::mt_CounterPose);
+		}
+
+
+		// 構え終了
+		void PoseEnd()override
+		{
+			// とりあえず通常移動へ
+			m_pLacrosse->m_Renderer.SetMotion(lacrosse_player::mt_Stand);
+			m_pLacrosse->SetState(new LacrosseState_PlayerControllMove());
+		}
+	};
+
+	// 構えパラメータ設定
+	LacrosseCounterPose::CounterPoseParams params;
+	params.AllFrame              = 60;      // 全フレーム
+	params.TurnSpeed           = 0.15f;  // 角度変化スピード
+	params.MoveDownSpeed = 0.2f;    // 減速割合
+
+	// 生成して返す
+	return new LacrosseCounterPose(
+		t,
+		new CounterPoseEvent(t),
+		params
+		);
+}
+
+

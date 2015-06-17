@@ -26,7 +26,7 @@ LacrosseAttackClose::LacrosseAttackClose(
 // デストラクタ
 LacrosseAttackClose::~LacrosseAttackClose()
 {
-
+	delete m_pEvent;
 }
 
 
@@ -41,14 +41,16 @@ bool LacrosseAttackClose::Update()
 		chr_func::AddMoveFront(
 			m_pLacrossePlayer,
 			m_ComboParams.MoveSpeed,
-			m_ComboParams.MoveSpeed);
+			m_ComboParams.MoveSpeed
+			);
 
 		// 移動方向補正
 		chr_func::AddXZMove(
 			m_pLacrossePlayer,
 			m_StickValue.x,
 			m_StickValue.y,
-			m_ComboParams.MoveSpeed);
+			m_ComboParams.MoveSpeed
+			);
 
 		// 向き補正
 		chr_func::AngleControll(
@@ -64,12 +66,11 @@ bool LacrosseAttackClose::Update()
 	// 減速
 	chr_func::XZMoveDown(
 		m_pLacrossePlayer,
-		m_ComboParams.MoveDownSpeed);
+		m_ComboParams.MoveDownSpeed
+		);
 
 	// 更新
 	m_pEvent->Update();
-
-	
 
 	if (m_Timer == m_ComboParams.DamageOutbreakFrame)
 	{// ダメージ発生フレーム

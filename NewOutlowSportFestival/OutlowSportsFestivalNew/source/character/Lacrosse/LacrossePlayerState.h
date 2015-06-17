@@ -117,3 +117,32 @@ private:
 	// 回避クラス作成
 	LacrosseHitBallAttack* CreateAttackClass(LacrossePlayer* t);
 };
+
+
+
+class LacrosseCounterPose;
+//***************************************************
+//		プレイヤー操作の カウンター構えクラス
+//***************************************************
+class LacrosseState_PlayerControllCounterPose : public LacrosseState
+{
+public:
+	// コンストラクタ
+	LacrosseState_PlayerControllCounterPose();
+
+	// ステート開始
+	void Enter(LacrossePlayer* t)override;
+
+	// ステート実行
+	void Execute(LacrossePlayer* t)override;
+
+	// ステート終了
+	void Exit(LacrossePlayer* t)override;
+
+private:
+	LacrosseCounterPose* m_pCounterPose; // カウンター構えクラス
+
+	// カウンター構えクラス作成
+	LacrosseCounterPose* CreateCounterPoseClass(LacrossePlayer* t);
+};
+

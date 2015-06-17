@@ -31,6 +31,8 @@ namespace lacrosse_player
 		mt_Evasion = 5,  // 回避
 
 		mt_AttackHitBall = 3, // 遠距離攻撃
+
+		mt_CounterPose = 13,  // カウンター構え
 	};
 
 
