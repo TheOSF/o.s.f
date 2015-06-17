@@ -17,11 +17,19 @@ UsualBall::UsualBall(
 	//パラメータ代入
 	m_BallBase.m_Params = params;
 
+	m_Damage.m_Param.pos = params.pos;
+	m_Damage.m_Param.size = 1;
+	m_Damage.pBall = &m_BallBase;
+	m_Damage.pParent = params.pParent;
+	m_Damage.type = damage_type;
+	m_Damage.Value = damage_val;
+	m_Damage.vec = params.move;
+
+
 	//ボールのメッシュを作成
 	GetBallMesh(params.pParent->m_PlayerInfo.chr_type, &pBallMesh);
 
 	//メッシュのレンダラー作成(最終的にメッシュを使いまわして描画するべき)
-
 	m_pMeshRenderer = new MeshRenderer(
 		pBallMesh,
 		true

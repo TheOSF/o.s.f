@@ -75,7 +75,7 @@ public:
 		virtual void Hit(DamageBase* pDmg) = 0;	//当たった時に呼ばれる関数
 	};
 
-	//球のダメージ判定をとる
+	//球でダメージ判定を取得する
 	void HitCheckSphere(
 		const ShpereParam&	sp,
 		HitEventBase&		HitEvent
