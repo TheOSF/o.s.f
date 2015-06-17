@@ -67,7 +67,7 @@ private:
 };
 
 
-class LacrosseEvasion;
+class CharacterEvasion;
 //***************************************************
 //		プレイヤー操作の 回避クラス
 //***************************************************
@@ -88,14 +88,14 @@ public:
 
 private:
 	// 回避クラス作成
-	LacrosseEvasion* CreateEvasionClass(LacrossePlayer* t);
+	CharacterEvasion* CreateEvasionClass(LacrossePlayer* t);
 
 private:
-	LacrosseEvasion* m_pEvasionClass; // 回避クラス
+	CharacterEvasion* m_pEvasionClass; // 回避クラス
 };
 
 
-class LacrosseHitBallAttack;
+class CharacterHitBallAttack;
 //***************************************************
 //		プレイヤー操作の 遠距離攻撃 (ボール打ち出し) クラス
 //***************************************************
@@ -116,10 +116,10 @@ public:
 
 private:
 	// 回避クラス作成
-	LacrosseHitBallAttack* CreateAttackClass(LacrossePlayer* t);
+	CharacterHitBallAttack* CreateAttackClass(LacrossePlayer* t);
 
 private:
-	LacrosseHitBallAttack* m_pAttackClass; // 回避クラス
+	CharacterHitBallAttack* m_pAttackClass; // 回避クラス
 };
 
 

@@ -6,6 +6,8 @@
 #include	"../character/Tennis/TennisPlayerState.h"
 #include	"../character/Soccer/SoccerPlayer.h"
 #include	"../character/Soccer/SoccerPlayerState.h"
+#include "../character/Lacrosse/LacrossePlayer.h"
+#include "../character/Lacrosse/LacrossePlayerState.h"
 
 
 //*****************************************************************************************************************************
@@ -52,6 +54,7 @@ bool sceneGamePlay::Initialize()
 	//テニスを作成し、動きとしてプレイヤー操作クラスをセット
 	(new TennisPlayer(pl))->SetState(new TennisState_PlayerControll_Move());
 	(new SoccerPlayer(pl))->SetState(new SoccerState_PlayerControll_Move());
+	(new LacrossePlayer(pl))->SetState(new LacrosseState_PlayerControllMove());
 
 	return true;
 }

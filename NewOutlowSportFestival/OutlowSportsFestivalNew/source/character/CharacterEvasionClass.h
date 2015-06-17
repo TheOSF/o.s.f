@@ -2,12 +2,12 @@
 
 #include "iextreme.h"
 
-class LacrossePlayer;
+class CharacterBase;
 
 //***************************************************
-//		ラクロス用回避クラス
+//		キャラクター共通 回避クラス
 //***************************************************
-class LacrosseEvasion
+class CharacterEvasion
 {
 public:
 	// 回避用パラメータ
@@ -32,14 +32,14 @@ public:
 	};
 
 	// コンストラクタ
-	LacrosseEvasion(
-		LacrossePlayer* pLacrossePlayer,
+	CharacterEvasion(
+		CharacterBase* pCharacterBase,
 		Event* pEvent,
 		const EvasionParams& evasion_params
 		);
 
 	// デストラクタ
-	~LacrosseEvasion();
+	~CharacterEvasion();
 
 	// 更新
 	bool Update();
@@ -53,7 +53,7 @@ public:
 private:
 	const EvasionParams m_EvasionParams;   // 回避パラメータ
 	Vector2                      m_StickValue;           // スティック入力状態
-	LacrossePlayer*         m_pLacrossePlayer; // ラクロスプレイヤー
+	CharacterBase*         m_pCharacterBase;  // キャラクター
 	int                              m_Timer;                  // タイマー
 	Event*                       m_pEvent;                // 回避イベント
 
