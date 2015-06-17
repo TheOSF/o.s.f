@@ -6,6 +6,8 @@
 #include	"character\Tennis\TennisPlayerState.h"
 #include	"../Camera/Camera.h"
 
+#include "../character/Lacrosse/LacrossePlayer.h"
+#include "../character/Lacrosse/LacrossePlayerState.h"
 
 //*****************************************************************************************************************************
 //
@@ -46,8 +48,10 @@ bool sceneGamePlay::Initialize()
 	pl.strong_type = StrongType::__ErrorType;
 	
 	//テニスを作成し、動きとしてプレイヤー操作クラスをセット
-	(new TennisPlayer(pl))->SetState(new TennisState_PlayerControll_Move());
+	//(new TennisPlayer(pl))->SetState(new TennisState_PlayerControll_Move());
 
+	// ラクロス作成
+	(new LacrossePlayer(pl))->SetState(new LacrosseState_PlayerControllMove());
 
 	return true;
 }

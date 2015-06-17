@@ -52,6 +52,7 @@ typedef IDirect3DSurface9 Surface;
 typedef IDirect3DDevice9 DEVICE, *LPDEVICE;
 
 typedef float RATIO;
+typedef float RADIAN;
 
 //*****************************************************************************
 //
