@@ -4,6 +4,8 @@
 #include	"sceneGamePlay.h"
 #include	"character\TennisPlayer.h"
 #include	"character\TennisPlayerState.h"
+#include	"character\SoccerPlayer.h"
+#include	"character\SoccerPlayerState.h"
 
 
 //*****************************************************************************************************************************
@@ -42,13 +44,13 @@ bool sceneGamePlay::Initialize()
 
 	CharacterBase::PlayerInfo pl;
 
-	pl.chr_type = CharacterType::_Tennis;
+	pl.chr_type = CharacterType::_Soccer;
 	pl.number = (PlayerNum::Value)0;
 	pl.player_type = PlayerType::_Player;
 	pl.strong_type = StrongType::__ErrorType;
 	
 	//テニスを作成し、動きとしてプレイヤー操作クラスをセット
-	(new TennisPlayer(pl))->SetState(new TennisState_PlayerControll_Move());
+	(new SoccerPlayer(pl))->SetState(new SoccerState_PlayerControll_Move());
 
 
 	return true;

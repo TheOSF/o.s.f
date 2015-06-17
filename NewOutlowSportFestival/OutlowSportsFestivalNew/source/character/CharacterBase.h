@@ -36,6 +36,10 @@ public:
 	};
 	const PlayerInfo	m_PlayerInfo;
 	Params				m_Params;
+	inline const Params& Getparam()
+		const{
+		return m_Params;
+	}
 
 	CharacterBase(const PlayerInfo& info);
 	virtual ~CharacterBase(){}

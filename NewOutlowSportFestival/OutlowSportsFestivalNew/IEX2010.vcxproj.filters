@@ -43,6 +43,9 @@
     <Filter Include="キャラクター\共通">
       <UniqueIdentifier>{759b7ee8-56fb-4914-8678-13cecc33e66e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="キャラクター\Soccer">
+      <UniqueIdentifier>{116dc90c-4833-4282-9aae-8b2a768c0de4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\system\Framework.cpp">
@@ -147,6 +150,21 @@
     <ClCompile Include="source\Ball.cpp">
       <Filter>ソース ファイル\GameSource</Filter>
     </ClCompile>
+    <ClCompile Include="source\character\SoccerPlayer.cpp">
+      <Filter>キャラクター\Soccer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\character\SoccerPlayerState.cpp">
+      <Filter>キャラクター\Soccer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\character\CharacterSliding.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\character\CharacterAttack.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="source\character\CharacterShot.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEX\iextreme.h">
@@ -223,6 +241,21 @@
     </ClInclude>
     <ClInclude Include="source\UsualBall.h">
       <Filter>ヘッダー ファイル\GameHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="source\character\SoccerPlayer.h">
+      <Filter>キャラクター\Soccer</Filter>
+    </ClInclude>
+    <ClInclude Include="source\character\SoccerPlayerState.h">
+      <Filter>キャラクター\Soccer</Filter>
+    </ClInclude>
+    <ClInclude Include="source\character\CharacterSliding.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="source\character\CharacterAttack.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="source\character\CharacterShot.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
