@@ -40,6 +40,7 @@ private:
 	D3DXQUATERNION		m_Ballrot;
 
 	bool isOutofField()const;
+	void UpdateDamageClass();
 	void UpdateMesh();
 };
 

@@ -17,14 +17,13 @@ UsualBall::UsualBall(
 	//パラメータ代入
 	m_BallBase.m_Params = params;
 
-	m_Damage.m_Param.pos = params.pos;
-	m_Damage.m_Param.size = 1;
+	//ダメージ判定のパラメータを代入
 	m_Damage.pBall = &m_BallBase;
 	m_Damage.pParent = params.pParent;
+	m_Damage.m_Param.size = 1;	//大きさはボールによって異なる可能性がある
 	m_Damage.type = damage_type;
 	m_Damage.Value = damage_val;
-	m_Damage.vec = params.move;
-
+	UpdateDamageClass();
 
 	//ボールのメッシュを作成
 	GetBallMesh(params.pParent->m_PlayerInfo.chr_type, &pBallMesh);
@@ -84,15 +83,9 @@ bool UsualBall::Update()
 	{
 		m_FreezeCount = m_FreezeDeleteFrame;
 	}
-	Matrix m;
 
-	D3DXMatrixScaling(&m, 0.01f, 0.01f, 0.01f);
-
-	m._41 = m_BallBase.m_Params.pos.x;
-	m._42 = m_BallBase.m_Params.pos.y;
-	m._43 = m_BallBase.m_Params.pos.z;
-
-	m_pMeshRenderer->SetMatrix(m);
+	UpdateMesh();
+	UpdateDamageClass();
 
 	return m_FreezeCount < m_FreezeDeleteFrame;
 }
@@ -111,8 +104,21 @@ bool UsualBall::isOutofField()const
 }
 
 
+void UsualBall::UpdateDamageClass()
+{
+	m_Damage.vec = m_BallBase.m_Params.move;
+	m_Damage.m_Param.pos = m_BallBase.m_Params.pos;
+}
 
 void UsualBall::UpdateMesh()
 {
+	Matrix m;
 
+	D3DXMatrixScaling(&m, 0.01f, 0.01f, 0.01f);
+
+	m._41 = m_BallBase.m_Params.pos.x;
+	m._42 = m_BallBase.m_Params.pos.y;
+	m._43 = m_BallBase.m_Params.pos.z;
+
+	m_pMeshRenderer->SetMatrix(m);
 }
