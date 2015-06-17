@@ -58,8 +58,8 @@ class LacrossePlayer : public CharacterBase
 {
 private:
 	LacrosseStateMachine* m_pStateMachine;  // ステートマシン
-
 public:
+	bool                         m_HaveBall;   // ボールを持っているかどうか
 	CharacterRenderer	m_Renderer;  // レンダラ
 
 public:

@@ -86,6 +86,7 @@
     <ClCompile Include="source\character\Lacrosse\LacrosseEvasionClass.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseHitBallAttackClass.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseCounterPoseClass.cpp" />
+    <ClCompile Include="source\character\Lacrosse\LacrosseCounterClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEX\iextreme.h">
@@ -122,6 +123,7 @@
     <ClInclude Include="source\character\Lacrosse\LacrosseEvasionClass.h" />
     <ClInclude Include="source\character\Lacrosse\LacrosseHitBallAttackClass.h" />
     <ClInclude Include="source\character\Lacrosse\LacrosseCounterPoseClass.h" />
+    <ClInclude Include="source\character\Lacrosse\LacrosseCounterClass.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DATA\Shader\2D.fx">
