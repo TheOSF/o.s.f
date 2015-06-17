@@ -15,24 +15,6 @@
 #include "iextreme.h"
 #include "ForwardDecl.h"
 
-class CollisionDamage
-{
-public:
-	enum Type
-	{
-		_WeekDamage,	//怯みのみのダメージ
-		_VanishDamage,	//横吹き飛びダメージ
-		_UpDamage,		//上に吹き飛ぶ(バレーとか)追撃可能
-		_Damage,		//
-	};
-	LpCharacter pParent;
-
-	struct Param
-	{
-		
-	};
-
-};
 
 class CollisionManager
 {

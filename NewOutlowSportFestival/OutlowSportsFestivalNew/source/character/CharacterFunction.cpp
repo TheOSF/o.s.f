@@ -109,3 +109,11 @@ void chr_func::CreateTransMatrix(CharacterBase* p, float Scale, Matrix* pOutMatr
 
 	*pOutMatrix *= m;
 }
+
+//前方向ベクトルを得る
+void chr_func::GetFront(CharacterBase* p, Vector3* pOut)
+{
+	pOut->x = sinf(p->m_Params.angle);
+	pOut->y = 0;
+	pOut->z = cosf(p->m_Params.angle);
+}

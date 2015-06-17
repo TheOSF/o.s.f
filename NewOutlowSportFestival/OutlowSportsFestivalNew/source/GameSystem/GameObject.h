@@ -4,6 +4,8 @@
 #include <map>
 #include "debug\DebugFunction.h"
 
+class GameObjectManager;
+
 
 //********************************************************************
 //	継承すると自動で更新するゲーム内オブジェクトのベースクラス
@@ -19,10 +21,12 @@ public:
 	};
 
 	GameObjectBase();
-	virtual ~GameObjectBase();
 
 	virtual bool Update() = 0;	//falseを返すと消去する
 	virtual bool Msg(MsgType mt) = 0;
+protected:
+	friend class GameObjectManager;
+	virtual ~GameObjectBase();
 };
 
 typedef GameObjectBase* LpGameObjectBase;
@@ -35,7 +39,6 @@ typedef GameObjectBase* LpGameObjectBase;
 class GameObjectManager
 {
 public:
-
 	static GameObjectManager& GetInstance();
 	static void Release();
 	
@@ -47,8 +50,6 @@ private:
 	typedef std::map<LpGameObjectBase, LpGameObjectBase> GameObjectMap;
 
 	friend class GameObjectBase;
-	friend GameObjectBase::GameObjectBase();
-	friend GameObjectBase::~GameObjectBase();
 private:
 	static GameObjectManager*	m_pInstance;
 	GameObjectMap				m_GameObjectMap;

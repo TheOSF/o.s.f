@@ -1,7 +1,6 @@
 #include	"iextreme.h"
 #include	"Framework.h"
-#include	"sceneMain.h"
-#include	"../SceneGamePlay.h"
+#include	"../GameScene/SceneGamePlay.h"
 #include	"../debug/DebugFunction.h"
 
 //*****************************************************************************************************************************

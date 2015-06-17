@@ -1,5 +1,5 @@
 #include	"iextreme.h"
-#include	"system/system.h"
+#include	"../IexSystem/System.h"
 #include	"debug\DebugFunction.h"
 #include	"sceneMain.h"
 //*****************************************************************************************************************************

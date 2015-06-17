@@ -1,17 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="ソース ファイル\SYSTEM">
-      <UniqueIdentifier>{188586ad-3818-4e68-816a-e6427b522bc6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="リソース ファイル">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
@@ -22,41 +11,8 @@
     <Filter Include="IEX">
       <UniqueIdentifier>{38fbec0a-1dc8-4967-afe0-3a6584026b2f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\IexHeader">
-      <UniqueIdentifier>{3ab58b75-2599-4d68-a785-9157e58e1d2e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\GameSource">
-      <UniqueIdentifier>{32527560-a3b4-4c31-85f0-977600250e35}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\GameHeader">
-      <UniqueIdentifier>{c4863d1e-c580-484b-b401-fe01fe1cedd2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\DebugSystem">
-      <UniqueIdentifier>{64816a0f-f37d-470a-baf0-8956c29f7d5a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="キャラクター">
-      <UniqueIdentifier>{9dc1eb99-f5b6-4513-8248-306e21a6a6dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="キャラクター\Tennis">
-      <UniqueIdentifier>{63d10272-fe82-4c2b-958b-bcb737d9ab5f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="キャラクター\共通">
-      <UniqueIdentifier>{759b7ee8-56fb-4914-8678-13cecc33e66e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="キャラクター\Soccer">
-      <UniqueIdentifier>{116dc90c-4833-4282-9aae-8b2a768c0de4}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\system\Framework.cpp">
-      <Filter>ソース ファイル\SYSTEM</Filter>
-    </ClCompile>
-    <ClCompile Include="source\system\System.cpp">
-      <Filter>ソース ファイル\SYSTEM</Filter>
-    </ClCompile>
-    <ClCompile Include="source\system\WinMain.cpp">
-      <Filter>ソース ファイル\SYSTEM</Filter>
-    </ClCompile>
     <ClCompile Include="IEX\IEX_2DObject.cpp">
       <Filter>IEX</Filter>
     </ClCompile>
@@ -105,158 +61,61 @@
     <ClCompile Include="IEX\IEX_View.cpp">
       <Filter>IEX</Filter>
     </ClCompile>
-    <ClCompile Include="source\GameObject.cpp">
-      <Filter>ソース ファイル\GameSource</Filter>
-    </ClCompile>
-    <ClCompile Include="source\sceneGamePlay.cpp">
-      <Filter>ソース ファイル\GameSource</Filter>
-    </ClCompile>
-    <ClCompile Include="source\sceneMain.cpp">
-      <Filter>ソース ファイル\GameSource</Filter>
-    </ClCompile>
-    <ClCompile Include="source\character\CharacterRenderer.cpp">
-      <Filter>キャラクター\共通</Filter>
-    </ClCompile>
-    <ClCompile Include="source\character\TennisPlayer.cpp">
-      <Filter>キャラクター\Tennis</Filter>
-    </ClCompile>
-    <ClCompile Include="source\brendanimation\BlendAnimationMesh.cpp">
-      <Filter>ソース ファイル\GameSource</Filter>
-    </ClCompile>
-    <ClCompile Include="source\character\Renderer.cpp">
-      <Filter>ソース ファイル\GameSource</Filter>
-    </ClCompile>
-    <ClCompile Include="source\character\CharacterBase.cpp">
-      <Filter>キャラクター\共通</Filter>
-    </ClCompile>
-    <ClCompile Include="source\system\GameController.cpp">
-      <Filter>ソース ファイル\GameSource</Filter>
-    </ClCompile>
-    <ClCompile Include="source\character\TennisPlayerState.cpp">
-      <Filter>キャラクター\Tennis</Filter>
-    </ClCompile>
-    <ClCompile Include="source\character\CharacterFunction.cpp">
-      <Filter>キャラクター\共通</Filter>
-    </ClCompile>
-    <ClCompile Include="source\character\CharacterMoveClass.cpp">
-      <Filter>キャラクター\共通</Filter>
-    </ClCompile>
-    <ClCompile Include="source\UsualBall.cpp">
-      <Filter>ソース ファイル\GameSource</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Camera.cpp">
-      <Filter>ソース ファイル\GameSource</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Ball.cpp">
-      <Filter>ソース ファイル\GameSource</Filter>
-    </ClCompile>
-    <ClCompile Include="source\character\SoccerPlayer.cpp">
-      <Filter>キャラクター\Soccer</Filter>
-    </ClCompile>
-    <ClCompile Include="source\character\SoccerPlayerState.cpp">
-      <Filter>キャラクター\Soccer</Filter>
-    </ClCompile>
-    <ClCompile Include="source\character\CharacterSliding.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="source\character\CharacterAttack.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="source\character\CharacterShot.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
+    <ClCompile Include="source\Ball\Ball.cpp" />
+    <ClCompile Include="source\Ball\UsualBall.cpp" />
+    <ClCompile Include="source\brendanimation\BlendAnimationMesh.cpp" />
+    <ClCompile Include="source\Camera\Camera.cpp" />
+    <ClCompile Include="source\character\Lacrosse\LacrossePlayer.cpp" />
+    <ClCompile Include="source\character\Lacrosse\LacrossePlayerState.cpp" />
+    <ClCompile Include="source\character\Tennis\TennisPlayer.cpp" />
+    <ClCompile Include="source\character\Tennis\TennisPlayerState.cpp" />
+    <ClCompile Include="source\character\CharacterBase.cpp" />
+    <ClCompile Include="source\character\CharacterFunction.cpp" />
+    <ClCompile Include="source\character\CharacterMoveClass.cpp" />
+    <ClCompile Include="source\character\CharacterRenderer.cpp" />
+    <ClCompile Include="source\Damage\Damage.cpp" />
+    <ClCompile Include="source\GameScene\sceneGamePlay.cpp" />
+    <ClCompile Include="source\GameScene\sceneMain.cpp" />
+    <ClCompile Include="source\GameSystem\GameController.cpp" />
+    <ClCompile Include="source\GameSystem\GameObject.cpp" />
+    <ClCompile Include="source\IexSystem\Framework.cpp" />
+    <ClCompile Include="source\IexSystem\System.cpp" />
+    <ClCompile Include="source\IexSystem\WinMain.cpp" />
+    <ClCompile Include="source\Render\Renderer.cpp" />
+    <ClCompile Include="source\Render\MeshRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEX\iextreme.h">
       <Filter>IEX</Filter>
     </ClInclude>
-    <ClInclude Include="source\system\Framework.h">
-      <Filter>ヘッダー ファイル\IexHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\system\System.h">
-      <Filter>ヘッダー ファイル\IexHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\GameObject.h">
-      <Filter>ヘッダー ファイル\GameHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Collision.h">
-      <Filter>ヘッダー ファイル\GameHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\ForwardDecl.h">
-      <Filter>ヘッダー ファイル\GameHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\debug\DebugFunction.h">
-      <Filter>ヘッダー ファイル\DebugSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="source\system\Scene.h">
-      <Filter>ヘッダー ファイル\IexHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\SceneGamePlay.h">
-      <Filter>ヘッダー ファイル\GameHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\sceneMain.h">
-      <Filter>ヘッダー ファイル\GameHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\GameSystem.h">
-      <Filter>ヘッダー ファイル\GameHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\brendanimation\BlendAnimationMesh.h">
-      <Filter>ヘッダー ファイル\GameHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\character\Renderer.h">
-      <Filter>ヘッダー ファイル\GameHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\character\TennisPlayer.h">
-      <Filter>キャラクター\Tennis</Filter>
-    </ClInclude>
-    <ClInclude Include="source\character\CharacterRenderer.h">
-      <Filter>キャラクター\共通</Filter>
-    </ClInclude>
-    <ClInclude Include="source\character\CharacterStateTemplate.h">
-      <Filter>キャラクター\共通</Filter>
-    </ClInclude>
-    <ClInclude Include="source\character\CharacterFunction.h">
-      <Filter>キャラクター\共通</Filter>
-    </ClInclude>
-    <ClInclude Include="source\StateTemplate.h">
-      <Filter>ヘッダー ファイル\GameHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\character\CharacterBase.h">
-      <Filter>キャラクター\共通</Filter>
-    </ClInclude>
-    <ClInclude Include="source\character\CharacterMoveClass.h">
-      <Filter>キャラクター\共通</Filter>
-    </ClInclude>
-    <ClInclude Include="source\character\TennisPlayerState.h">
-      <Filter>キャラクター\Tennis</Filter>
-    </ClInclude>
-    <ClInclude Include="source\system\GameController.h">
-      <Filter>ヘッダー ファイル\GameHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\brendanimation\Camera.h">
-      <Filter>ヘッダー ファイル\GameHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Ball.h">
-      <Filter>ヘッダー ファイル\GameHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\UsualBall.h">
-      <Filter>ヘッダー ファイル\GameHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="source\character\SoccerPlayer.h">
-      <Filter>キャラクター\Soccer</Filter>
-    </ClInclude>
-    <ClInclude Include="source\character\SoccerPlayerState.h">
-      <Filter>キャラクター\Soccer</Filter>
-    </ClInclude>
-    <ClInclude Include="source\character\CharacterSliding.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="source\character\CharacterAttack.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="source\character\CharacterShot.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
+    <ClInclude Include="source\Ball\Ball.h" />
+    <ClInclude Include="source\Ball\UsualBall.h" />
+    <ClInclude Include="source\brendanimation\BlendAnimationMesh.h" />
+    <ClInclude Include="source\Camera\Camera.h" />
+    <ClInclude Include="source\character\Lacrosse\LacrossePlayer.h" />
+    <ClInclude Include="source\character\Lacrosse\LacrossePlayerState.h" />
+    <ClInclude Include="source\character\Tennis\TennisPlayer.h" />
+    <ClInclude Include="source\character\Tennis\TennisPlayerState.h" />
+    <ClInclude Include="source\character\CharacterBase.h" />
+    <ClInclude Include="source\character\CharacterFunction.h" />
+    <ClInclude Include="source\character\CharacterMoveClass.h" />
+    <ClInclude Include="source\character\CharacterRenderer.h" />
+    <ClInclude Include="source\character\CharacterStateTemplate.h" />
+    <ClInclude Include="source\Damage\Damage.h" />
+    <ClInclude Include="source\debug\DebugFunction.h" />
+    <ClInclude Include="source\GameScene\SceneGamePlay.h" />
+    <ClInclude Include="source\GameScene\sceneMain.h" />
+    <ClInclude Include="source\GameSystem\ForwardDecl.h" />
+    <ClInclude Include="source\GameSystem\GameController.h" />
+    <ClInclude Include="source\GameSystem\GameObject.h" />
+    <ClInclude Include="source\GameSystem\GameSystem.h" />
+    <ClInclude Include="source\IexSystem\Framework.h" />
+    <ClInclude Include="source\IexSystem\Scene.h" />
+    <ClInclude Include="source\IexSystem\System.h" />
+    <ClInclude Include="source\utillity\Collision.h" />
+    <ClInclude Include="source\utillity\StateTemplate.h" />
+    <ClInclude Include="source\Render\Renderer.h" />
+    <ClInclude Include="source\Render\MeshRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DATA\Shader\2D.fx">

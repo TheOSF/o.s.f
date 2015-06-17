@@ -5,10 +5,13 @@
 //		‘O•ûéŒ¾ƒwƒbƒ_
 //***************************************************************
 
-class Character;
-typedef Character* LpCharacter;
+class CharacterBase;
+typedef CharacterBase* LpCharacterBase;
 
 class BallBase;
 typedef BallBase* LpBallBase;
+
+class MeshRenderer;
+typedef MeshRenderer* LpMeshRenderer;
 	 
 #endif
