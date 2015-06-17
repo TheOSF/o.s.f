@@ -2,19 +2,18 @@
 #include	"../IexSystem/System.h"
 #include	"debug\DebugFunction.h"
 #include	"sceneGamePlay.h"
-#include	"character\Tennis\TennisPlayer.h"
-#include	"character\Tennis\TennisPlayerState.h"
-#include	"../Camera/Camera.h"
+#include	"../character/Tennis/TennisPlayer.h"
+#include	"../character/Tennis/TennisPlayerState.h"
+#include	"../character/Soccer/SoccerPlayer.h"
+#include	"../character/Soccer/SoccerPlayerState.h"
 
-#include "../character/Lacrosse/LacrossePlayer.h"
-#include "../character/Lacrosse/LacrossePlayerState.h"
 
 //*****************************************************************************************************************************
 //
 //	グローバル変数
 //
 //*****************************************************************************************************************************
-
+static iexView* m_pView;
 static LPIEXMESH pStage;
 
 //*****************************************************************************************************************************
@@ -34,24 +33,25 @@ bool sceneGamePlay::Initialize()
 	dir.Normalize();
 	iexLight::DirLight(shader, 0, &dir, 0.8f, 0.8f, 0.8f);
 
+	m_pView = new iexView;
+	m_pView->Set(Vector3(0, 40, -55), Vector3(0, 4, 0));
+	
 	pStage = new iexMesh("DATA\\STAGE\\Stage.IMO");
 
-	DefCamera.m_Position = Vector3(0, 40, -55);
-	DefCamera.m_Target = Vector3(0, 4, 0);
+
 
 	//キャラクタ作成
+
 	CharacterBase::PlayerInfo pl;
 
-	pl.chr_type = CharacterType::_Tennis;
+	pl.chr_type = CharacterType::_Soccer;
 	pl.number = (PlayerNum::Value)0;
 	pl.player_type = PlayerType::_Player;
 	pl.strong_type = StrongType::__ErrorType;
 	
 	//テニスを作成し、動きとしてプレイヤー操作クラスをセット
 	(new TennisPlayer(pl))->SetState(new TennisState_PlayerControll_Move());
-
-	// ラクロス作成
-	(new LacrossePlayer(pl))->SetState(new LacrosseState_PlayerControllMove());
+	(new SoccerPlayer(pl))->SetState(new SoccerState_PlayerControll_Move());
 
 	return true;
 }
@@ -64,9 +64,9 @@ bool sceneGamePlay::Initialize()
 
 sceneGamePlay::~sceneGamePlay()
 {
+	delete m_pView;
 	delete pStage;
 
-	DefCamera.Release();
 	DefRendererMgr.Release();
 	DefGameObjMgr.Release();
 }
@@ -78,7 +78,8 @@ sceneGamePlay::~sceneGamePlay()
 //*****************************************************************************************************************************
 void	sceneGamePlay::Update()
 {
-	DefCamera.Update();
+	m_pView->Activate();
+
 	DefGameObjMgr.Update();
 }
 
@@ -90,7 +91,7 @@ void	sceneGamePlay::Update()
 
 void	sceneGamePlay::Render()
 {
-	DefCamera.Clear();
+	m_pView->Clear();
 
 	pStage->Render();
 
