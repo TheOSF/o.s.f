@@ -35,10 +35,12 @@ public:
 	Type			type;		//このダメージのタイプ
 	float			Value;		//値
 	Vector3			vec;		//ひるむ方向ベクトル
+	int				HitCount;	//当たった回数
 
 	DamageBase();
 	virtual ~DamageBase();
 	virtual bool HitCheckSphere(const ShpereParam* sp) = 0;
+
 };
 
 
@@ -67,12 +69,12 @@ public:
 	static DamageManager& GetInstance();
 	static void Release();
 
-	//あたり判定条件のデリゲーター
+	//ダメージヒット時のイベントクラス
 	class HitEventBase
 	{
 	public:
 		virtual ~HitEventBase(){}
-		virtual void Hit(DamageBase* pDmg) = 0;	//当たった時に呼ばれる関数
+		virtual bool Hit(DamageBase* pDmg){ return false; }	//当たった時に呼ばれる関数(戻り値：当たったかどうか)
 	};
 
 	//球でダメージ判定を取得する

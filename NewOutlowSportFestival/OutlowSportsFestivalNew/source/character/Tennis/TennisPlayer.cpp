@@ -11,7 +11,6 @@ CharacterBase(info),
 m_Renderer(new BlendAnimationMesh("DATA\\CHR\\Tennis_player\\Player_T.iem"))
 {
 	m_pStateMachine = new TennisStateMachine(this);
-	m_Renderer.SetMotion(2);
 }
 
 TennisPlayer::~TennisPlayer()

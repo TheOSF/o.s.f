@@ -3,9 +3,9 @@
 #include "../CharacterFunction.h"
 
 #include "../CharacterMoveClass.h"
+#include "../CharacterHitBallAttackClass.h"
+#include "../CharacterEvasionClass.h"
 #include "LacrosseAttackClose.h"
-#include "LacrosseEvasionClass.h"
-#include "LacrosseHitBallAttackClass.h"
 #include "LacrosseCounterPoseClass.h"
 
 //*************************************************************
@@ -56,7 +56,7 @@ CharacterUsualMove* LacrosseState_PlayerControllMove::CreateMoveClass(LacrossePl
 	p.TurnSpeed = 0.3f;
 	p.DownSpeed = 0.2f;
 
-	return new CharacterUsualMove(t, p, new LacrosseMoveEvent(t));
+	return new CharacterUsualMove(t, p, new LacrosseMoveEvent(t), new DamageManager::HitEventBase());
 }
 
 
@@ -282,9 +282,9 @@ void LacrosseState_PlayerControllEvasion::Exit(LacrossePlayer* t)
 
 
 // 回避クラス作成
-LacrosseEvasion* LacrosseState_PlayerControllEvasion::CreateEvasionClass(LacrossePlayer* t)
+CharacterEvasion* LacrosseState_PlayerControllEvasion::CreateEvasionClass(LacrossePlayer* t)
 {
-	class EvasionEvent : public LacrosseEvasion::Event
+	class EvasionEvent : public CharacterEvasion::Event
 	{
 		LacrossePlayer* m_pLacrosse; // ラクロス
 	public:
@@ -324,7 +324,7 @@ LacrosseEvasion* LacrosseState_PlayerControllEvasion::CreateEvasionClass(Lacross
 	};
 
 	// 回避パラメータ設定
-	LacrosseEvasion::EvasionParams params;
+	CharacterEvasion::EvasionParams params;
 	params.AllFrame                      = 35;         // 全35フレーム
 	params.MaxTurnRadian            = PI / 4;    // 45°
 	params.MoveDownSpeed         = 0.2f;      // 減速割合
@@ -333,7 +333,7 @@ LacrosseEvasion* LacrosseState_PlayerControllEvasion::CreateEvasionClass(Lacross
 	params.NoDamageEndFrame   = 20;       // 開始20フレームで無敵終了
 
 	// 作成
-	return new LacrosseEvasion(
+	return new CharacterEvasion(
 		t,
 		new EvasionEvent(t),
 		params
@@ -386,9 +386,9 @@ void LacrosseState_PlayerControllHitBallAttack::Exit(LacrossePlayer* t)
 
 
 // 回避クラス作成
-LacrosseHitBallAttack* LacrosseState_PlayerControllHitBallAttack::CreateAttackClass(LacrossePlayer* t)
+CharacterHitBallAttack* LacrosseState_PlayerControllHitBallAttack::CreateAttackClass(LacrossePlayer* t)
 {
-	class HitBallEvent : public LacrosseHitBallAttack::Event
+	class HitBallEvent : public CharacterHitBallAttack::Event
 	{
 		LacrossePlayer* m_pLacrosse; // ラクロス
 	public:
@@ -432,7 +432,7 @@ LacrosseHitBallAttack* LacrosseState_PlayerControllHitBallAttack::CreateAttackCl
 	};
 
 	// 攻撃パラメータ作成
-	LacrosseHitBallAttack::AttackParams params;
+	CharacterHitBallAttack::AttackParams params;
 	params.AllFrame                        = 30;     // 全30フレーム
 	params.AttackPower                  = 10.0f; // 攻撃力
 	params.DamageOutbreakFrame = 5;       // 開始5フレームで球発射
@@ -440,7 +440,7 @@ LacrosseHitBallAttack* LacrosseState_PlayerControllHitBallAttack::CreateAttackCl
 	params.MoveDownSpeed           = 0.2f;   // 減速割合
 
 	// 生成して返す
-	return new LacrosseHitBallAttack(
+	return new CharacterHitBallAttack(
 		t,
 		new HitBallEvent(t),
 		params);
@@ -541,7 +541,6 @@ LacrosseCounterPose* LacrosseState_PlayerControllCounterPose::CreateCounterPoseC
 	// 構えパラメータ設定
 	LacrosseCounterPose::CounterPoseParams params;
 	params.AllFrame              = 60;      // 全フレーム
-	params.TurnSpeed           = 0.15f;  // 角度変化スピード
 	params.MoveDownSpeed = 0.2f;    // 減速割合
 
 	// 生成して返す

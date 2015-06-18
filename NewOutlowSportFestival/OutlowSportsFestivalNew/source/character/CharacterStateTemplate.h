@@ -40,29 +40,39 @@ public:
 	}
 	virtual~ChrStateMachine()
 	{
-		if (m_pState)delete m_pState;
+		if (m_pState)
+		{
+			m_pState->Exit(m_pClient);
+			delete m_pState;
+		}
 		if (m_pNextState)delete m_pNextState;
 	}
 public:
 	void set_state(_MyState_ptr const Newstate)
 	{
 		if (m_pNextState)
+		{
 			delete m_pNextState;
+		}
 		m_pNextState = Newstate;
 	}
 	void state_execute()
 	{
-		if (m_pNextState){
-			if (m_pState){
+		if (m_pNextState)
+		{
+			if (m_pState)
+			{
 				m_pState->Exit(m_pClient);
 				delete m_pState;
 			}
 			m_pNextState->Enter(m_pClient);
 			m_pState = m_pNextState;
-			m_pNextState = 0;
+			m_pNextState = nullptr;
 		}
 		if (m_pState)
+		{
 			return m_pState->Execute(m_pClient);
+		}
 	}
 
 	bool Msg(Msg_t t)

@@ -15,7 +15,6 @@ public:
 	struct CounterPoseParams
 	{
 		int AllFrame;                 // 全フレーム
-		float TurnSpeed;           // 向き補正速度
 		float MoveDownSpeed; // 減速割合
 	};
 

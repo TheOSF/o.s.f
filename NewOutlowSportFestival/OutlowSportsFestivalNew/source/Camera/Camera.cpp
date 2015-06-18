@@ -1,5 +1,5 @@
 #include "Camera.h"
-
+#include "CameraState.h"
 
 Camera* Camera::m_pInstance = nullptr;
 
@@ -77,13 +77,31 @@ void Camera::ProjectionToWorld(Vector3* pOut, CrVector3 In)
 	*pOut = Vector3MulMatrix(In, m_VP_inv);
 }
 
+CrVector3 Camera::GetRight()const
+{
+	return m_Right;
+}
+
+CrVector3 Camera::GetUp()const
+{
+	return m_Up;
+}
+
+CrVector3 Camera::GetForward()const
+{
+	return m_Forward;
+}
+
 Camera::Camera()
 {
 	m_pStateMachine = new CameraStateMachine(this);
+	m_pStateMachine->set_state(new CameraStateGamePlay());
 
 	ShockParam.power = Vector2(0, 0);
 	ShockParam.time = 0;
 	ShockParam.max_time = 0;
+
+
 }
 
 Camera::~Camera()
@@ -103,15 +121,15 @@ void Camera::UpdateMatrix(Vector3 pos, Vector3 target)
 	D3DXMatrixInverse(&m_VP_inv, 0, &m_VP);
 
 	m_Right.x = matView._11;
-	m_Right.y = matView._12;
-	m_Right.z = matView._13;
+	m_Right.y = matView._21;
+	m_Right.z = matView._31;
 
-	m_Up.x = matView._21;
+	m_Up.x = matView._12;
 	m_Up.y = matView._22;
-	m_Up.z = matView._23;
+	m_Up.z = matView._32;
 
-	m_Forward.x = matView._31;
-	m_Forward.y = matView._32;
+	m_Forward.x = matView._13;
+	m_Forward.y = matView._23;
 	m_Forward.z = matView._33;
 
 

@@ -35,7 +35,7 @@ void SoccerState_PlayerControll_Move::Enter(SoccerPlayer* s)
 	p.TurnSpeed = 0.3f;
 	p.DownSpeed = 0.2f;
 
-	m_pMoveClass = new CharacterUsualMove(s, p, new SoccerMoveEvent(s));
+	m_pMoveClass = new CharacterUsualMove(s, p, new SoccerMoveEvent(s),new DamageManager::HitEventBase());
 }
 void SoccerState_PlayerControll_Move::Execute(SoccerPlayer* s)
 {

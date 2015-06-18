@@ -5,6 +5,8 @@
 //	球ベースクラス
 //*****************************************************
 
+const float BallBase::UsualBallShotY = 1.0f;
+
 BallBase::BallBase()
 {
 	MyAssert(DefBallMgr.AddBall(this), "ボール登録に失敗しました");

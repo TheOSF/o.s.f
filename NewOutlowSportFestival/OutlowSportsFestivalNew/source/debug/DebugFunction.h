@@ -22,8 +22,8 @@
 
 #ifdef _DEBUG
 
-#define MyMemoryLeakCheck
-//#define MyMemoryLeakCheck _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF)
+//#define MyMemoryLeakCheck
+#define MyMemoryLeakCheck _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF)
 
 //*****************************************************************
 //printfと同じ形式で出力ウィンドウに表示

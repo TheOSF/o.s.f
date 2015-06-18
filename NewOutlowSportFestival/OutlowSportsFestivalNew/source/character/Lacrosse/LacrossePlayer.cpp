@@ -10,8 +10,9 @@
 //----------------------------------------------
 
 // コンストラクタ
-LacrossePlayer::LacrossePlayer(const CharacterBase::PlayerInfo& info):
+LacrossePlayer::LacrossePlayer(const CharacterBase::PlayerInfo& info) :
 CharacterBase(info),
+m_HaveBall(false), 
 m_Renderer(new BlendAnimationMesh("DATA\\CHR\\Golfer\\Player_G.iem"))
 {
 	m_pStateMachine = new LacrosseStateMachine(this);
