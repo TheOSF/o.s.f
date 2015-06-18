@@ -31,7 +31,7 @@ public:
 
 	// コンストラクタ
 	CharacterCounterPose(
-		const int MaxLevel,
+		const unsigned int MaxLevel,
 		const CounterPoseParams& counterPoseParams,
 		CharacterBase* pCharacter,
 		Event* pEvent
@@ -50,9 +50,9 @@ public:
 	bool IsMaxLevel(int level)const;
 
 private:
-	const int                              m_MaxLevel;                  // レベルアップパラメータ
+	const unsigned int               m_MaxLevel;                  // レベルアップパラメータ
+	unsigned int                        m_NowLevel;                  // 現在のレベル
 	int                                       m_Timer;                        // タイマー
-	int                                       m_NowLevel;                  // 現在のレベル
 	const CounterPoseParams  m_CounterPoseParams; // カウンター構えパラメータ
 	Vector2                               m_StickValue;                 // スティックの入力状態
 	CharacterBase*                  m_pCharacter;                // キャラクター
