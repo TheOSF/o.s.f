@@ -61,59 +61,28 @@ void SoccerState_PlayerControll_Move::Exit(SoccerPlayer* s)
 }
 void SoccerState_PlayerControll_Sliding::Enter(SoccerPlayer* s)
 {
-	class SoccerMoveEvent :public CharacterSliding::MoveEvent
-	{
-		SoccerPlayer* m_pSoccer;
-	public:
-		SoccerMoveEvent(SoccerPlayer* pSoccer) :
-			m_pSoccer(pSoccer){}
 
-		void Update(bool isRun, RATIO speed_ratio)
-		{
-			m_pSoccer->m_Renderer.Update(1);
-		}
+	SoccerSliding::Params p;
+	p.speed = 0.5f;
+	p.damage = 1;
 
-		void RunStart()
-		{
-			m_pSoccer->m_Renderer.SetMotion(SoccerPlayer::_ms_Rolling);
-		}
-
-		void StandStart()
-		{
-			m_pSoccer->m_Renderer.SetMotion(SoccerPlayer::_ms_Stand);
-		}
-	};
-	CharacterSliding::Params p;
-	
-
-	p.Acceleration = 0.2f;
-	p.MaxSpeed = 0.2f;
-	p.TurnSpeed = 0.3f;
-	p.DownSpeed = 0.2f;
-
-	m_pMoveClass = new CharacterSliding(s, p, new SoccerMoveEvent(s));
-	
-
+	m_pSlidingClass = new SoccerSliding(p,s);
+	m_pSlidingClass->Start();
 }
 void SoccerState_PlayerControll_Sliding::Execute(SoccerPlayer* s)
 {
-	timer++;
-	Vector2 st = controller::GetStickValue(controller::stick::left, s->m_PlayerInfo.number);
-
-	//m_pMoveClass->SetStickValue(st);
-	//chr_func::AddMoveFront(s, 0.4f, 0.5f);
-	m_pMoveClass->Update();
-
-	chr_func::CreateTransMatrix(s, 0.05f, &s->m_Renderer.m_TransMatrix);
-	if (timer > 48)
+	m_pSlidingClass->Update();
+	if (m_pSlidingClass->is_End())
 	{
 		s->SetState(new SoccerState_PlayerControll_Move);
 	}
+	
+	chr_func::CreateTransMatrix(s, 0.05f, &s->m_Renderer.m_TransMatrix);
 }
 void SoccerState_PlayerControll_Sliding::Exit(SoccerPlayer* s)
 {
 
-	delete m_pMoveClass;
+	delete m_pSlidingClass;
 }
 void SoccerState_PlayerControll_Attack::Enter(SoccerPlayer* s)
 {

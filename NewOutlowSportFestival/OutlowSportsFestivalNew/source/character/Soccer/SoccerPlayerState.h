@@ -4,8 +4,9 @@
 #include "SoccerPlayer.h"
 #include "../../Ball/UsualBall.h"
 #include "../CharacterMoveClass.h"
-#include "../CharacterSliding.h"
+#include "SoccerSliding.h"
 #include "../CharacterAttack.h"
+#include "../CharacterShot.h"
 
 
 //****************************************************
@@ -26,7 +27,7 @@ public:
 class SoccerState_PlayerControll_Sliding :public SoccerState
 {
 private:
-	CharacterSliding*		m_pMoveClass;
+	SoccerSliding*		m_pSlidingClass;
 	int timer = 0;
 public:
 	void Enter(SoccerPlayer* s);
@@ -67,7 +68,7 @@ public:
 class SoccerState_PlayerControll_Shot :public SoccerState
 {
 private:
-	CharacterSliding*		m_pMoveClass;
+	CharacterShot*		m_pMoveClass;
 	int timer = 0;
 public:
 	void Enter(SoccerPlayer* s);

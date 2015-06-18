@@ -44,13 +44,13 @@ bool sceneGamePlay::Initialize()
 	{
 		CharacterBase::PlayerInfo pl;
 
-		pl.chr_type = CharacterType::_Tennis;
+		pl.chr_type = CharacterType::_Soccer;
 		pl.number = (PlayerNum::Value)0;
 		pl.player_type = PlayerType::_Player;
 		pl.strong_type = StrongType::__ErrorType;
 
-		TennisPlayer* tp = new TennisPlayer(pl);
-		tp->SetState(new TennisState_PlayerControll_Move());
+		SoccerPlayer* tp = new SoccerPlayer(pl);
+		tp->SetState(new SoccerState_PlayerControll_Move());
 	}
 
 
