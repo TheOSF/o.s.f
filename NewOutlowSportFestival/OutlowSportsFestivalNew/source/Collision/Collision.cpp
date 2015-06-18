@@ -20,14 +20,22 @@ CollisionBase::~CollisionBase()
 //	あたり判定オブジェクトマネージャ
 //*******************************************************
 
+CollisionManager* CollisionManager::m_pInstance = nullptr;
+
 CollisionManager& CollisionManager::GetInstance()
 {
+	if (m_pInstance == nullptr)
+	{
+		m_pInstance = new CollisionManager();
+	}
 
+	return *m_pInstance;
 }
 
 void CollisionManager::Release()
 {
-
+	delete m_pInstance;
+	m_pInstance = nullptr;
 }
 
 //レイピック
