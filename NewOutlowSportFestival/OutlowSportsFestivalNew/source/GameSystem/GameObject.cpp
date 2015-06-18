@@ -66,5 +66,10 @@ GameObjectManager::GameObjectManager()
 
 GameObjectManager::~GameObjectManager()
 {
-
+	for (auto it = m_GameObjectMap.begin();
+		it != m_GameObjectMap.end();
+		++it)
+	{
+		delete it->second;
+	}
 }

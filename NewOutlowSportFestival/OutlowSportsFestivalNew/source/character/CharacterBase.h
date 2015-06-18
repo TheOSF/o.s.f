@@ -34,15 +34,17 @@ public:
 		float				HP;			//‚O`
 		float				SP;			//‚O`‚P‚O‚O
 	};
+
 	const PlayerInfo	m_PlayerInfo;
 	Params				m_Params;
+
 	inline const Params& Getparam()
 		const{
 		return m_Params;
 	}
 
 	CharacterBase(const PlayerInfo& info);
-	virtual ~CharacterBase(){}
+	virtual ~CharacterBase();
 
 	virtual bool Update() = 0;	//‚±‚ÌŠÖ”‚ªfalse‚ğ•Ô‚·‚Ædelete‚³‚ê‚é
 	virtual bool Msg(MsgType mt) = 0;	//óM‚Å‚«‚½ƒƒbƒZ[ƒW‚Ítrue‚ğ

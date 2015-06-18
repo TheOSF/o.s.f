@@ -92,6 +92,9 @@
     <ClCompile Include="source\Render\Renderer.cpp" />
     <ClCompile Include="source\character\Soccer\SoccerPlayer.cpp" />
     <ClCompile Include="source\character\Soccer\SoccerPlayerState.cpp" />
+    <ClCompile Include="source\character\CharacterManager.cpp" />
+    <ClCompile Include="source\Camera\CameraState.cpp" />
+    <ClCompile Include="source\Collision\Collision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEX\iextreme.h">
@@ -134,6 +137,9 @@
     <ClInclude Include="source\utillity\StateTemplate.h" />
     <ClInclude Include="source\character\Soccer\SoccerPlayer.h" />
     <ClInclude Include="source\character\Soccer\SoccerPlayerState.h" />
+    <ClInclude Include="source\character\CharacterManager.h" />
+    <ClInclude Include="source\Camera\CameraState.h" />
+    <ClInclude Include="source\Collision\Collision.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DATA\Shader\2D.fx">

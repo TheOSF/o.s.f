@@ -17,11 +17,11 @@
 #include	<dinput.h>
 #include	<cassert>
 
-//#if _DEBUG
-//#define _CRTDBG_MAP_ALLOC
-//#include <crtdbg.h>
-//#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
-//#endif
+#if _DEBUG
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#endif
 
 #include	"../source/debug/DebugFunction.h"
 
@@ -306,6 +306,11 @@ inline float Vector3XZLength(const Vector& v)
 inline float Vector3YZLength(const Vector& v)
 {
 	return sqrtf(v.z*v.z + v.y*v.y);
+}
+
+inline float Vector3Distance(const Vector3& p1, const Vector3& p2)
+{
+	return Vector3(p1.x - p2.x, p1.y - p2.y, p1.z - p1.z).Length();
 }
 
 //------------------------------------------------------

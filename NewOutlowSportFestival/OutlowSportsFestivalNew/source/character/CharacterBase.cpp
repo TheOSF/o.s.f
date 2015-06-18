@@ -1,4 +1,5 @@
 #include "CharacterBase.h"
+#include "CharacterManager.h"
 
 //***************************************************
 //		キャラクタクラス
@@ -13,4 +14,13 @@ m_PlayerInfo(info)
 	m_Params.angle = 0;
 	m_Params.HP = 100;
 	m_Params.SP = 0;
+
+	//マネージャに登録
+	DefCharacterMgr.Add(this);
+}
+
+CharacterBase::~CharacterBase()
+{
+	//マネージャから削除
+	DefCharacterMgr.Erace(this);
 }
