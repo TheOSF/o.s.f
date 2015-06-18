@@ -2,7 +2,7 @@
 #define __SOCCER_PLAYER_STATE_H__
 
 #include "SoccerPlayer.h"
-#include "UsualBall.h"
+#include "../../Ball/UsualBall.h"
 #include "../CharacterMoveClass.h"
 #include "../CharacterSliding.h"
 #include "../CharacterAttack.h"
