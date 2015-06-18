@@ -541,7 +541,6 @@ LacrosseCounterPose* LacrosseState_PlayerControllCounterPose::CreateCounterPoseC
 	// 構えパラメータ設定
 	LacrosseCounterPose::CounterPoseParams params;
 	params.AllFrame              = 60;      // 全フレーム
-	params.TurnSpeed           = 0.15f;  // 角度変化スピード
 	params.MoveDownSpeed = 0.2f;    // 減速割合
 
 	// 生成して返す

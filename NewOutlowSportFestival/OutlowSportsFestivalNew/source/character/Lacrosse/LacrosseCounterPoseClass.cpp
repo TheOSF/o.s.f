@@ -37,13 +37,6 @@ bool LacrosseCounterPose::Update()
 		m_pEvent->PoseStart();
 	}
 
-	// Œü‚«•â³
-	chr_func::AngleControll(
-		m_pLacrossePlayer,
-		m_pLacrossePlayer->m_Params.pos + Vector3(m_StickValue.x, 0, m_StickValue.y), 
-		m_PoseParams.TurnSpeed
-		);
-
 	// À•WXV
 	chr_func::PositionUpdate(m_pLacrossePlayer);
 

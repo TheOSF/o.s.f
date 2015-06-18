@@ -164,6 +164,8 @@
     <ClInclude Include="source\Camera\Camera.h" />
     <ClInclude Include="source\character\CharacterAttack.h" />
     <ClInclude Include="source\character\CharacterBase.h" />
+    <ClInclude Include="source\character\CharacterCounterClass.h" />
+    <ClInclude Include="source\character\CharacterCounterPoseClass.h" />
     <ClInclude Include="source\character\CharacterFunction.h" />
     <ClInclude Include="source\character\CharacterMoveClass.h" />
     <ClInclude Include="source\character\CharacterRenderer.h" />

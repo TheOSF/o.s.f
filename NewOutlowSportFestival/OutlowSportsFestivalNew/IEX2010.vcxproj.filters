@@ -136,6 +136,8 @@
     <ClInclude Include="source\character\Lacrosse\LacrosseCounterClass.h" />
     <ClInclude Include="source\character\CharacterHitBallAttackClass.h" />
     <ClInclude Include="source\character\CharacterEvasionClass.h" />
+    <ClInclude Include="source\character\CharacterCounterClass.h" />
+    <ClInclude Include="source\character\CharacterCounterPoseClass.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DATA\Shader\2D.fx">
