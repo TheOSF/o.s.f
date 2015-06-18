@@ -4,11 +4,12 @@
 class CharacterBase;
 
 #include "iextreme.h"
+#include "../Damage/Damage.h"
+
 
 //****************************************************************
 //		キャラクタ共通の動きクラス
 //****************************************************************
-
 
 //通常移動クラス
 class CharacterUsualMove
@@ -32,15 +33,22 @@ public:
 	};
 
 	CharacterUsualMove(
-		CharacterBase*	pParent,	//操るキャラクタのポインタ
-		const Params&	param,
-		MoveEvent*		pMoveEvent);
+		CharacterBase*					pParent,	//操るキャラクタのポインタ
+		const Params&					param,		//移動パラメータ構造体
+		MoveEvent*						pMoveEvent,	//移動イベントに反応するクラス
+		DamageManager::HitEventBase*	pHitEventBase//ダメージを受けた時に反応するクラス
+		);
+
+	~CharacterUsualMove();
 
 	void Update();	//更新
 	void SetStickValue(CrVector2 StickValue);
 private:
+	typedef DamageManager::HitEventBase HitEventBase;
+
 	CharacterBase*	m_pParent;
 	MoveEvent*		m_pMoveEvent;
+	HitEventBase*	m_pHitEventBase;
 	Params			m_Params;
 	Vector2			m_StickValue;
 	bool			m_isRun;

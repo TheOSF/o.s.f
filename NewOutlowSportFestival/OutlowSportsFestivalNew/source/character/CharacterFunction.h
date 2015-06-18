@@ -32,6 +32,9 @@ namespace chr_func
 
 	//前方向ベクトルを得る
 	void GetFront(CharacterBase* p, Vector3* pOut);
+
+	//キャラクタが死んでいるかどうか
+	bool isDie(CharacterBase* p);
 }
 
 #endif

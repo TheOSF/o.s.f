@@ -5,8 +5,8 @@
 #include "../utillity/StateTemplate.h"
 
 class Camera;
-typedef StateMachine<Camera> CameraStateMachine;
-typedef State<Camera> CameraState;
+typedef StateMachine<Camera, void> CameraStateMachine;
+typedef State<Camera, void> CameraState;
 
 //***********************************************
 //	カメラクラス(シングルトン)

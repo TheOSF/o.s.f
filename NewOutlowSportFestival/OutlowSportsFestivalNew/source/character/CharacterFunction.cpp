@@ -117,3 +117,8 @@ void chr_func::GetFront(CharacterBase* p, Vector3* pOut)
 	pOut->y = 0;
 	pOut->z = cosf(p->m_Params.angle);
 }
+
+bool chr_func::isDie(CharacterBase* p)
+{
+	return p->m_Params.HP <= 0;
+}

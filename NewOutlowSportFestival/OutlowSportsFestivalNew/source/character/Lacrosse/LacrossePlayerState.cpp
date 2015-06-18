@@ -56,7 +56,7 @@ CharacterUsualMove* LacrosseState_PlayerControllMove::CreateMoveClass(LacrossePl
 	p.TurnSpeed = 0.3f;
 	p.DownSpeed = 0.2f;
 
-	return new CharacterUsualMove(t, p, new LacrosseMoveEvent(t));
+	return new CharacterUsualMove(t, p, new LacrosseMoveEvent(t), new DamageManager::HitEventBase());
 }
 
 

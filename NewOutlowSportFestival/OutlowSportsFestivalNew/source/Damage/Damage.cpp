@@ -7,7 +7,8 @@ pParent(nullptr),
 pBall(nullptr),
 type(_WeekDamage),
 Value(1),
-vec(Vector3Zero)
+vec(Vector3Zero),
+HitCount(0)
 {
 	MyAssert(DefDamageMgr.AddDamage(this), "ƒ_ƒ[ƒW“o˜^‚ÌŽ¸”s");
 }
@@ -67,9 +68,12 @@ void DamageManager::HitCheckSphere(
 		++it
 		)
 	{
-		if (it->second->HitCheckSphere(&sp))
+		//‚à‚µ‚ ‚½‚Á‚Ä‚¢‚½‚ç
+		if (it->second->HitCheckSphere(&sp) &&
+			HitEvent.Hit(it->second))
 		{
-			HitEvent.Hit(it->second);
+			//“–‚½‚Á‚½‰ñ”ƒJƒEƒ“ƒg‚ð‘«‚·
+			it->second->HitCount++;
 		}
 	}
 }

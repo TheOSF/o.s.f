@@ -2,20 +2,20 @@
 #include	"../IexSystem/System.h"
 #include	"debug\DebugFunction.h"
 #include	"sceneGamePlay.h"
+#include	"../Ball/Ball.h"
+#include	"../Camera/Camera.h"
+#include	"../character/CharacterManager.h"
+
 #include	"../character/Tennis/TennisPlayer.h"
 #include	"../character/Tennis/TennisPlayerState.h"
 #include	"../character/Soccer/SoccerPlayer.h"
 #include	"../character/Soccer/SoccerPlayerState.h"
-#include "../character/Lacrosse/LacrossePlayer.h"
-#include "../character/Lacrosse/LacrossePlayerState.h"
-
 
 //*****************************************************************************************************************************
 //
 //	グローバル変数
 //
 //*****************************************************************************************************************************
-static iexView* m_pView;
 static LPIEXMESH pStage;
 
 //*****************************************************************************************************************************
@@ -35,26 +35,38 @@ bool sceneGamePlay::Initialize()
 	dir.Normalize();
 	iexLight::DirLight(shader, 0, &dir, 0.8f, 0.8f, 0.8f);
 
-	m_pView = new iexView;
-	m_pView->Set(Vector3(0, 40, -55), Vector3(0, 4, 0));
-	
+	DefCamera.m_Position = Vector3(0, 40, -55);
+	DefCamera.m_Target = Vector3(0, 4, 0);
+
 	pStage = new iexMesh("DATA\\STAGE\\Stage.IMO");
 
-
-
 	//キャラクタ作成
+	{
+		CharacterBase::PlayerInfo pl;
 
-	CharacterBase::PlayerInfo pl;
+		pl.chr_type = CharacterType::_Tennis;
+		pl.number = (PlayerNum::Value)0;
+		pl.player_type = PlayerType::_Player;
+		pl.strong_type = StrongType::__ErrorType;
 
-	pl.chr_type = CharacterType::_Soccer;
-	pl.number = (PlayerNum::Value)0;
-	pl.player_type = PlayerType::_Player;
-	pl.strong_type = StrongType::__ErrorType;
+		TennisPlayer* tp = new TennisPlayer(pl);
+		tp->SetState(new TennisState_PlayerControll_Move());
+	}
+
+
+	{
+		CharacterBase::PlayerInfo pl;
+
+		pl.chr_type = CharacterType::_Tennis;
+		pl.number = (PlayerNum::Value)1;
+		pl.player_type = PlayerType::_Player;
+		pl.strong_type = StrongType::__ErrorType;
+
+		TennisPlayer* tp = new TennisPlayer(pl);
+		tp->SetState(new TennisState_PlayerControll_Move());
+		tp->m_Params.pos.x += 40;
+	}
 	
-	//テニスを作成し、動きとしてプレイヤー操作クラスをセット
-	(new TennisPlayer(pl))->SetState(new TennisState_PlayerControll_Move());
-	(new SoccerPlayer(pl))->SetState(new SoccerState_PlayerControll_Move());
-	(new LacrossePlayer(pl))->SetState(new LacrosseState_PlayerControllMove());
 
 	return true;
 }
@@ -67,11 +79,14 @@ bool sceneGamePlay::Initialize()
 
 sceneGamePlay::~sceneGamePlay()
 {
-	delete m_pView;
 	delete pStage;
 
-	DefRendererMgr.Release();
+	DefCharacterMgr.Release();
 	DefGameObjMgr.Release();
+	DefRendererMgr.Release();
+	DefDamageMgr.Release();
+	DefBallMgr.Release();
+	DefCamera.Release();
 }
 
 //*****************************************************************************************************************************
@@ -81,7 +96,7 @@ sceneGamePlay::~sceneGamePlay()
 //*****************************************************************************************************************************
 void	sceneGamePlay::Update()
 {
-	m_pView->Activate();
+	DefCamera.Update();
 
 	DefGameObjMgr.Update();
 }
@@ -94,7 +109,7 @@ void	sceneGamePlay::Update()
 
 void	sceneGamePlay::Render()
 {
-	m_pView->Clear();
+	DefCamera.Clear();
 
 	pStage->Render();
 

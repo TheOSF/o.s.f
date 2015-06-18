@@ -67,6 +67,8 @@
     <ClCompile Include="source\Camera\Camera.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseAttackClose.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseCounterPoseClass.cpp" />
+    <ClCompile Include="source\character\Lacrosse\LacrosseEvasionClass.cpp" />
+    <ClCompile Include="source\character\Lacrosse\LacrosseHitBallAttackClass.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrossePlayer.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrossePlayerState.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayer.cpp" />
@@ -90,9 +92,9 @@
     <ClCompile Include="source\Render\Renderer.cpp" />
     <ClCompile Include="source\character\Soccer\SoccerPlayer.cpp" />
     <ClCompile Include="source\character\Soccer\SoccerPlayerState.cpp" />
-    <ClCompile Include="source\character\Lacrosse\LacrosseCounterClass.cpp" />
-    <ClCompile Include="source\character\CharacterHitBallAttackClass.cpp" />
-    <ClCompile Include="source\character\CharacterEvasionClass.cpp" />
+    <ClCompile Include="source\character\CharacterManager.cpp" />
+    <ClCompile Include="source\Camera\CameraState.cpp" />
+    <ClCompile Include="source\Collision\Collision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEX\iextreme.h">
@@ -104,6 +106,8 @@
     <ClInclude Include="source\Camera\Camera.h" />
     <ClInclude Include="source\character\Lacrosse\LacrosseAttackClose.h" />
     <ClInclude Include="source\character\Lacrosse\LacrosseCounterPoseClass.h" />
+    <ClInclude Include="source\character\Lacrosse\LacrosseEvasionClass.h" />
+    <ClInclude Include="source\character\Lacrosse\LacrosseHitBallAttackClass.h" />
     <ClInclude Include="source\character\Lacrosse\LacrossePlayer.h" />
     <ClInclude Include="source\character\Lacrosse\LacrossePlayerState.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayer.h" />
@@ -133,11 +137,17 @@
     <ClInclude Include="source\utillity\StateTemplate.h" />
     <ClInclude Include="source\character\Soccer\SoccerPlayer.h" />
     <ClInclude Include="source\character\Soccer\SoccerPlayerState.h" />
+<<<<<<< HEAD
     <ClInclude Include="source\character\Lacrosse\LacrosseCounterClass.h" />
     <ClInclude Include="source\character\CharacterHitBallAttackClass.h" />
     <ClInclude Include="source\character\CharacterEvasionClass.h" />
     <ClInclude Include="source\character\CharacterCounterClass.h" />
     <ClInclude Include="source\character\CharacterCounterPoseClass.h" />
+=======
+    <ClInclude Include="source\character\CharacterManager.h" />
+    <ClInclude Include="source\Camera\CameraState.h" />
+    <ClInclude Include="source\Collision\Collision.h" />
+>>>>>>> 5d6a90810ce2057f4e97714b66ac949d9a204f3d
   </ItemGroup>
   <ItemGroup>
     <None Include="DATA\Shader\2D.fx">

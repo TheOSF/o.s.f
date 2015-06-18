@@ -13,6 +13,9 @@
 class BallBase
 {
 public:
+	//通常ボール打ちのワールド座標上でのyの値
+	static const float UsualBallShotY;
+
 	//球の機能のタイプ
 	enum Type
 	{
