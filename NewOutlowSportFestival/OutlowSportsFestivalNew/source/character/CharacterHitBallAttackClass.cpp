@@ -1,6 +1,6 @@
-#include "LacrossePlayer.h"
-#include "LacrosseHitBallAttackClass.h"
-#include "../CharacterFunction.h"
+#include "CharacterBase.h"
+#include "CharacterHitBallAttackClass.h"
+#include "CharacterFunction.h"
 
 
 //***************************************************
@@ -8,14 +8,14 @@
 //***************************************************
 
 // コンストラクタ
-LacrosseHitBallAttack::LacrosseHitBallAttack(
-	LacrossePlayer* pLacrossePlayer,
+CharacterHitBallAttack::CharacterHitBallAttack(
+	CharacterBase* pCharacter,
 	Event* pEvent,
 	const AttackParams& attack_params
 	) :
 	m_AttackParams(attack_params),
 	m_StickValue(0, 0),
-	m_pLacrossePlayer(pLacrossePlayer),
+	m_pCharacter(pCharacter),
 	m_Timer(0),
 	m_pEvent(pEvent)
 {
@@ -24,14 +24,14 @@ LacrosseHitBallAttack::LacrosseHitBallAttack(
 
 
 // デストラクタ
-LacrosseHitBallAttack::~LacrosseHitBallAttack()
+CharacterHitBallAttack::~CharacterHitBallAttack()
 {
 	delete m_pEvent;
 }
 
 
 // 更新
-bool LacrosseHitBallAttack::Update()
+bool CharacterHitBallAttack::Update()
 {
 	if (m_Timer == 0)
 	{// 攻撃開始
@@ -39,18 +39,18 @@ bool LacrosseHitBallAttack::Update()
 
 		// 向き補正
 		chr_func::AngleControll(
-			m_pLacrossePlayer,
-			m_pLacrossePlayer->m_Params.pos + Vector3(m_StickValue.x, 0, m_StickValue.y) ,
+			m_pCharacter,
+			m_pCharacter->m_Params.pos + Vector3(m_StickValue.x, 0, m_StickValue.y),
 			m_AttackParams.MaxTurnRadian
 			);
 	}
 
 	// 座標更新
-	chr_func::PositionUpdate(m_pLacrossePlayer);
+	chr_func::PositionUpdate(m_pCharacter);
 
 	// 減速
 	chr_func::XZMoveDown(
-		m_pLacrossePlayer,
+		m_pCharacter,
 		m_AttackParams.MoveDownSpeed);
 
 	// 更新
@@ -75,7 +75,7 @@ bool LacrosseHitBallAttack::Update()
 
 
 // スティックの値セット
-void LacrosseHitBallAttack::SetStickValue(CrVector2 stickValue)
+void CharacterHitBallAttack::SetStickValue(CrVector2 stickValue)
 {
 	m_StickValue = stickValue;
 }

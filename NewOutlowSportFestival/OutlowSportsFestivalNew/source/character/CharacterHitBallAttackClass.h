@@ -2,12 +2,12 @@
 
 #include "iextreme.h"
 
-class LacrossePlayer;
+class CharacterBase;
 
 //***************************************************
-//		ラクロス用 遠距離攻撃 (ボール打ち出し) クラス
+//		キャラクター共通 遠距離攻撃 (ボール打ち出し) クラス
 //***************************************************
-class LacrosseHitBallAttack
+class CharacterHitBallAttack
 {
 public:
 	// 攻撃パラメータ
@@ -26,20 +26,20 @@ public:
 	public:
 		virtual~Event(){}
 		virtual void Update() = 0;           // 更新
-		virtual void DamageStart() = 0;  // ダメージ判定開始
+		virtual void DamageStart() = 0;  // ダメージ判定開始 & ボール発射
 		virtual void AttackStart() = 0;     // 攻撃開始
 		virtual void AttackEnd() = 0;      // 攻撃終了
 	};
 
 	// コンストラクタ
-	LacrosseHitBallAttack(
-		LacrossePlayer* pLacrossePlayer, 
+	CharacterHitBallAttack(
+		CharacterBase* pCharacter,
 		Event* pEvent,
 		const AttackParams& attack_params
 		);
 
 	// デストラクタ
-	~LacrosseHitBallAttack();
+	~CharacterHitBallAttack();
 
 	// 更新
 	bool Update();
@@ -50,7 +50,7 @@ public:
 private:
 	const AttackParams m_AttackParams;      // 攻撃パラメータ
 	Vector2                    m_StickValue;           // スティックの入力状態
-	LacrossePlayer*       m_pLacrossePlayer;  // ラクロスプレイヤー
+	CharacterBase*       m_pCharacter;          // キャラクター
 	int                            m_Timer;                  // タイマー
 	Event*                     m_pEvent;                // 攻撃イベント
 };
