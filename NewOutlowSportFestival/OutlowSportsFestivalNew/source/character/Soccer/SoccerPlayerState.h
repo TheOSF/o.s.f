@@ -2,6 +2,7 @@
 #define __SOCCER_PLAYER_STATE_H__
 
 #include "SoccerPlayer.h"
+#include "../../Ball/UsualBall.h"
 #include "../CharacterMoveClass.h"
 #include "../CharacterSliding.h"
 #include "../CharacterAttack.h"
@@ -57,6 +58,16 @@ class SoccerState_PlayerControll_AttackFinish :public SoccerState
 {
 private:
 	CharacterAttack_A*		m_pMoveClass;
+	int timer = 0;
+public:
+	void Enter(SoccerPlayer* s);
+	void Execute(SoccerPlayer* s);
+	void Exit(SoccerPlayer* s);
+};
+class SoccerState_PlayerControll_Shot :public SoccerState
+{
+private:
+	CharacterSliding*		m_pMoveClass;
 	int timer = 0;
 public:
 	void Enter(SoccerPlayer* s);

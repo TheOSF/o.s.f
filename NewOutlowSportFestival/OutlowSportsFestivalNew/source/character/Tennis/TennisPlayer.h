@@ -23,6 +23,9 @@ public:
 	{
 		_mt_Stand,
 		_mt_Run,
+
+		_mt_CounterPose,
+		_mt_Counter,
 	};
 
 	TennisPlayer(const CharacterBase::PlayerInfo& info);

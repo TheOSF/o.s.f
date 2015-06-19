@@ -216,7 +216,7 @@ void SoccerState_PlayerControll_AttackCombo::Execute(SoccerPlayer* s)
 	m_pMoveClass->Update();
 
 	chr_func::CreateTransMatrix(s, 0.05f, &s->m_Renderer.m_TransMatrix);
-	if (timer > 20 && timer < 46 && KEY_Get(KEY_B, 1))
+	if (timer > 20 && timer < 46 && controller::GetTRG(controller::button::shikaku,s->m_PlayerInfo.number))
 	{
 		s->SetState(new SoccerState_PlayerControll_AttackFinish);
 	}

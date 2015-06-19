@@ -69,6 +69,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <ForcedIncludeFiles>iextreme.h;debug/DebugFunction.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -130,17 +131,18 @@
     <ClCompile Include="source\Camera\CameraState.cpp" />
     <ClCompile Include="source\character\CharacterAttack.cpp" />
     <ClCompile Include="source\character\CharacterBase.cpp" />
+    <ClCompile Include="source\character\CharacterCounterClass.cpp" />
+    <ClCompile Include="source\character\CharacterCounterPoseClass.cpp" />
     <ClCompile Include="source\character\CharacterFunction.cpp" />
     <ClCompile Include="source\character\CharacterManager.cpp" />
     <ClCompile Include="source\character\CharacterMoveClass.cpp" />
     <ClCompile Include="source\character\CharacterRenderer.cpp" />
-    <ClCompile Include="source\character\CharacterShot.cpp" />
     <ClCompile Include="source\character\CharacterSliding.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseAttackClose.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseCounterClass.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseCounterPoseClass.cpp" />
     <ClCompile Include="source\character\CharacterEvasionClass.cpp" />
-    <ClCompile Include="source\character\CharacterHitBallAttackClass.cpp" />
+    <ClCompile Include="source\character\CharacterShotAttackClass.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrossePlayer.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrossePlayerState.cpp" />
     <ClCompile Include="source\character\Soccer\SoccerPlayer.cpp" />
@@ -169,18 +171,19 @@
     <ClInclude Include="source\Camera\CameraState.h" />
     <ClInclude Include="source\character\CharacterAttack.h" />
     <ClInclude Include="source\character\CharacterBase.h" />
+    <ClInclude Include="source\character\CharacterCounterClass.h" />
+    <ClInclude Include="source\character\CharacterCounterPoseClass.h" />
     <ClInclude Include="source\character\CharacterFunction.h" />
     <ClInclude Include="source\character\CharacterManager.h" />
     <ClInclude Include="source\character\CharacterMoveClass.h" />
     <ClInclude Include="source\character\CharacterRenderer.h" />
-    <ClInclude Include="source\character\CharacterShot.h" />
     <ClInclude Include="source\character\CharacterSliding.h" />
     <ClInclude Include="source\character\CharacterStateTemplate.h" />
     <ClInclude Include="source\character\Lacrosse\LacrosseAttackClose.h" />
     <ClInclude Include="source\character\Lacrosse\LacrosseCounterClass.h" />
     <ClInclude Include="source\character\Lacrosse\LacrosseCounterPoseClass.h" />
     <ClInclude Include="source\character\CharacterEvasionClass.h" />
-    <ClInclude Include="source\character\CharacterHitBallAttackClass.h" />
+    <ClInclude Include="source\character\CharacterShotAttackClass.h" />
     <ClInclude Include="source\character\Lacrosse\LacrossePlayer.h" />
     <ClInclude Include="source\character\Lacrosse\LacrossePlayerState.h" />
     <ClInclude Include="source\character\Soccer\SoccerPlayer.h" />

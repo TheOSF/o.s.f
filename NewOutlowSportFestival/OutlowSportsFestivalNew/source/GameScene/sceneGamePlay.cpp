@@ -80,9 +80,8 @@ bool sceneGamePlay::Initialize()
 sceneGamePlay::~sceneGamePlay()
 {
 	delete pStage;
-
-	DefCharacterMgr.Release();
 	DefGameObjMgr.Release();
+	DefCharacterMgr.Release();
 	DefRendererMgr.Release();
 	DefDamageMgr.Release();
 	DefBallMgr.Release();
