@@ -40,6 +40,9 @@ public:
 	//コンストラクタ・デストラクタで自動的にマネージャに登録・削除を行う
 	BallBase();
 	virtual ~BallBase();
+
+	//引数のボールがカウンター可能かどうか
+	static bool isCanCounter(const BallBase* pBall);
 };
 
 
@@ -49,6 +52,8 @@ public:
 class BallManager
 {
 public:
+	typedef std::map<BallBase*, BallBase*> BallMap;
+
 	//登録・削除をBallBaseのみ可能にするため
 	friend class BallBase;
 
@@ -56,9 +61,17 @@ public:
 	static BallManager& GetInstance();
 	static void Release();
 
-private:
-	typedef std::map<BallBase*, BallBase*> BallMap;
+	//ボールデータ取得
+	BallMap* GetBallMap();
 
+	//もっともカウンターするのに適したボールを得る
+	bool GetCounterBall(
+		BallBase**	ppOut,			//戻り値として返却するボール
+		CrVector3	character_pos,	//キャラクタの場所
+		float		catch_area_size,//キャッチ可能な範囲
+		int			move_frame		//キャッチまでの移動フレーム
+		);
+private:
 	static BallManager*		m_pInstance;
 	BallMap					m_BallMap;
 

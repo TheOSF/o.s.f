@@ -87,4 +87,3 @@ bool CharacterCounterPose::IsMaxLevel()const
 {
 	return m_NowLevel >= m_MaxLevel;
 }
-
