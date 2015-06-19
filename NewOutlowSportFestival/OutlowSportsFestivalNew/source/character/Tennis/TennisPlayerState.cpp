@@ -107,6 +107,7 @@ void TennisState_PlayerControll_Move::Execute(TennisPlayer* t)
 		chr_func::GetFront(t, &param.move);
 		param.move *= 0.5f;
 		param.pos = t->m_Params.pos;
+		param.pos.y=BallBase::UsualBallShotY;
 		param.pParent = t;
 		param.type = BallBase::Type::_Usual;
 
