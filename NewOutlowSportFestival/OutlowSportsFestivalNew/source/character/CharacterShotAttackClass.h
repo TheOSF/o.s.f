@@ -7,17 +7,17 @@ class CharacterBase;
 //***************************************************
 //		キャラクター共通 遠距離攻撃 (ボール打ち出し) クラス
 //***************************************************
-class CharacterHitBallAttack
+class CharacterShotAttack
 {
 public:
 	// 攻撃パラメータ
 	struct AttackParams
 	{
-		int AllFrame;                         // 全フレーム
-		int DamageOutbreakFrame; // ボール＆ダメージ判定発生フレーム
-		float MaxTurnRadian;           // 向き補正の角度制限
-		float AttackPower;               // 攻撃力
-		float MoveDownSpeed;        // 減速割合
+		int AllFrame;                 // 全フレーム
+		int ShotFrame;              // ボール＆ダメージ判定発生フレーム
+		float MaxTurnRadian;    // 向き補正の角度制限
+		float AttackPower;        // 攻撃力
+		float MoveDownSpeed; // 減速割合
 	};
 
 	// 攻撃イベントクラス
@@ -26,20 +26,20 @@ public:
 	public:
 		virtual~Event(){}
 		virtual void Update() = 0;           // 更新
-		virtual void DamageStart() = 0;  // ダメージ判定開始 & ボール発射
+		virtual void Shot() = 0;               // ダメージ判定開始 & ボール発射
 		virtual void AttackStart() = 0;     // 攻撃開始
 		virtual void AttackEnd() = 0;      // 攻撃終了
 	};
 
 	// コンストラクタ
-	CharacterHitBallAttack(
+	CharacterShotAttack(
 		CharacterBase* pCharacter,
 		Event* pEvent,
 		const AttackParams& attack_params
 		);
 
 	// デストラクタ
-	~CharacterHitBallAttack();
+	~CharacterShotAttack();
 
 	// 更新
 	bool Update();

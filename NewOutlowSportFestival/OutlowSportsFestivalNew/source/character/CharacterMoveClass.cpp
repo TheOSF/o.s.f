@@ -27,6 +27,7 @@ CharacterUsualMove::CharacterUsualMove(
 CharacterUsualMove:: ~CharacterUsualMove()
 {
 	delete m_pMoveEvent;
+	delete m_pHitEventBase;
 }
 
 void CharacterUsualMove::Update()

@@ -31,10 +31,10 @@ public:
 
 	// コンストラクタ
 	CharacterCounterPose(
-		const unsigned int MaxLevel,
-		const CounterPoseParams& counterPoseParams,
-		CharacterBase* pCharacter,
-		Event* pEvent
+		const int                               maxLevel,                  // 最大レベル
+		const CounterPoseParams& counterPoseParams,  // 構えパラメータ
+		CharacterBase*                    pCharacter,                // 動かしたいキャラクター
+		Event*                                  pEvent                       // 構えイベント
 		);
 
 	// デストラクタ
@@ -43,18 +43,19 @@ public:
 	// 更新
 	bool Update();
 
-	// スティックの値セット
-	void SetStickValue(CrVector2 stickValue);
-
-	// 最大レベルかどうか
+	// level が最大レベルかどうか
 	bool IsMaxLevel(int level)const;
+	bool IsMaxLevel()const;
+
+	// レベル取得
+	inline int GetLevel()const{ return m_NowLevel; }
 
 private:
-	const unsigned int               m_MaxLevel;                  // レベルアップパラメータ
-	unsigned int                        m_NowLevel;                  // 現在のレベル
+	const int                              m_MaxLevel;                  // レベルアップパラメータ
+	int                                       m_NowLevel;                  // 現在のレベル
 	int                                       m_Timer;                        // タイマー
+	int                                       m_TotalFrame;                // 全フレーム
 	const CounterPoseParams  m_CounterPoseParams; // カウンター構えパラメータ
-	Vector2                               m_StickValue;                 // スティックの入力状態
 	CharacterBase*                  m_pCharacter;                // キャラクター
 	Event*                                m_pEvent;                      // カウンター構えイベント
 };

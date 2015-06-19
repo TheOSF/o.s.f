@@ -1,5 +1,5 @@
 #include "CharacterBase.h"
-#include "CharacterHitBallAttackClass.h"
+#include "CharacterShotAttackClass.h"
 #include "CharacterFunction.h"
 
 
@@ -8,7 +8,7 @@
 //***************************************************
 
 // コンストラクタ
-CharacterHitBallAttack::CharacterHitBallAttack(
+CharacterShotAttack::CharacterShotAttack(
 	CharacterBase* pCharacter,
 	Event* pEvent,
 	const AttackParams& attack_params
@@ -24,14 +24,14 @@ CharacterHitBallAttack::CharacterHitBallAttack(
 
 
 // デストラクタ
-CharacterHitBallAttack::~CharacterHitBallAttack()
+CharacterShotAttack::~CharacterShotAttack()
 {
 	delete m_pEvent;
 }
 
 
 // 更新
-bool CharacterHitBallAttack::Update()
+bool CharacterShotAttack::Update()
 {
 	if (m_Timer == 0)
 	{// 攻撃開始
@@ -56,9 +56,9 @@ bool CharacterHitBallAttack::Update()
 	// 更新
 	m_pEvent->Update();
 
-	if (m_Timer == m_AttackParams.DamageOutbreakFrame)
+	if (m_Timer == m_AttackParams.ShotFrame)
 	{// ダメージ発生フレーム
-		m_pEvent->DamageStart();
+		m_pEvent->Shot();
 	}
 
 	if (m_Timer >= m_AttackParams.AllFrame)
@@ -75,7 +75,7 @@ bool CharacterHitBallAttack::Update()
 
 
 // スティックの値セット
-void CharacterHitBallAttack::SetStickValue(CrVector2 stickValue)
+void CharacterShotAttack::SetStickValue(CrVector2 stickValue)
 {
 	m_StickValue = stickValue;
 }

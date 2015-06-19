@@ -95,15 +95,15 @@ private:
 };
 
 
-class CharacterHitBallAttack;
+class CharacterShotAttack;
 //***************************************************
 //		プレイヤー操作の 遠距離攻撃 (ボール打ち出し) クラス
 //***************************************************
-class LacrosseState_PlayerControllHitBallAttack : public LacrosseState
+class LacrosseState_PlayerControllShotAttack : public LacrosseState
 {
 public:
 	// コンストラクタ
-	LacrosseState_PlayerControllHitBallAttack();
+	LacrosseState_PlayerControllShotAttack();
 
 	// ステート開始
 	void Enter(LacrossePlayer* t)override;
@@ -115,11 +115,11 @@ public:
 	void Exit(LacrossePlayer* t)override;
 
 private:
-	// 回避クラス作成
-	CharacterHitBallAttack* CreateAttackClass(LacrossePlayer* t);
+	// 攻撃クラス作成
+	CharacterShotAttack* CreateAttackClass(LacrossePlayer* t);
 
 private:
-	CharacterHitBallAttack* m_pAttackClass; // 回避クラス
+	CharacterShotAttack* m_pAttackClass; // 攻撃クラス
 };
 
 
@@ -152,7 +152,7 @@ private:
 };
 
 
-#if 0
+
 class LacrosseHitCounter;
 //***************************************************
 //		プレイヤー操作の カウンタークラス
@@ -185,5 +185,3 @@ private:
 	CharacterUsualMove* m_pMove;          // 移動クラス
 	
 };
-
-#endif
