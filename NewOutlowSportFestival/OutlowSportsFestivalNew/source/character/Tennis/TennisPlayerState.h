@@ -20,40 +20,13 @@ public:
 	void Exit(TennisPlayer* t)override;
 };
 
-class CharacterCounterPose;
-//***************************************************
-//		プレイヤー操作の カウンター構えクラス
-//***************************************************
-class TennisState_PlayerControll_CounterPose : public TennisState
-{
-public:
-	// ステート開始
-	void Enter(TennisPlayer* t)override;
-
-	// ステート実行
-	void Execute(TennisPlayer* t)override;
-
-	// ステート終了
-	void Exit(TennisPlayer* t)override;
-
-private:
-	// カウンター構えクラス作成
-	CharacterCounterPose* CreateCounterPoseClass(TennisPlayer* t);
-
-	CharacterCounterPose* m_pCounterPose; // カウンター構えクラス
-};
-
-
 class CharacterCounter;
 //***************************************************
-//		プレイヤー操作の カウンター構えクラス
+//		プレイヤー操作の カウンタークラス
 //***************************************************
 class TennisState_PlayerControll_Counter : public TennisState
 {
 public:
-	// コンストラクタ
-	TennisState_PlayerControll_Counter(int level);
-
 	// ステート開始
 	void Enter(TennisPlayer* t)override;
 
@@ -65,10 +38,12 @@ public:
 
 private:
 	// カウンタークラス作成
-	CharacterCounter* CreateCounterClass(TennisPlayer* t, int level);
+	CharacterCounter* CreateCounterClass(TennisPlayer* t);
 
-	int                           m_Level;        // カウンターレベル
-	CharacterCounter*  m_pCounter; // カウンタークラス
+	CharacterCounter* m_pCounter; // カウンタークラス
 };
+
+
+
 
 #endif
