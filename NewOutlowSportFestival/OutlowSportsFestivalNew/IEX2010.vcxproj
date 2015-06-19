@@ -150,6 +150,7 @@
     <ClCompile Include="source\character\Tennis\TennisPlayer.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayerState.cpp" />
     <ClCompile Include="source\Collision\Collision.cpp" />
+    <ClCompile Include="source\Collision\MeshCollider.cpp" />
     <ClCompile Include="source\Damage\Damage.cpp" />
     <ClCompile Include="source\GameScene\sceneGamePlay.cpp" />
     <ClCompile Include="source\GameScene\sceneMain.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="source\character\Tennis\TennisPlayer.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayerState.h" />
     <ClInclude Include="source\Collision\Collision.h" />
+    <ClInclude Include="source\Collision\MeshCollider.h" />
     <ClInclude Include="source\Damage\Damage.h" />
     <ClInclude Include="source\debug\DebugFunction.h" />
     <ClInclude Include="source\GameScene\SceneGamePlay.h" />
