@@ -858,17 +858,18 @@ class iexMesh {
 private:
 protected:
 	u32				dwFlags;		//	フラグ
-	u8				bChanged;		//	変更フラグ
+	u8				bChanged;	//	変更フラグ
 
 	Vector3			Pos;			//	メッシュ座標
-	Vector3			Angle;			//	メッシュ回転量
-	Vector3			Scale;			//	メッシュスケール
+	Vector3			Angle;     //	メッシュ回転量
+	Vector3			Scale;      //	メッシュスケール
 
 	D3DMATERIAL9	*lpMaterial;	//	材質
 	Texture2D*		*lpTexture;		//	テクスチャ
 	Texture2D*		*lpNormal;		//	法線テクスチャ
 	Texture2D*		*lpSpecular;	//	スペキュラテクスチャ
 	Texture2D*		*lpHeight;		//	高さテクスチャ
+
 	u32				MaterialCount;	//	材質数
 
 	LPD3DXMESH		lpMesh;			//	メッシュ

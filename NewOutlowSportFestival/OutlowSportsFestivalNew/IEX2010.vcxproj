@@ -95,6 +95,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>iextreme.h;debug/DebugFunction.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -158,6 +159,11 @@
     <ClCompile Include="source\IexSystem\Framework.cpp" />
     <ClCompile Include="source\IexSystem\System.cpp" />
     <ClCompile Include="source\IexSystem\WinMain.cpp" />
+    <ClCompile Include="source\Library\Bullet\BulletDebug.cpp" />
+    <ClCompile Include="source\Library\Bullet\BulletSystem.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">iextreme.h;debug/DebugFunction.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">iextreme.h;debug/DebugFunction.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
     <ClCompile Include="source\Library\Effekseer\EffekseerEffect.cpp" />
     <ClCompile Include="source\Library\Effekseer\EffekseerEffectManager.cpp" />
     <ClCompile Include="source\Library\Effekseer\EffekseerSystem.cpp" />
@@ -165,6 +171,7 @@
     <ClCompile Include="source\Render\Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IEX\DebugDrawManager.h" />
     <ClInclude Include="IEX\iextreme.h" />
     <ClInclude Include="source\Ball\Ball.h" />
     <ClInclude Include="source\Ball\UsualBall.h" />
@@ -204,6 +211,7 @@
     <ClInclude Include="source\IexSystem\Framework.h" />
     <ClInclude Include="source\IexSystem\Scene.h" />
     <ClInclude Include="source\IexSystem\System.h" />
+    <ClInclude Include="source\Library\Bullet\BulletDebug.h" />
     <ClInclude Include="source\Library\Bullet\BulletSystem.h" />
     <ClInclude Include="source\Library\Effekseer\EffekseerEffect.h" />
     <ClInclude Include="source\Library\Effekseer\EffekseerEffectManager.h" />

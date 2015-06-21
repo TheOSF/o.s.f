@@ -11,9 +11,14 @@
 #include	"../character/Soccer/SoccerPlayer.h"
 #include	"../character/Soccer/SoccerPlayerState.h"
 
+
+// Effekseer
 #include "../Library/Effekseer/EffekseerSystem.h"
 #include "../Library/Effekseer/EffekseerEffectManager.h"
 #include "../Library/Effekseer/EffekseerEffect.h"
+
+// Bullet
+#include "../Library/Bullet/BulletSystem.h"
 
 //*****************************************************************************************************************************
 //
@@ -24,6 +29,7 @@ static LPIEXMESH pStage;
 static EffekseerSystem* pEffekseerSystem;
 static EffekseerEffectManager* pEffekseerEffectManager;
 static EffekseerEffect* pEffekseerEffect;
+
 
 //*****************************************************************************************************************************
 //
@@ -79,11 +85,60 @@ bool sceneGamePlay::Initialize()
 		pEffekseerEffectManager = pEffekseerSystem->CreateManager();
 
 		pEffekseerEffectManager->LoadEffect(0, (const EFK_CHAR*)L"DATA//Effekseer//Sample//test.efk");
-		
+
 
 		// エフェクト再生
 		pEffekseerEffect = pEffekseerEffectManager->PlayEffect(0);
-	}
+	};
+
+	{// Bullet
+		DefBulletSystem.StartUp();
+		DefBulletSystem.InitializeBulletPhysics(btVector3(0, -9.8f, 0), iexSystem::Device);
+
+		// テスト用
+
+		// Box
+		DefBulletSystem.AddRigidBox(
+			1.0f, 
+			RigidBody::ct_dynamic, 
+			Vector3(0, 30, 0), 
+			Vector3(0, 0, 0), 
+			Vector3(1, 1, 1),
+			0.2f, 
+			0.85f, 
+			Vector3(0, 0, 0)
+			);
+
+		// Sphere
+		DefBulletSystem.AddRigidSphere(
+			1.0f,
+			RigidBody::ct_dynamic,
+			Vector3(0, 30, 0),
+			Vector3(0, 0, 0),
+			1.0f,
+			0.2f,
+			0.9f,
+			Vector3(0, 0, 0)
+			);
+
+		// Mesh
+		DefBulletSystem.AddRigidMesh(
+			pStage
+			);
+
+
+		//// 床
+		//DefBulletSystem.AddRigidBox(
+		//	0.0f,
+		//	RigidBody::ct_static,
+		//	Vector3(0, -10, 0),
+		//	Vector3(0, 0, 0),
+		//	Vector3(100, 5, 100),
+		//	0.0f,
+		//	0.0f,
+		//	Vector3(0, 0, 0)
+		//	);
+	};
 
 	return true;
 }
@@ -100,7 +155,13 @@ sceneGamePlay::~sceneGamePlay()
 		delete pEffekseerEffect;
 		delete pEffekseerEffectManager;
 		delete pEffekseerSystem;
-	}
+	};
+
+	{// Bullet
+		DefBulletSystem.ReleaseBulletPhysics();
+		DefBulletSystem.ShutDown(true);
+	};
+
 	delete pStage;
 	DefGameObjMgr.Release();
 	DefCharacterMgr.Release();
@@ -153,7 +214,11 @@ void	sceneGamePlay::Update()
 
 		// マネージャーの更新
 		pEffekseerEffectManager->UpdateAllInstances(1.0f);
-	}
+	};
+
+	{// Bullet Physics
+		DefBulletSystem.StepSimulation(1.0f / 60.0f);
+	};
 
 	DefCamera.Update();
 
@@ -170,14 +235,18 @@ void	sceneGamePlay::Render()
 {
 	DefCamera.Clear();
 
-	pStage->Render();
+	//pStage->Render();
 
-	DefRendererMgr.DeferredRender();
-	DefRendererMgr.ForwardRender();
+	//DefRendererMgr.DeferredRender();
+	//DefRendererMgr.ForwardRender();
 
-	{// Effekseer
-		pEffekseerSystem->BeginRendering();
-		pEffekseerEffectManager->RenderAllInstances();
-		pEffekseerSystem->EndRendering();
-	}
+	//{// Effekseer
+	//	pEffekseerSystem->BeginRendering();
+	//	pEffekseerEffectManager->RenderAllInstances();
+	//	pEffekseerSystem->EndRendering();
+	//};
+
+	{// Bullet Physics
+		DefBulletSystem.DebugDrawWorld();
+	};
 }
