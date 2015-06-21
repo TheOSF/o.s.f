@@ -11,12 +11,19 @@
 #include	"../character/Soccer/SoccerPlayer.h"
 #include	"../character/Soccer/SoccerPlayerState.h"
 
+#include "../Library/Effekseer/EffekseerSystem.h"
+#include "../Library/Effekseer/EffekseerEffectManager.h"
+#include "../Library/Effekseer/EffekseerEffect.h"
+
 //*****************************************************************************************************************************
 //
 //	グローバル変数
 //
 //*****************************************************************************************************************************
 static LPIEXMESH pStage;
+static EffekseerSystem* pEffekseerSystem;
+static EffekseerEffectManager* pEffekseerEffectManager;
+static EffekseerEffect* pEffekseerEffect;
 
 //*****************************************************************************************************************************
 //
@@ -66,7 +73,17 @@ bool sceneGamePlay::Initialize()
 		tp->SetState(new TennisState_PlayerControll_Move());
 		tp->m_Params.pos.x += 40;
 	}
-	
+
+	{ // Effekseer
+		pEffekseerSystem = new EffekseerSystem(iexSystem::Device);
+		pEffekseerEffectManager = pEffekseerSystem->CreateManager();
+
+		pEffekseerEffectManager->LoadEffect(0, (const EFK_CHAR*)L"DATA//Effekseer//Sample//test.efk");
+		
+
+		// エフェクト再生
+		pEffekseerEffect = pEffekseerEffectManager->PlayEffect(0);
+	}
 
 	return true;
 }
@@ -79,6 +96,11 @@ bool sceneGamePlay::Initialize()
 
 sceneGamePlay::~sceneGamePlay()
 {
+	{// Effekseer
+		delete pEffekseerEffect;
+		delete pEffekseerEffectManager;
+		delete pEffekseerSystem;
+	}
 	delete pStage;
 	DefGameObjMgr.Release();
 	DefCharacterMgr.Release();
@@ -95,6 +117,44 @@ sceneGamePlay::~sceneGamePlay()
 //*****************************************************************************************************************************
 void	sceneGamePlay::Update()
 {
+	{// Effekseer
+
+		// ビュー行列設定
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				pEffekseerSystem->m_ViewMatrix.Values[j][i] = matView.m[j][i];
+			}
+		}
+
+		// 射影変換行列設定
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				pEffekseerSystem->m_ProjectionMatrix.Values[j][i] = matProjection.m[j][i];
+			}
+		}
+
+		// レンダラーの更新
+		pEffekseerSystem->UpdateParams();
+
+		// エフェクト更新
+		if (pEffekseerEffect->IsDead())
+		{
+			delete pEffekseerEffect;
+			pEffekseerEffect = pEffekseerEffectManager->PlayEffect(0);
+		}
+		else{
+			pEffekseerEffect->m_Params.Angle.Y += 0.02f;
+			pEffekseerEffect->Update();
+		}
+
+		// マネージャーの更新
+		pEffekseerEffectManager->UpdateAllInstances(1.0f);
+	}
+
 	DefCamera.Update();
 
 	DefGameObjMgr.Update();
@@ -114,4 +174,10 @@ void	sceneGamePlay::Render()
 
 	DefRendererMgr.DeferredRender();
 	DefRendererMgr.ForwardRender();
+
+	{// Effekseer
+		pEffekseerSystem->BeginRendering();
+		pEffekseerEffectManager->RenderAllInstances();
+		pEffekseerSystem->EndRendering();
+	}
 }

@@ -45,10 +45,10 @@
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(DXSDK_DIR)include;$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(DXSDK_DIR)lib/x86;$(LibraryPath)</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(DXSDK_DIR)include;$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(DXSDK_DIR)lib/x86;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(DXSDK_DIR)include;$(ProjectDir)\library\bullet\src;$(ProjectDir)\library\effekseer\include;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(DXSDK_DIR)lib/x86;$(ProjectDir)\library\bullet\lib\Debug;$(ProjectDir)\library\effekseer\lib\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(DXSDK_DIR)include;$(ProjectDir)\library\bullet\src;$(ProjectDir)\library\effekseer\include;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(DXSDK_DIR)lib/x86;$(ProjectDir)\library\bullet\lib\Release;$(ProjectDir)\library\effekseer\lib\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <EmbedManifest>false</EmbedManifest>
@@ -158,6 +158,9 @@
     <ClCompile Include="source\IexSystem\Framework.cpp" />
     <ClCompile Include="source\IexSystem\System.cpp" />
     <ClCompile Include="source\IexSystem\WinMain.cpp" />
+    <ClCompile Include="source\Library\Effekseer\EffekseerEffect.cpp" />
+    <ClCompile Include="source\Library\Effekseer\EffekseerEffectManager.cpp" />
+    <ClCompile Include="source\Library\Effekseer\EffekseerSystem.cpp" />
     <ClCompile Include="source\Render\MeshRenderer.cpp" />
     <ClCompile Include="source\Render\Renderer.cpp" />
   </ItemGroup>
@@ -201,9 +204,16 @@
     <ClInclude Include="source\IexSystem\Framework.h" />
     <ClInclude Include="source\IexSystem\Scene.h" />
     <ClInclude Include="source\IexSystem\System.h" />
+    <ClInclude Include="source\Library\Bullet\BulletSystem.h" />
+    <ClInclude Include="source\Library\Effekseer\EffekseerEffect.h" />
+    <ClInclude Include="source\Library\Effekseer\EffekseerEffectManager.h" />
+    <ClInclude Include="source\Library\Effekseer\EffekseerSystem.h" />
     <ClInclude Include="source\Render\MeshRenderer.h" />
     <ClInclude Include="source\Render\Renderer.h" />
     <ClInclude Include="source\utillity\Collision.h" />
+    <ClInclude Include="source\utillity\NonCopyable.h" />
+    <ClInclude Include="source\utillity\SafeMethod.h" />
+    <ClInclude Include="source\utillity\Singleton.h" />
     <ClInclude Include="source\utillity\StateTemplate.h" />
   </ItemGroup>
   <ItemGroup>
