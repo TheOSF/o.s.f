@@ -10,7 +10,8 @@
 #include	"../character/Tennis/TennisPlayerState.h"
 #include	"../character/Soccer/SoccerPlayer.h"
 #include	"../character/Soccer/SoccerPlayerState.h"
-
+#include	"../character/Baseball/BaseballPlayer.h"
+#include	"../character/Baseball/BaseballPlayerState.h"
 
 // Effekseer
 #include "../Library/Effekseer/EffekseerSystem.h"
@@ -59,13 +60,13 @@ bool sceneGamePlay::Initialize()
 	{
 		CharacterBase::PlayerInfo pl;
 
-		pl.chr_type = CharacterType::_Tennis;
+		pl.chr_type = CharacterType::_Baseball;
 		pl.number = (PlayerNum::Value)0;
 		pl.player_type = PlayerType::_Player;
 		pl.strong_type = StrongType::__ErrorType;
 
-		TennisPlayer* tp = new TennisPlayer(pl);
-		tp->SetState(new TennisState_PlayerControll_Move());
+		BaseballPlayer* bp = new BaseballPlayer(pl);
+		bp->SetState(new BaseballState_PlayerControll_Move());
 	}
 
 
@@ -266,18 +267,18 @@ void	sceneGamePlay::Render()
 {
 	DefCamera.Clear();
 
-	//pStage->Render();
+	pStage->Render();
 
-	//DefRendererMgr.DeferredRender();
-	//DefRendererMgr.ForwardRender();
+	DefRendererMgr.DeferredRender();
+	DefRendererMgr.ForwardRender();
 
-	//{// Effekseer
-	//	pEffekseerSystem->BeginRendering();
-	//	pEffekseerEffectManager->RenderAllInstances();
-	//	pEffekseerSystem->EndRendering();
-	//};
-
-	{// Bullet Physics
-		DefBulletSystem.DebugDrawWorld();
+	{// Effekseer
+		pEffekseerSystem->BeginRendering();
+		pEffekseerEffectManager->RenderAllInstances();
+		pEffekseerSystem->EndRendering();
 	};
+
+	//{// Bullet Physics
+	//	DefBulletSystem.DebugDrawWorld();
+	//};
 }

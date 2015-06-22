@@ -130,6 +130,10 @@
     <ClCompile Include="source\brendanimation\BlendAnimationMesh.cpp" />
     <ClCompile Include="source\Camera\Camera.cpp" />
     <ClCompile Include="source\Camera\CameraState.cpp" />
+    <ClCompile Include="source\character\Amefoot\AmefootPlayer.cpp" />
+    <ClCompile Include="source\character\Amefoot\AmefootPlayerState.cpp" />
+    <ClCompile Include="source\character\Baseball\BaseballPlayer.cpp" />
+    <ClCompile Include="source\character\Baseball\BaseballPlayerState.cpp" />
     <ClCompile Include="source\character\CharacterAttack.cpp" />
     <ClCompile Include="source\character\CharacterBase.cpp" />
     <ClCompile Include="source\character\CharacterCounterClass.cpp" />
@@ -178,6 +182,10 @@
     <ClInclude Include="source\brendanimation\BlendAnimationMesh.h" />
     <ClInclude Include="source\Camera\Camera.h" />
     <ClInclude Include="source\Camera\CameraState.h" />
+    <ClInclude Include="source\character\Amefoot\AmefootPlayer.h" />
+    <ClInclude Include="source\character\Amefoot\AmefootPlayerState.h" />
+    <ClInclude Include="source\character\Baseball\BaseballPlayer.h" />
+    <ClInclude Include="source\character\Baseball\BaseballPlayerState.h" />
     <ClInclude Include="source\character\CharacterAttack.h" />
     <ClInclude Include="source\character\CharacterBase.h" />
     <ClInclude Include="source\character\CharacterCounterClass.h" />
