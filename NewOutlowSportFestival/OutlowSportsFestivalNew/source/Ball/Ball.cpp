@@ -60,7 +60,7 @@ bool BallManager::GetCounterBall(
 	)
 {
 	
-	float most_near = 10000000;		//いちばん近いボールまでの距離
+	float most_near = catch_area_size;		//いちばん近いボールまでの距離
 	float temp_len;
 	float Fmove_frame = (float)move_frame;	
 
