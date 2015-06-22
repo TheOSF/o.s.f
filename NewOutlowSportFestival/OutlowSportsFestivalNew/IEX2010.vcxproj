@@ -88,7 +88,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>./IEX/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./IEX/;./SOURCE/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>
@@ -106,6 +106,7 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -137,7 +138,6 @@
     <ClCompile Include="source\character\CharacterManager.cpp" />
     <ClCompile Include="source\character\CharacterMoveClass.cpp" />
     <ClCompile Include="source\character\CharacterRenderer.cpp" />
-    <ClCompile Include="source\character\CharacterSliding.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseAttackClose.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseCounterClass.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseCounterPoseClass.cpp" />
@@ -147,6 +147,7 @@
     <ClCompile Include="source\character\Lacrosse\LacrossePlayerState.cpp" />
     <ClCompile Include="source\character\Soccer\SoccerPlayer.cpp" />
     <ClCompile Include="source\character\Soccer\SoccerPlayerState.cpp" />
+    <ClCompile Include="source\character\Soccer\SoccerSliding.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayer.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayerState.cpp" />
     <ClCompile Include="source\Collision\Collision.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="source\character\Lacrosse\LacrossePlayerState.h" />
     <ClInclude Include="source\character\Soccer\SoccerPlayer.h" />
     <ClInclude Include="source\character\Soccer\SoccerPlayerState.h" />
+    <ClInclude Include="source\character\Soccer\SoccerSliding.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayer.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayerState.h" />
     <ClInclude Include="source\Collision\Collision.h" />

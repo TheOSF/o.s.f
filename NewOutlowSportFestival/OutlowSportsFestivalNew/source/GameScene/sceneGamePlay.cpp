@@ -266,18 +266,18 @@ void	sceneGamePlay::Render()
 {
 	DefCamera.Clear();
 
-	//pStage->Render();
+	pStage->Render();
 
-	//DefRendererMgr.DeferredRender();
-	//DefRendererMgr.ForwardRender();
+	DefRendererMgr.DeferredRender();
+	DefRendererMgr.ForwardRender();
 
-	//{// Effekseer
-	//	pEffekseerSystem->BeginRendering();
-	//	pEffekseerEffectManager->RenderAllInstances();
-	//	pEffekseerSystem->EndRendering();
-	//};
-
-	{// Bullet Physics
-		DefBulletSystem.DebugDrawWorld();
+	{// Effekseer
+		pEffekseerSystem->BeginRendering();
+		pEffekseerEffectManager->RenderAllInstances();
+		pEffekseerSystem->EndRendering();
 	};
+
+	//{// Bullet Physics
+	//	DefBulletSystem.DebugDrawWorld();
+	//};
 }

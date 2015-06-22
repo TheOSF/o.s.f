@@ -6,7 +6,7 @@
 #include "../CharacterMoveClass.h"
 #include "SoccerSliding.h"
 #include "../CharacterAttack.h"
-#include "../CharacterShot.h"
+#include "../CharacterShotAttackClass.h"
 
 
 //****************************************************
@@ -38,7 +38,7 @@ public:
 class SoccerState_PlayerControll_Attack :public SoccerState
 {
 private:
-	CharacterAttack_A*		m_pMoveClass;
+	CharacterNearAttack*		m_pMoveClass;
 	int timer = 0;
 public:
 	void Enter(SoccerPlayer* s);
@@ -48,7 +48,7 @@ public:
 class SoccerState_PlayerControll_AttackCombo :public SoccerState
 {
 private:
-	CharacterAttack_A*		m_pMoveClass;
+	CharacterNearAttack*		m_pMoveClass;
 	int timer = 0;
 public:
 	void Enter(SoccerPlayer* s);
@@ -58,7 +58,7 @@ public:
 class SoccerState_PlayerControll_AttackFinish :public SoccerState
 {
 private:
-	CharacterAttack_A*		m_pMoveClass;
+	CharacterNearAttack*		m_pMoveClass;
 	int timer = 0;
 public:
 	void Enter(SoccerPlayer* s);
@@ -68,8 +68,7 @@ public:
 class SoccerState_PlayerControll_Shot :public SoccerState
 {
 private:
-	CharacterShot*		m_pShotClass;
-	int timer = 0;
+	CharacterShotAttack*		m_pShotClass;
 public:
 	void Enter(SoccerPlayer* s);
 	void Execute(SoccerPlayer* s);

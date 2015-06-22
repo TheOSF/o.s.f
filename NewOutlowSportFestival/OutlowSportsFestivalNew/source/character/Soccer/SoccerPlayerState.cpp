@@ -41,13 +41,17 @@ void SoccerState_PlayerControll_Move::Execute(SoccerPlayer* s)
 {
 	Vector2 st = controller::GetStickValue(controller::stick::left, s->m_PlayerInfo.number);
 
-	if (KEY_Get(KEY_A, 1))
+	if (controller::GetTRG(controller::button::batu, s->m_PlayerInfo.number))
 	{
 		s->SetState(new SoccerState_PlayerControll_Sliding);
 	}
 	if (controller::GetTRG(controller::button::shikaku, s->m_PlayerInfo.number))
 	{
 		s->SetState(new SoccerState_PlayerControll_Attack);
+	}
+	if (controller::GetTRG(controller::button::sankaku, s->m_PlayerInfo.number))
+	{
+		s->SetState(new SoccerState_PlayerControll_Shot);
 	}
 
 	m_pMoveClass->SetStickValue(st);
@@ -86,56 +90,53 @@ void SoccerState_PlayerControll_Sliding::Exit(SoccerPlayer* s)
 }
 void SoccerState_PlayerControll_Attack::Enter(SoccerPlayer* s)
 {
-	class SoccerMoveEvent :public CharacterAttack_A::MoveEvent
+	class SoccerMoveEvent :public CharacterNearAttack::AttackEvent
 	{
 		SoccerPlayer* m_pSoccer;
 	public:
 		SoccerMoveEvent(SoccerPlayer* pSoccer) :
 			m_pSoccer(pSoccer){}
 
-		void Update(bool isRun, RATIO speed_ratio)
+		void Update()
 		{
 			m_pSoccer->m_Renderer.Update(1);
 		}
 
-		void RunStart()
+		void AttackStart()
 		{
 			m_pSoccer->m_Renderer.SetMotion(SoccerPlayer::_ms_Atk1);
 		}
 
-		void StandStart()
+		void AttackEnd()
 		{
 			m_pSoccer->m_Renderer.SetMotion(SoccerPlayer::_ms_Stand);
 		}
+		void Assault()
+		{
+			
+		}
 	};
-	CharacterAttack_A::Params p;
+	CharacterNearAttack::Params p;
 
 
-	p.Acceleration = 0.0f;
-	p.MaxSpeed = 0.0f;
 	p.TurnSpeed = 0.1f;
-	p.DownSpeed = 0.2f;
+	p.AttackFrame = 5;
+	p.EndFrame = 35;
+	p.damage = 20;
+	p.speed = 0.2f;
 
-	m_pMoveClass = new CharacterAttack_A(s, p, new SoccerMoveEvent(s));
+	m_pMoveClass = new CharacterNearAttack(s, p, new SoccerMoveEvent(s));
 }
 void SoccerState_PlayerControll_Attack::Execute(SoccerPlayer* s)
 {
-	timer++;
 	Vector2 st = controller::GetStickValue(controller::stick::left, s->m_PlayerInfo.number);
 
-	m_pMoveClass->SetStickValue(st);
-	//chr_func::AddMoveFront(s, 0.4f, 0.5f);
 	m_pMoveClass->Update();
-
-	chr_func::CreateTransMatrix(s, 0.05f, &s->m_Renderer.m_TransMatrix);
-	if (timer > 20 && timer < 46 && controller::GetTRG(controller::button::shikaku, s->m_PlayerInfo.number))
-	{
-		s->SetState(new SoccerState_PlayerControll_AttackCombo);
-	}
-	else if (timer > 46)
+	if (m_pMoveClass->is_End())
 	{
 		s->SetState(new SoccerState_PlayerControll_Move);
 	}
+	chr_func::CreateTransMatrix(s, 0.05f, &s->m_Renderer.m_TransMatrix);
 
 }
 void SoccerState_PlayerControll_Attack::Exit(SoccerPlayer* s)
@@ -144,37 +145,38 @@ void SoccerState_PlayerControll_Attack::Exit(SoccerPlayer* s)
 }
 void SoccerState_PlayerControll_AttackCombo::Enter(SoccerPlayer* s)
 {
-	class SoccerMoveEvent :public CharacterAttack_A::MoveEvent
+	class SoccerMoveEvent :public CharacterNearAttack::AttackEvent
 	{
 		SoccerPlayer* m_pSoccer;
 	public:
 		SoccerMoveEvent(SoccerPlayer* pSoccer) :
 			m_pSoccer(pSoccer){}
 
-		void Update(bool isRun, RATIO speed_ratio)
+		void Update()
 		{
 			m_pSoccer->m_Renderer.Update(1);
 		}
 
-		void RunStart()
+		void AttackStart()
 		{
 			m_pSoccer->m_Renderer.SetMotion(SoccerPlayer::_ms_Atk2);
 		}
 
-		void StandStart()
+		void AttackEnd()
 		{
 			m_pSoccer->m_Renderer.SetMotion(SoccerPlayer::_ms_Stand);
 		}
+		void Assault()
+		{
+
+		}
 	};
-	CharacterAttack_A::Params p;
+	CharacterNearAttack::Params p;
 	timer = 0;
 
-	p.Acceleration = 0.0f;
-	p.MaxSpeed = 0.0f;
 	p.TurnSpeed = 0.1f;
-	p.DownSpeed = 0.2f;
 
-	m_pMoveClass = new CharacterAttack_A(s, p, new SoccerMoveEvent(s));
+	m_pMoveClass = new CharacterNearAttack(s, p, new SoccerMoveEvent(s));
 }
 void SoccerState_PlayerControll_AttackCombo::Execute(SoccerPlayer* s)
 {
@@ -201,37 +203,38 @@ void SoccerState_PlayerControll_AttackCombo::Exit(SoccerPlayer* s)
 }
 void SoccerState_PlayerControll_AttackFinish::Enter(SoccerPlayer* s)
 {
-	class SoccerMoveEvent :public CharacterAttack_A::MoveEvent
+	class SoccerAttackEvent :public CharacterNearAttack::AttackEvent
 	{
 		SoccerPlayer* m_pSoccer;
 	public:
-		SoccerMoveEvent(SoccerPlayer* pSoccer) :
+		SoccerAttackEvent(SoccerPlayer* pSoccer) :
 			m_pSoccer(pSoccer){}
 
-		void Update(bool isRun, RATIO speed_ratio)
+		void Update()
 		{
 			m_pSoccer->m_Renderer.Update(1);
 		}
 
-		void RunStart()
+		void AttackStart()
 		{
 			m_pSoccer->m_Renderer.SetMotion(SoccerPlayer::_ms_Atk3);
 		}
 
-		void StandStart()
+		void AttackEnd()
 		{
 			m_pSoccer->m_Renderer.SetMotion(SoccerPlayer::_ms_Stand);
 		}
+		void Assault()
+		{
+
+		}
 	};
-	CharacterAttack_A::Params p;
+	CharacterNearAttack::Params p;
 	timer = 0;
 
-	p.Acceleration = 0.0f;
-	p.MaxSpeed = 0.0f;
 	p.TurnSpeed = 0.1f;
-	p.DownSpeed = 0.2f;
 
-	m_pMoveClass = new CharacterAttack_A(s, p, new SoccerMoveEvent(s));
+	m_pMoveClass = new CharacterNearAttack(s, p, new SoccerAttackEvent(s));
 }
 void SoccerState_PlayerControll_AttackFinish::Execute(SoccerPlayer* s)
 {
@@ -255,7 +258,7 @@ void SoccerState_PlayerControll_AttackFinish::Exit(SoccerPlayer* s)
 }
 void SoccerState_PlayerControll_Shot::Enter(SoccerPlayer* s)
 {
-	class SoccerShotEvent :public CharacterShot::ShotEvent
+	class SoccerShotEvent :public CharacterShotAttack::Event
 	{
 		SoccerPlayer* m_pSoccer;
 	public:
@@ -265,44 +268,45 @@ void SoccerState_PlayerControll_Shot::Enter(SoccerPlayer* s)
 		void Update()
 		{
 			m_pSoccer->m_Renderer.Update(1);
+		
 		}
 
-		void RunStart()
+		void AttackStart()
 		{
 			m_pSoccer->m_Renderer.SetMotion(SoccerPlayer::_ms_Shot);
 		}
 
-		void StandStart()
+		void AttackEnd()
 		{
 			m_pSoccer->m_Renderer.SetMotion(SoccerPlayer::_ms_Stand);
 		}
+		void Shot()
+		{
+			BallBase::Params param;
+
+			chr_func::GetFront(m_pSoccer, &param.move);
+			param.move *= 0.5f;
+			param.pos = m_pSoccer->m_Params.pos;
+			param.pos.y = BallBase::UsualBallShotY;
+			param.pParent = m_pSoccer;
+			param.type = BallBase::Type::_Usual;
+
+			new UsualBall(param, DamageBase::Type::_WeekDamage, 1);
+		}
 	};
-	CharacterShot::Params p;
-	timer = 0;
+	CharacterShotAttack::AttackParams p;
 
-	p.shot_frame = 20;
+	p.ShotFrame = 10;
+	p.AllFrame = 35;
+	p.MoveDownSpeed = 0.2f;
 
-	//m_pShotClass = new CharacterShot(s, p, new SoccerShotEvent(s));
+	m_pShotClass = new CharacterShotAttack(s, new SoccerShotEvent(s),p);
 }
 void SoccerState_PlayerControll_Shot::Execute(SoccerPlayer* s)
 {
-	timer++;
-	if (timer == 15)
-	{
-		BallBase::Params param;
 
-		chr_func::GetFront(s, &param.move);
-		param.move *= 0.5f;
-		param.pos = s->m_Params.pos;
-		param.pParent = s;
-		param.type = BallBase::Type::_Usual;
-
-		new UsualBall(param, DamageBase::Type::_WeekDamage, 1);
-	}
-	if (timer >= 35)
-	{
-		s->SetState(new SoccerState_PlayerControll_Move);
-	}
+	m_pShotClass->Update();
+	chr_func::CreateTransMatrix(s, 0.05f, &s->m_Renderer.m_TransMatrix);
 }
 void SoccerState_PlayerControll_Shot::Exit(SoccerPlayer* s)
 {
