@@ -111,8 +111,15 @@ public:
 	// 物理シミュレーションを進める
 	void StepSimulation(float deltaTime);
 
-	// iexMeshをワールドに静的オブジェクトとして配置
-	RigidBody* AddRigidMesh(iexMesh* pMesh);
+	// iexMeshをワールドに配置
+	RigidBody* AddRigidMesh(
+		iexMesh* pMesh,
+		float mass,
+		RigidBody::CollisionTypes collisionType,
+		float friction,
+		float restitution,
+		const Vector3&velocity
+		);
 
 	// Boxをワールドに追加
 	RigidBody* AddRigidBox(

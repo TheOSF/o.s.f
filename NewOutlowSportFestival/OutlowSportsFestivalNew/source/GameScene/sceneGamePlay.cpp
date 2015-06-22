@@ -26,6 +26,8 @@
 //
 //*****************************************************************************************************************************
 static LPIEXMESH pStage;
+static LPIEXMESH pTennisBall;
+
 static EffekseerSystem* pEffekseerSystem;
 static EffekseerEffectManager* pEffekseerEffectManager;
 static EffekseerEffect* pEffekseerEffect;
@@ -92,6 +94,12 @@ bool sceneGamePlay::Initialize()
 	};
 
 	{// Bullet
+
+		pTennisBall = new IEXMESH("DATA//CHR//Tennis_ball//Tennis_ball.IMO");
+		pTennisBall->SetPos(0, 20, 10);
+		pTennisBall->SetAngle(0, 0, 0);
+		pTennisBall->SetScale(0.03f, 0.03f, 0.03f);
+
 		DefBulletSystem.StartUp();
 		DefBulletSystem.InitializeBulletPhysics(btVector3(0, -9.8f, 0), iexSystem::Device);
 
@@ -102,10 +110,10 @@ bool sceneGamePlay::Initialize()
 			1.0f, 
 			RigidBody::ct_dynamic, 
 			Vector3(0, 30, 0), 
-			Vector3(0, 0, 0), 
+			Vector3(0.2f, 0, 0), 
 			Vector3(1, 1, 1),
 			0.2f, 
-			0.85f, 
+			1.0f, 
 			Vector3(0, 0, 0)
 			);
 
@@ -113,31 +121,36 @@ bool sceneGamePlay::Initialize()
 		DefBulletSystem.AddRigidSphere(
 			1.0f,
 			RigidBody::ct_dynamic,
-			Vector3(0, 30, 0),
+			Vector3(10, 30, 0),
 			Vector3(0, 0, 0),
 			1.0f,
 			0.2f,
-			0.9f,
-			Vector3(0, 0, 0)
+			1.0f,
+			Vector3(0, -10, 0)
 			);
 
 		// Mesh
 		DefBulletSystem.AddRigidMesh(
-			pStage
+			pTennisBall,
+			1.0f,
+			RigidBody::ct_dynamic,
+			0.2f,
+			1.0f,
+			Vector3(0,0,0)
 			);
 
 
 		//// è∞
-		//DefBulletSystem.AddRigidBox(
-		//	0.0f,
-		//	RigidBody::ct_static,
-		//	Vector3(0, -10, 0),
-		//	Vector3(0, 0, 0),
-		//	Vector3(100, 5, 100),
-		//	0.0f,
-		//	0.0f,
-		//	Vector3(0, 0, 0)
-		//	);
+		DefBulletSystem.AddRigidBox(
+			0.0f,
+			RigidBody::ct_static,
+			Vector3(0, -10, 0),
+			Vector3(0, 0, 0),
+			Vector3(100, 10, 100),
+			0.2f,
+			0.5f,
+			Vector3(0, 0, 0)
+			);
 	};
 
 	return true;
@@ -158,6 +171,7 @@ sceneGamePlay::~sceneGamePlay()
 	};
 
 	{// Bullet
+		delete pTennisBall;
 		DefBulletSystem.ReleaseBulletPhysics();
 		DefBulletSystem.ShutDown(true);
 	};
@@ -217,6 +231,23 @@ void	sceneGamePlay::Update()
 	};
 
 	{// Bullet Physics
+
+
+		if (KEY(KEY_SPACE, 0) == 3)
+		{
+			// Sphere
+			DefBulletSystem.AddRigidSphere(
+				1.0f,
+				RigidBody::ct_dynamic,
+				Vector3(10, 30, 0),
+				Vector3(0, 0, 0),
+				1.0f,
+				0.0f,
+				1.0f,
+				Vector3(0, -10, 0)
+				);
+		}
+
 		DefBulletSystem.StepSimulation(1.0f / 60.0f);
 	};
 
