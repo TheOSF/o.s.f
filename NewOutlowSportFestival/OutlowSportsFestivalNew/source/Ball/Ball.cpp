@@ -54,6 +54,7 @@ BallManager::BallMap* BallManager::GetBallMap()
 bool BallManager::GetCounterBall(
 	BallBase**	ppOut,			//戻り値として返却するボール
 	CrVector3	character_pos,	//キャラクタの場所
+	Vector3*	pOutAfterFrameBallPos,//キャッチまでの移動フレーム後のボールの位置
 	float		catch_area_size,//キャッチ可能な範囲
 	int			move_frame		//キャッチまでの移動フレーム
 	)
@@ -65,7 +66,8 @@ bool BallManager::GetCounterBall(
 
 	*ppOut = nullptr;
 
-	Vector3 move_pos;	
+	Vector3 move_pos;
+	Vector3 len;
 
 	for (
 		auto it = m_BallMap.begin();
@@ -83,14 +85,15 @@ bool BallManager::GetCounterBall(
 		move_pos += it->second->m_Params.pos;
 
 		//距離を算出
-		move_pos -= character_pos;
-		temp_len = move_pos.Length();
+		len = move_pos - character_pos;
+		temp_len = len.Length();
 
 		//最短距離を更新した場合は戻り値に代入
 		if (most_near > temp_len)
 		{
 			most_near = temp_len;
 			*ppOut = it->second;
+			*pOutAfterFrameBallPos = move_pos;
 		}
 	}
 
