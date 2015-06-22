@@ -13,5 +13,15 @@ typedef BallBase* LpBallBase;
 
 class MeshRenderer;
 typedef MeshRenderer* LpMeshRenderer;
+
+class CharacterUsualMove;
+typedef CharacterUsualMove* LpCharacterUsualMove;
+
+class CharacterShotAttack;
+typedef CharacterShotAttack* LpCharacterShotAttack;
 	 
+class DamageBase;
+typedef DamageBase* LpDamageBase;
+
+
 #endif

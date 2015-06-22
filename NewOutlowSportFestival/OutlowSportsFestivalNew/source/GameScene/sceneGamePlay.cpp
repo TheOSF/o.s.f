@@ -269,6 +269,8 @@ void	sceneGamePlay::Render()
 
 	pStage->Render();
 
+	
+
 	DefRendererMgr.DeferredRender();
 	DefRendererMgr.ForwardRender();
 
@@ -277,6 +279,8 @@ void	sceneGamePlay::Render()
 		pEffekseerEffectManager->RenderAllInstances();
 		pEffekseerSystem->EndRendering();
 	};
+
+	
 
 	//{// Bullet Physics
 	//	DefBulletSystem.DebugDrawWorld();

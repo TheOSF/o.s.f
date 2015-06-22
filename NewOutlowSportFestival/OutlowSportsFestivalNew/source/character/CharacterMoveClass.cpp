@@ -70,14 +70,7 @@ void CharacterUsualMove::Update()
 		}
 	}
 
-	//‚ ‚½‚è”»’è‚ğ‚Æ‚é
-	ShpereParam sp;
-
-	sp.pos = m_pParent->m_Params.pos;
-	sp.pos.y += BallBase::UsualBallShotY;
-	sp.size = m_pParent->m_Params.hitScale;
-
-	DefDamageMgr.HitCheckSphere(sp, *m_pHitEventBase);
+	
 
 
 	//ˆÊ’u‚ÌXV

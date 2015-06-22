@@ -2,6 +2,8 @@
 #define __CHARACTER_FUNCTION_H__
 
 #include "iextreme.h"
+#include "../GameSystem/ForwardDecl.h"
+#include "../Damage/Damage.h"
 
 class CharacterBase;
 
@@ -27,6 +29,9 @@ namespace chr_func
 	//指定した場所に向く
 	void AngleControll(CharacterBase* p, CrVector3 view_pos, float speed);
 
+	//指定した場所に向く(一瞬で)
+	void AngleControll(CharacterBase* p, CrVector3 view_pos);
+
 	//現在の位置、現在のangle、Scaleをもとに変換行列を生成する
 	void CreateTransMatrix(CharacterBase* p, float Scale, Matrix* pOutMatrix);
 
@@ -35,6 +40,12 @@ namespace chr_func
 
 	//キャラクタが死んでいるかどうか
 	bool isDie(CharacterBase* p);
+
+	//ダメージ判定をとる
+	void DamageCheck(
+		LpCharacterBase					pCharacter,	//判定をとるキャラクタ
+		DamageManager::HitEventBase*	pHitEvent	//イベント処理
+		);
 }
 
 #endif

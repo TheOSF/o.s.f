@@ -35,7 +35,7 @@ public:
 		Vector3			move;		//移動量
 	};
 
-	Params	m_Params;
+	Params m_Params;
 
 	//コンストラクタ・デストラクタで自動的にマネージャに登録・削除を行う
 	BallBase();
@@ -68,6 +68,7 @@ public:
 	bool GetCounterBall(
 		BallBase**	ppOut,			//戻り値として返却するボール
 		CrVector3	character_pos,	//キャラクタの場所
+		Vector3*	pOutAfterFrameBallPos,//キャッチまでの移動フレーム後のボールの位置
 		float		catch_area_size,//キャッチ可能な範囲
 		int			move_frame		//キャッチまでの移動フレーム
 		);

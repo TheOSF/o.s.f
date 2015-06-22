@@ -137,6 +137,7 @@
     <ClCompile Include="source\character\CharacterAttack.cpp" />
     <ClCompile Include="source\character\CharacterBase.cpp" />
     <ClCompile Include="source\character\CharacterCounterClass.cpp" />
+    <ClCompile Include="source\character\CharacterDamageMotion.cpp" />
     <ClCompile Include="source\character\CharacterFunction.cpp" />
     <ClCompile Include="source\character\CharacterManager.cpp" />
     <ClCompile Include="source\character\CharacterMoveClass.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="source\character\CharacterAttack.h" />
     <ClInclude Include="source\character\CharacterBase.h" />
     <ClInclude Include="source\character\CharacterCounterClass.h" />
+    <ClInclude Include="source\character\CharacterDamageMotion.h" />
     <ClInclude Include="source\character\CharacterFunction.h" />
     <ClInclude Include="source\character\CharacterManager.h" />
     <ClInclude Include="source\character\CharacterMoveClass.h" />
