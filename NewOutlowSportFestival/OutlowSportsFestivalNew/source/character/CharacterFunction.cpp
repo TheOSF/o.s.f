@@ -1,5 +1,6 @@
 #include "CharacterFunction.h"
 #include "CharacterBase.h"
+#include "../Ball/Ball.h"
 
 
 //座標に移動量を更新する
@@ -89,6 +90,19 @@ void chr_func::AngleControll(CharacterBase* p, CrVector3 view_pos, float speed)
 	p->m_Params.angle = angle;
 }
 
+//指定した場所に向く(一瞬で)
+void chr_func::AngleControll(CharacterBase* p, CrVector3 view_pos)
+{
+	Vector3 mepos = p->m_Params.pos;
+
+	if (mepos.x == view_pos.x&&mepos.z == view_pos.z) return;
+
+	mepos = view_pos - mepos;
+	mepos.y = 0;
+	mepos.Normalize();
+
+	p->m_Params.angle = acosf(mepos.z);
+}
 
 //現在の位置、現在のangle、Scaleをもとに変換行列を生成する
 void chr_func::CreateTransMatrix(CharacterBase* p, float Scale, Matrix* pOutMatrix)
@@ -121,4 +135,20 @@ void chr_func::GetFront(CharacterBase* p, Vector3* pOut)
 bool chr_func::isDie(CharacterBase* p)
 {
 	return p->m_Params.HP <= 0;
+}
+
+//ダメージ判定をとる
+void chr_func::DamageCheck(
+	LpCharacterBase					pCharacter,	//判定をとるキャラクタ
+	DamageManager::HitEventBase*	pHitEvent	//イベント処理
+	)
+{
+	//あたり判定をとる
+	ShpereParam sp;
+
+	sp.pos = pCharacter->m_Params.pos;
+	sp.pos.y += BallBase::UsualBallShotY;
+	sp.size = pCharacter->m_Params.hitScale;
+
+	DefDamageMgr.HitCheckSphere(sp, *pHitEvent);
 }
