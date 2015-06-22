@@ -35,7 +35,7 @@ public:
 		Vector3			move;		//移動量
 	};
 
-	Params	m_Params;
+	Params m_Params;
 
 	//コンストラクタ・デストラクタで自動的にマネージャに登録・削除を行う
 	BallBase();

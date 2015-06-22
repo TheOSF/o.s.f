@@ -220,7 +220,9 @@ CharacterCounter* TennisState_PlayerControll_Counter::CreateCounterClass(TennisP
 	params.MaxPoseFrame = 60;
 	params.LevelUpFrame = 45;
 	params.MoveDownSpeed = 0.2f;
-	params.CounterTotalFrame = 60;
+	params.CounterTotalFrame = 30;
+	params.CounterMoveFrame = 5;
+	params.CanCounterArea = 10.0f;
 
 	return new CharacterCounter(
 		3,
@@ -266,7 +268,7 @@ void TennisState_PlayerControll_Shot::Enter(TennisPlayer* t)
 			//移動は前向き
 			chr_func::GetFront(pTennis, &param.move);
 			//スピードは適当
-			param.move *= 0.5f;	
+			param.move *= 0.65f;	
 			//キャラの場所に(最終的に腕の位置に？)
 			param.pos = pTennis->m_Params.pos;
 			//高さをキャラ共通ボール発射のYに

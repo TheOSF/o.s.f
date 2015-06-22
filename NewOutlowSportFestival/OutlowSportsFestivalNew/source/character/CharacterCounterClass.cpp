@@ -3,6 +3,8 @@
 #include "CharacterBase.h"
 #include "CharacterFunction.h"
 
+#include "../Ball/Ball.h"
+
 
 //***************************************************
 //		キャラクター共通 カウンタークラス
@@ -23,7 +25,10 @@ CharacterCounter::CharacterCounter(
 	m_StickValue(0, 0),
 	m_CounterParams(counterParams),
 	m_pCharacter(pCharacter),
-	m_pEvent(pEvent)
+	m_pEvent(pEvent),
+	m_pCounterBall(nullptr),
+	m_pCounterBallOwner(nullptr),
+	m_CounterPos(m_pCharacter->m_Params.pos)
 {
 	m_TotalPoseFrame = (m_MaxLevel*m_CounterParams.LevelUpFrame) + m_CounterParams.MaxPoseFrame;
 }
@@ -65,8 +70,49 @@ bool CharacterCounter::Update()
 	else
 	{
 		if (m_Timer == 0)
+		{
+			// ボール検索
+			bool result = DefBallMgr.GetCounterBall(
+				&m_pCounterBall,
+				m_pCharacter->m_Params.pos,
+				&m_CounterPos,
+				m_CounterParams.CanCounterArea,
+				m_CounterParams.CounterMoveFrame
+				);
+
+			if (result == true &&
+				m_pCounterBall->m_Params.pParent != m_pCharacter)
+			{
+				// 見つかった
+				// カウンターできるボールなら
+				m_pCounterBallOwner = m_pCounterBall->m_Params.pParent;
+			}
+			else
+			{
+				// 見つからなかった
+				m_CounterPos = m_pCharacter->m_Params.pos;
+			}
+		}
+
+		if (m_Timer < m_CounterParams.CounterMoveFrame)
+		{// 移動
+			float t = 1.0f / m_CounterParams.CounterMoveFrame;
+			m_pCharacter->m_Params.pos =
+				(m_pCharacter->m_Params.pos*(1.0f - t)) + (m_CounterPos*t);
+		}
+
+		if (m_Timer == m_CounterParams.CounterMoveFrame)
 		{// カウンター開始
 			m_pEvent->CounterStart(m_NowLevel);
+
+			if (m_pCounterBall != nullptr && m_pCounterBallOwner != nullptr)
+			{// ボールがあればカウンター
+				float speed = m_pCounterBall->m_Params.move.Length();
+				m_pCounterBall->m_Params.move = (m_pCounterBallOwner->m_Params.pos - m_pCharacter->m_Params.pos);
+				m_pCounterBall->m_Params.move.Normalize();
+				m_pCounterBall->m_Params.move *= speed;
+				m_pCounterBall->m_Params.pParent = m_pCharacter;
+			}
 		}
 
 		if (m_Timer == m_CounterParams.CounterTotalFrame)
