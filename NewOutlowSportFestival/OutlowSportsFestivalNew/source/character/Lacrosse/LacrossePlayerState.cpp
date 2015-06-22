@@ -3,7 +3,7 @@
 #include "../CharacterFunction.h"
 
 #include "../CharacterMoveClass.h"
-#include "../CharacterHitBallAttackClass.h"
+#include "../CharacterShotAttackClass.h"
 #include "../CharacterEvasionClass.h"
 #include "LacrosseAttackClose.h"
 #include "LacrosseCounterPoseClass.h"
@@ -91,7 +91,7 @@ void LacrosseState_PlayerControllMove::Execute(LacrossePlayer* t)
 
 	if (controller::GetTRG(controller::button::sankaku, t->m_PlayerInfo.number))
 	{// [△] で [遠距離攻撃]
-		t->SetState(new LacrosseState_PlayerControllHitBallAttack());
+		t->SetState(new LacrosseState_PlayerControllShotAttack());
 		return;
 	}
 
@@ -348,7 +348,7 @@ CharacterEvasion* LacrosseState_PlayerControllEvasion::CreateEvasionClass(Lacros
 //***************************************************
 
 // コンストラクタ
-LacrosseState_PlayerControllHitBallAttack::LacrosseState_PlayerControllHitBallAttack() :
+LacrosseState_PlayerControllShotAttack::LacrosseState_PlayerControllShotAttack() :
 m_pAttackClass(nullptr)
 {
 
@@ -356,14 +356,14 @@ m_pAttackClass(nullptr)
 
 
 // ステート開始
-void LacrosseState_PlayerControllHitBallAttack::Enter(LacrossePlayer* t)
+void LacrosseState_PlayerControllShotAttack::Enter(LacrossePlayer* t)
 {
 	m_pAttackClass = this->CreateAttackClass(t);
 }
 
 
 // ステート実行
-void LacrosseState_PlayerControllHitBallAttack::Execute(LacrossePlayer* t)
+void LacrosseState_PlayerControllShotAttack::Execute(LacrossePlayer* t)
 {
 	// スティックの値セット
 	m_pAttackClass->SetStickValue(
@@ -379,16 +379,16 @@ void LacrosseState_PlayerControllHitBallAttack::Execute(LacrossePlayer* t)
 
 
 // ステート終了
-void LacrosseState_PlayerControllHitBallAttack::Exit(LacrossePlayer* t)
+void LacrosseState_PlayerControllShotAttack::Exit(LacrossePlayer* t)
 {
 	delete m_pAttackClass;
 }
 
 
 // 回避クラス作成
-CharacterHitBallAttack* LacrosseState_PlayerControllHitBallAttack::CreateAttackClass(LacrossePlayer* t)
+CharacterShotAttack* LacrosseState_PlayerControllShotAttack::CreateAttackClass(LacrossePlayer* t)
 {
-	class HitBallEvent : public CharacterHitBallAttack::Event
+	class HitBallEvent : public CharacterShotAttack::Event
 	{
 		LacrossePlayer* m_pLacrosse; // ラクロス
 	public:
@@ -410,7 +410,7 @@ CharacterHitBallAttack* LacrosseState_PlayerControllHitBallAttack::CreateAttackC
 		}
 
 		// ダメージ判定開始
-		void DamageStart()
+		void Shot()override
 		{// とりあえず置いておく
 
 		}
@@ -432,15 +432,15 @@ CharacterHitBallAttack* LacrosseState_PlayerControllHitBallAttack::CreateAttackC
 	};
 
 	// 攻撃パラメータ作成
-	CharacterHitBallAttack::AttackParams params;
+	CharacterShotAttack::AttackParams params;
 	params.AllFrame                        = 30;     // 全30フレーム
 	params.AttackPower                  = 10.0f; // 攻撃力
-	params.DamageOutbreakFrame = 5;       // 開始5フレームで球発射
+	params.ShotFrame                     = 5;       // 開始5フレームで球発射
 	params.MaxTurnRadian              = PI / 4; // 45°
 	params.MoveDownSpeed           = 0.2f;   // 減速割合
 
 	// 生成して返す
-	return new CharacterHitBallAttack(
+	return new CharacterShotAttack(
 		t,
 		new HitBallEvent(t),
 		params);

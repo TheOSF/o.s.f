@@ -18,7 +18,7 @@ public:
 	static Camera& GetInstance();
 	static void Release();
 
-	//マイフレームの更新
+	// 毎フレームの更新
 	void Update();
 
 	//画面消去

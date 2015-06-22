@@ -22,7 +22,7 @@ void CharacterManager::Release()
 const CharacterManager::CharacterMap& 
 	CharacterManager::GetCharacterMap()const
 {
-		return m_CharacterMap;
+	return m_CharacterMap;
 }
 
 CharacterManager::CharacterManager()

@@ -3,6 +3,7 @@
 #include "../CharacterFunction.h"
 #include "../../Ball/UsualBall.h"
 #include "../../Damage/Damage.h"
+#include "../CharacterCounterClass.h"
 
 
 //ステート開始
@@ -106,10 +107,16 @@ void TennisState_PlayerControll_Move::Execute(TennisPlayer* t)
 		chr_func::GetFront(t, &param.move);
 		param.move *= 0.5f;
 		param.pos = t->m_Params.pos;
+		param.pos.y=BallBase::UsualBallShotY;
 		param.pParent = t;
 		param.type = BallBase::Type::_Usual;
 
 		new UsualBall(param, DamageBase::Type::_WeekDamage, 1);
+	}
+
+	if (controller::GetTRG(controller::button::_R1, t->m_PlayerInfo.number))
+	{// [R1] で [カウンター構え]
+		t->SetState(new TennisState_PlayerControll_Counter());
 	}
 }
 
@@ -117,3 +124,116 @@ void TennisState_PlayerControll_Move::Exit(TennisPlayer* t)
 {
 	delete m_pMoveClass;
 }
+
+
+
+//***************************************************
+//		プレイヤー操作の カウンタークラス
+//***************************************************
+
+// ステート開始
+void TennisState_PlayerControll_Counter::Enter(TennisPlayer* t)
+{
+	// カウンタークラス作成
+	m_pCounter = CreateCounterClass(t);
+}
+
+
+// ステート実行
+void TennisState_PlayerControll_Counter::Execute(TennisPlayer* t)
+{
+	if (controller::GetLeave(controller::button::_R1, t->m_PlayerInfo.number))
+	{// [R1離す] でカウンター
+		m_pCounter->SetPoseEndFlg();
+	}
+
+	//更新
+	if (m_pCounter->Update() == false)
+	{
+		return;
+	}
+}
+
+
+// ステート終了
+void TennisState_PlayerControll_Counter::Exit(TennisPlayer* t)
+{
+	delete m_pCounter;
+}
+
+
+// カウンター構えクラス作成
+CharacterCounter* TennisState_PlayerControll_Counter::CreateCounterClass(TennisPlayer* t)
+{
+	class CounterEvent : public CharacterCounter::Event
+	{
+		TennisPlayer* m_pTennis;
+		int m_CounterLevel;
+	public:
+		// コンストラクタ
+		CounterEvent(TennisPlayer* pTennisPlayer) :
+			m_pTennis(pTennisPlayer),
+			m_CounterLevel(0){}
+
+		// 更新
+		void Update()override
+		{
+			// モデル更新
+			m_pTennis->m_Renderer.Update(1);
+
+			// 転送行列更新
+			chr_func::CreateTransMatrix(
+				m_pTennis,
+				0.05f,
+				&m_pTennis->m_Renderer.m_TransMatrix);
+		}
+
+		// 構え開始
+		void CounterPoseStart()override
+		{
+			m_pTennis->m_Renderer.SetMotion(TennisPlayer::_mt_CounterPose);
+		}
+
+		// 構え終了
+		void CounterPoseEnd()override
+		{// カウンター
+			m_pTennis->m_Renderer.SetMotion(TennisPlayer::_mt_Counter);
+		}
+
+		// レベルアップ
+		void LevelUp(int level)override
+		{
+			m_CounterLevel = level;
+			MyDebugString("%d\n", level);
+		}
+
+		// カウンター開始
+		void CounterStart(int level)override
+		{
+			m_pTennis->m_Renderer.SetMotion(TennisPlayer::_mt_Counter);
+		}
+
+		// カウンター終了
+		void CounterEnd()override
+		{// 通常移動へ
+			m_pTennis->m_Renderer.SetMotion(TennisPlayer::_mt_Stand);
+			m_pTennis->SetState(new TennisState_PlayerControll_Move());
+		}
+	};
+
+	// パラメータ設定
+	CharacterCounter::CounterParams params;
+	params.MaxPoseFrame = 60;
+	params.LevelUpFrame = 45;
+	params.MoveDownSpeed = 0.2f;
+	params.CounterTotalFrame = 60;
+
+	return new CharacterCounter(
+		3,
+		params,
+		t,
+		new CounterEvent(t)
+		);
+}
+
+
