@@ -270,11 +270,23 @@ void	sceneGamePlay::Render()
 
 	DefRendererMgr.DeferredRender();
 	DefRendererMgr.ForwardRender();
+<<<<<<< HEAD
 
 	{// Effekseer
 		pEffekseerSystem->BeginRendering();
 		pEffekseerEffectManager->RenderAllInstances();
 		pEffekseerSystem->EndRendering();
+=======
+
+	{// Effekseer
+		pEffekseerSystem->BeginRendering();
+		pEffekseerEffectManager->RenderAllInstances();
+		pEffekseerSystem->EndRendering();
+	};
+
+	{// Bullet Physics
+	//	DefBulletSystem.DebugDrawWorld();
+>>>>>>> 2449a14307932ee78a8fd995c6cd1712dfa5b585
 	};
 
 	//{// Bullet Physics
