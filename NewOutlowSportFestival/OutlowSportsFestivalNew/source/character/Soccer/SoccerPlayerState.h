@@ -68,7 +68,7 @@ public:
 class SoccerState_PlayerControll_Shot :public SoccerState
 {
 private:
-	CharacterShot*		m_pMoveClass;
+	CharacterShot*		m_pShotClass;
 	int timer = 0;
 public:
 	void Enter(SoccerPlayer* s);

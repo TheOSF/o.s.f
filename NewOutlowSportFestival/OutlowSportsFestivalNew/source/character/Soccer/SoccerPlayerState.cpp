@@ -45,7 +45,7 @@ void SoccerState_PlayerControll_Move::Execute(SoccerPlayer* s)
 	{
 		s->SetState(new SoccerState_PlayerControll_Sliding);
 	}
-	if (KEY_Get(KEY_B, 1))
+	if (controller::GetTRG(controller::button::shikaku, s->m_PlayerInfo.number))
 	{
 		s->SetState(new SoccerState_PlayerControll_Attack);
 	}
@@ -128,7 +128,7 @@ void SoccerState_PlayerControll_Attack::Execute(SoccerPlayer* s)
 	m_pMoveClass->Update();
 
 	chr_func::CreateTransMatrix(s, 0.05f, &s->m_Renderer.m_TransMatrix);
-	if (timer > 20 && timer < 46 && KEY_Get(KEY_B, 1))
+	if (timer > 20 && timer < 46 && controller::GetTRG(controller::button::shikaku, s->m_PlayerInfo.number))
 	{
 		s->SetState(new SoccerState_PlayerControll_AttackCombo);
 	}
@@ -252,4 +252,59 @@ void SoccerState_PlayerControll_AttackFinish::Execute(SoccerPlayer* s)
 void SoccerState_PlayerControll_AttackFinish::Exit(SoccerPlayer* s)
 {
 	delete m_pMoveClass;
+}
+void SoccerState_PlayerControll_Shot::Enter(SoccerPlayer* s)
+{
+	class SoccerShotEvent :public CharacterShot::ShotEvent
+	{
+		SoccerPlayer* m_pSoccer;
+	public:
+		SoccerShotEvent(SoccerPlayer* pSoccer) :
+			m_pSoccer(pSoccer){}
+
+		void Update()
+		{
+			m_pSoccer->m_Renderer.Update(1);
+		}
+
+		void RunStart()
+		{
+			m_pSoccer->m_Renderer.SetMotion(SoccerPlayer::_ms_Shot);
+		}
+
+		void StandStart()
+		{
+			m_pSoccer->m_Renderer.SetMotion(SoccerPlayer::_ms_Stand);
+		}
+	};
+	CharacterShot::Params p;
+	timer = 0;
+
+	p.shot_frame = 20;
+
+	//m_pShotClass = new CharacterShot(s, p, new SoccerShotEvent(s));
+}
+void SoccerState_PlayerControll_Shot::Execute(SoccerPlayer* s)
+{
+	timer++;
+	if (timer == 15)
+	{
+		BallBase::Params param;
+
+		chr_func::GetFront(s, &param.move);
+		param.move *= 0.5f;
+		param.pos = s->m_Params.pos;
+		param.pParent = s;
+		param.type = BallBase::Type::_Usual;
+
+		new UsualBall(param, DamageBase::Type::_WeekDamage, 1);
+	}
+	if (timer >= 35)
+	{
+		s->SetState(new SoccerState_PlayerControll_Move);
+	}
+}
+void SoccerState_PlayerControll_Shot::Exit(SoccerPlayer* s)
+{
+	delete m_pShotClass;
 }
