@@ -45,10 +45,10 @@
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(DXSDK_DIR)include;$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(DXSDK_DIR)lib/x86;$(LibraryPath)</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(DXSDK_DIR)include;$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(DXSDK_DIR)lib/x86;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(DXSDK_DIR)include;$(ProjectDir)\library\bullet\src;$(ProjectDir)\library\effekseer\include;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(DXSDK_DIR)lib/x86;$(ProjectDir)\library\bullet\lib\Debug;$(ProjectDir)\library\effekseer\lib\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(DXSDK_DIR)include;$(ProjectDir)\library\bullet\src;$(ProjectDir)\library\effekseer\include;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(DXSDK_DIR)lib/x86;$(ProjectDir)\library\bullet\lib\Release;$(ProjectDir)\library\effekseer\lib\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <EmbedManifest>false</EmbedManifest>
@@ -69,6 +69,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <ForcedIncludeFiles>iextreme.h;debug/DebugFunction.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -94,6 +95,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>iextreme.h;debug/DebugFunction.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -130,17 +132,17 @@
     <ClCompile Include="source\Camera\CameraState.cpp" />
     <ClCompile Include="source\character\CharacterAttack.cpp" />
     <ClCompile Include="source\character\CharacterBase.cpp" />
+    <ClCompile Include="source\character\CharacterCounterClass.cpp" />
     <ClCompile Include="source\character\CharacterFunction.cpp" />
     <ClCompile Include="source\character\CharacterManager.cpp" />
     <ClCompile Include="source\character\CharacterMoveClass.cpp" />
     <ClCompile Include="source\character\CharacterRenderer.cpp" />
-    <ClCompile Include="source\character\CharacterShot.cpp" />
-    <ClCompile Include="source\character\Soccer\SoccerSliding.cpp" />
+    <ClCompile Include="source\character\CharacterSliding.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseAttackClose.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseCounterClass.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseCounterPoseClass.cpp" />
     <ClCompile Include="source\character\CharacterEvasionClass.cpp" />
-    <ClCompile Include="source\character\CharacterHitBallAttackClass.cpp" />
+    <ClCompile Include="source\character\CharacterShotAttackClass.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrossePlayer.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrossePlayerState.cpp" />
     <ClCompile Include="source\character\Soccer\SoccerPlayer.cpp" />
@@ -148,6 +150,7 @@
     <ClCompile Include="source\character\Tennis\TennisPlayer.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayerState.cpp" />
     <ClCompile Include="source\Collision\Collision.cpp" />
+    <ClCompile Include="source\Collision\MeshCollider.cpp" />
     <ClCompile Include="source\Damage\Damage.cpp" />
     <ClCompile Include="source\GameScene\sceneGamePlay.cpp" />
     <ClCompile Include="source\GameScene\sceneMain.cpp" />
@@ -156,10 +159,19 @@
     <ClCompile Include="source\IexSystem\Framework.cpp" />
     <ClCompile Include="source\IexSystem\System.cpp" />
     <ClCompile Include="source\IexSystem\WinMain.cpp" />
+    <ClCompile Include="source\Library\Bullet\BulletDebug.cpp" />
+    <ClCompile Include="source\Library\Bullet\BulletSystem.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">iextreme.h;debug/DebugFunction.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">iextreme.h;debug/DebugFunction.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="source\Library\Effekseer\EffekseerEffect.cpp" />
+    <ClCompile Include="source\Library\Effekseer\EffekseerEffectManager.cpp" />
+    <ClCompile Include="source\Library\Effekseer\EffekseerSystem.cpp" />
     <ClCompile Include="source\Render\MeshRenderer.cpp" />
     <ClCompile Include="source\Render\Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IEX\DebugDrawManager.h" />
     <ClInclude Include="IEX\iextreme.h" />
     <ClInclude Include="source\Ball\Ball.h" />
     <ClInclude Include="source\Ball\UsualBall.h" />
@@ -169,19 +181,17 @@
     <ClInclude Include="source\character\CharacterAttack.h" />
     <ClInclude Include="source\character\CharacterBase.h" />
     <ClInclude Include="source\character\CharacterCounterClass.h" />
-    <ClInclude Include="source\character\CharacterCounterPoseClass.h" />
     <ClInclude Include="source\character\CharacterFunction.h" />
     <ClInclude Include="source\character\CharacterManager.h" />
     <ClInclude Include="source\character\CharacterMoveClass.h" />
     <ClInclude Include="source\character\CharacterRenderer.h" />
-    <ClInclude Include="source\character\CharacterShot.h" />
-    <ClInclude Include="source\character\Soccer\SoccerSliding.h" />
+    <ClInclude Include="source\character\CharacterSliding.h" />
     <ClInclude Include="source\character\CharacterStateTemplate.h" />
     <ClInclude Include="source\character\Lacrosse\LacrosseAttackClose.h" />
     <ClInclude Include="source\character\Lacrosse\LacrosseCounterClass.h" />
     <ClInclude Include="source\character\Lacrosse\LacrosseCounterPoseClass.h" />
     <ClInclude Include="source\character\CharacterEvasionClass.h" />
-    <ClInclude Include="source\character\CharacterHitBallAttackClass.h" />
+    <ClInclude Include="source\character\CharacterShotAttackClass.h" />
     <ClInclude Include="source\character\Lacrosse\LacrossePlayer.h" />
     <ClInclude Include="source\character\Lacrosse\LacrossePlayerState.h" />
     <ClInclude Include="source\character\Soccer\SoccerPlayer.h" />
@@ -189,6 +199,7 @@
     <ClInclude Include="source\character\Tennis\TennisPlayer.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayerState.h" />
     <ClInclude Include="source\Collision\Collision.h" />
+    <ClInclude Include="source\Collision\MeshCollider.h" />
     <ClInclude Include="source\Damage\Damage.h" />
     <ClInclude Include="source\debug\DebugFunction.h" />
     <ClInclude Include="source\GameScene\SceneGamePlay.h" />
@@ -200,9 +211,17 @@
     <ClInclude Include="source\IexSystem\Framework.h" />
     <ClInclude Include="source\IexSystem\Scene.h" />
     <ClInclude Include="source\IexSystem\System.h" />
+    <ClInclude Include="source\Library\Bullet\BulletDebug.h" />
+    <ClInclude Include="source\Library\Bullet\BulletSystem.h" />
+    <ClInclude Include="source\Library\Effekseer\EffekseerEffect.h" />
+    <ClInclude Include="source\Library\Effekseer\EffekseerEffectManager.h" />
+    <ClInclude Include="source\Library\Effekseer\EffekseerSystem.h" />
     <ClInclude Include="source\Render\MeshRenderer.h" />
     <ClInclude Include="source\Render\Renderer.h" />
     <ClInclude Include="source\utillity\Collision.h" />
+    <ClInclude Include="source\utillity\NonCopyable.h" />
+    <ClInclude Include="source\utillity\SafeMethod.h" />
+    <ClInclude Include="source\utillity\Singleton.h" />
     <ClInclude Include="source\utillity\StateTemplate.h" />
   </ItemGroup>
   <ItemGroup>
