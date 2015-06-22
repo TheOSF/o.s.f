@@ -39,12 +39,17 @@ void EffekseerEffectManager::LoadEffect(EffectID id, const EFK_CHAR* file)
 	// チェック
 	MyAssert(
 		m_Effects.find(id) == m_Effects.end(), 
-		"ID[%d]には既に登録されています。",
+		"ID[%d]には既に登録されています。\n",
 		id
 		);
 	
 	// 読み込み
 	Effect* pEffect = Effect::Create(m_pManager, file);
+
+	MyAssertW(
+		pEffect != nullptr,
+		L"ファイル : %s の読み込みに失敗しました。\n", (const wchar_t*)file
+		);
 
 	// 登録
 	m_Effects.insert(
@@ -61,7 +66,7 @@ EffekseerEffect* EffekseerEffectManager::PlayEffect(EffectID id)
 	// チェック
 	MyAssert(
 		it != m_Effects.end(),
-		"ID[%d]にエフェクトが登録されていません。",
+		"ID[%d]にエフェクトが登録されていません。\n",
 		id
 		);
 

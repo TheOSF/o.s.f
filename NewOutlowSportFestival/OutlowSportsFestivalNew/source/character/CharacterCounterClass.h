@@ -59,7 +59,7 @@ public:
 	inline int GetLevel()const{ return m_NowLevel; }
 
 	// 溜めフラグセット
-	void SetPoseFlg(bool flg);
+	void SetPoseEndFlg();
 
 	// スティックの値セット
 	inline void SetStickValue(CrVector2 stickValue){ m_StickValue = stickValue; }
