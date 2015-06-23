@@ -10,6 +10,7 @@
 //***************************************
 //　移動
 //***************************************
+
 //　ステート開始
 void BaseballState_PlayerControll_Move::Enter(BaseballPlayer* b)
 {
@@ -101,10 +102,17 @@ void BaseballState_PlayerControll_Move::Execute(BaseballPlayer* b){
 	//　モデルのワールド変換行列を更新
 	chr_func::CreateTransMatrix(b, 0.05f, &b->m_Renderer.m_TransMatrix);
 
-	//　回避行動[×]
-	if (controller::GetTRG(controller::button::batu, b->m_PlayerInfo.number)){
-		b->SetState(new BaseballState_PlayerControll_Evasion());
-		return;
+	//　切り替え
+
+	SetBatterFlg(b);
+	//　実行パターン
+	if (batterflg){
+		//　バッター時
+		Batter(b);
+	}
+	else{
+		//　投手時
+		Pitcher(b);
 	}
 
 }
@@ -114,15 +122,32 @@ void BaseballState_PlayerControll_Move::Exit(BaseballPlayer* b){
 	delete m_pMoveClass;
 }
 
+//　バッター時
+void BaseballState_PlayerControll_Move::Batter(BaseballPlayer* b){
+	//　回避行動[×]
+	if (controller::GetTRG(controller::button::batu, b->m_PlayerInfo.number)){
+		b->SetState(new BaseballState_PlayerControll_Evasion(0.25f));
+		return;
+	}
+}
+
+//　投手時
+void  BaseballState_PlayerControll_Move::Pitcher(BaseballPlayer* b){
+	//　回避行動[×]
+	if (controller::GetTRG(controller::button::batu, b->m_PlayerInfo.number)){
+		b->SetState(new BaseballState_PlayerControll_Evasion(0.65f));
+		return;
+	}
+}
 //***************************************
 //　回避
 //***************************************
 
 //　コンストラクタ
-BaseballState_PlayerControll_Evasion::BaseballState_PlayerControll_Evasion():
+BaseballState_PlayerControll_Evasion::BaseballState_PlayerControll_Evasion(float speed) :
 m_pEvasionClass(nullptr)
 {
-
+	roolspeed = speed;
 }
 
 //　ステート開始
@@ -195,7 +220,7 @@ CharacterEvasion* BaseballState_PlayerControll_Evasion::CreateEvasionClass(Baseb
 	params.AllFrame = 35;         // 全35フレーム
 	params.MaxTurnRadian = PI / 4;    // 45°
 	params.MoveDownSpeed = 0.2f;      // 減速割合
-	params.MoveSpeed = 0.35f;    // 移動スピード
+	params.MoveSpeed = roolspeed;    // 移動スピード
 	params.NoDamageStartFrame = 3;          // 開始3フレームで無敵開始
 	params.NoDamageEndFrame = 20;       // 開始20フレームで無敵終了
 

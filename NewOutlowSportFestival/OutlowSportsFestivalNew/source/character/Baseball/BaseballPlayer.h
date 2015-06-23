@@ -28,6 +28,10 @@ namespace baseball_player{
 
 class BaseballPlayer :public CharacterBase
 {
+protected:
+	bool batterflg;//　(true:バッター,false:投手)
+private:
+	BaseballStateMachine*		m_pStateMachine;
 public:
 
 
@@ -39,9 +43,13 @@ public:
 	void SetState(BaseballState* state);
 	bool Update();
 	bool Msg(MsgType mt);
+public:
+	//　切り替え
+	void Change();
+public:
+	//　ゲッター
+	bool getBatterFlg(){ return batterflg; }
 
-private:
-	BaseballStateMachine*		m_pStateMachine;
 
 };
 #endif
