@@ -137,7 +137,8 @@ void TennisState_PlayerControll_Counter::Enter(TennisPlayer* t)
 void TennisState_PlayerControll_Counter::Execute(TennisPlayer* t)
 {
 	if (controller::GetLeave(controller::button::_R1, t->m_PlayerInfo.number))
-	{// [R1離す] でカウンター
+	{
+		// [R1離す] でカウンター
 		m_pCounter->SetPoseEndFlg();
 	}
 
