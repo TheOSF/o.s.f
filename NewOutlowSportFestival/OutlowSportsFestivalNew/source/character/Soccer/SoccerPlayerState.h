@@ -39,7 +39,9 @@ class SoccerState_PlayerControll_Attack :public SoccerState
 {
 private:
 	CharacterNearAttack*		m_pMoveClass;
-	int timer = 0;
+	CharacterNearAttack::Params p;
+	
+	int timer;
 public:
 	void Enter(SoccerPlayer* s);
 	void Execute(SoccerPlayer* s);
@@ -49,7 +51,8 @@ class SoccerState_PlayerControll_AttackCombo :public SoccerState
 {
 private:
 	CharacterNearAttack*		m_pMoveClass;
-	int timer = 0;
+	CharacterNearAttack::Params p;
+	int timer;
 public:
 	void Enter(SoccerPlayer* s);
 	void Execute(SoccerPlayer* s);
@@ -59,7 +62,8 @@ class SoccerState_PlayerControll_AttackFinish :public SoccerState
 {
 private:
 	CharacterNearAttack*		m_pMoveClass;
-	int timer = 0;
+	CharacterNearAttack::Params p;
+	int timer;
 public:
 	void Enter(SoccerPlayer* s);
 	void Execute(SoccerPlayer* s);

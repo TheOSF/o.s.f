@@ -90,12 +90,21 @@ void SoccerState_PlayerControll_Sliding::Exit(SoccerPlayer* s)
 }
 void SoccerState_PlayerControll_Attack::Enter(SoccerPlayer* s)
 {
-	class SoccerMoveEvent :public CharacterNearAttack::AttackEvent
+	
+	class SoccerAttackEvent :public CharacterNearAttack::AttackEvent
 	{
 		SoccerPlayer* m_pSoccer;
+		DamageShpere m_damage;
 	public:
-		SoccerMoveEvent(SoccerPlayer* pSoccer) :
-			m_pSoccer(pSoccer){}
+		SoccerAttackEvent(SoccerPlayer* pSoccer) :
+			m_pSoccer(pSoccer){
+
+			m_damage.pParent = m_pSoccer;
+			m_damage.pBall = NULL;
+			m_damage.type = DamageBase::_WeekDamage;
+			m_damage.Value = 20.0f;
+			m_damage.m_Enable = false;
+		}
 
 		void Update()
 		{
@@ -113,31 +122,39 @@ void SoccerState_PlayerControll_Attack::Enter(SoccerPlayer* s)
 		}
 		void Assault()
 		{
-			
+			m_damage.m_Enable = true;
 		}
 	};
-	CharacterNearAttack::Params p;
+	
 
 
 	p.TurnSpeed = 0.1f;
-	p.AttackFrame = 5;
+	p.AttackFrame = 15;
 	p.EndFrame = 35;
 	p.damage = 20;
 	p.speed = 0.2f;
 
-	m_pMoveClass = new CharacterNearAttack(s, p, new SoccerMoveEvent(s));
+	timer = 0;
+
+	m_pMoveClass = new CharacterNearAttack(s, p, new SoccerAttackEvent(s));
 }
 void SoccerState_PlayerControll_Attack::Execute(SoccerPlayer* s)
 {
 	Vector2 st = controller::GetStickValue(controller::stick::left, s->m_PlayerInfo.number);
+	timer++;
 
-	m_pMoveClass->Update();
-	if (m_pMoveClass->is_End())
+	m_pMoveClass->SetStickValue(st);
+	
+	if (!m_pMoveClass->Update())
 	{
 		s->SetState(new SoccerState_PlayerControll_Move);
 	}
+	if (timer>p.AttackFrame && timer < p.EndFrame && controller::GetTRG(controller::button::shikaku, s->m_PlayerInfo.number))
+	{
+		s->SetState(new SoccerState_PlayerControll_AttackCombo);
+	}
 	chr_func::CreateTransMatrix(s, 0.05f, &s->m_Renderer.m_TransMatrix);
-
+	
 }
 void SoccerState_PlayerControll_Attack::Exit(SoccerPlayer* s)
 {
@@ -145,11 +162,11 @@ void SoccerState_PlayerControll_Attack::Exit(SoccerPlayer* s)
 }
 void SoccerState_PlayerControll_AttackCombo::Enter(SoccerPlayer* s)
 {
-	class SoccerMoveEvent :public CharacterNearAttack::AttackEvent
+	class SoccerAttackEvent :public CharacterNearAttack::AttackEvent
 	{
 		SoccerPlayer* m_pSoccer;
 	public:
-		SoccerMoveEvent(SoccerPlayer* pSoccer) :
+		SoccerAttackEvent(SoccerPlayer* pSoccer) :
 			m_pSoccer(pSoccer){}
 
 		void Update()
@@ -171,31 +188,34 @@ void SoccerState_PlayerControll_AttackCombo::Enter(SoccerPlayer* s)
 
 		}
 	};
-	CharacterNearAttack::Params p;
-	timer = 0;
 
 	p.TurnSpeed = 0.1f;
+	p.AttackFrame = 15;
+	p.EndFrame = 35;
+	p.damage = 20;
+	p.speed = 0.2f;
 
-	m_pMoveClass = new CharacterNearAttack(s, p, new SoccerMoveEvent(s));
+	timer = 0;
+
+	m_pMoveClass = new CharacterNearAttack(s, p, new SoccerAttackEvent(s));
 }
 void SoccerState_PlayerControll_AttackCombo::Execute(SoccerPlayer* s)
 {
-	timer++;
 	Vector2 st = controller::GetStickValue(controller::stick::left, s->m_PlayerInfo.number);
+	timer++;
 
 	m_pMoveClass->SetStickValue(st);
-	m_pMoveClass->Update();
-
-	chr_func::CreateTransMatrix(s, 0.05f, &s->m_Renderer.m_TransMatrix);
-	if (timer > 20 && timer < 46 && controller::GetTRG(controller::button::shikaku,s->m_PlayerInfo.number))
-	{
-		s->SetState(new SoccerState_PlayerControll_AttackFinish);
-	}
-	else if (timer > 46)
+	if (!m_pMoveClass->Update())
 	{
 		s->SetState(new SoccerState_PlayerControll_Move);
 	}
+	if (timer>p.AttackFrame && timer < p.EndFrame && controller::GetTRG(controller::button::shikaku, s->m_PlayerInfo.number))
+	{
+		s->SetState(new SoccerState_PlayerControll_AttackFinish);
+	}
 
+	chr_func::CreateTransMatrix(s, 0.05f, &s->m_Renderer.m_TransMatrix);
+	
 }
 void SoccerState_PlayerControll_AttackCombo::Exit(SoccerPlayer* s)
 {
@@ -229,7 +249,13 @@ void SoccerState_PlayerControll_AttackFinish::Enter(SoccerPlayer* s)
 
 		}
 	};
-	CharacterNearAttack::Params p;
+
+	p.TurnSpeed = 0.1f;
+	p.AttackFrame = 15;
+	p.EndFrame = 35;
+	p.damage = 20;
+	p.speed = 0.2f;
+
 	timer = 0;
 
 	p.TurnSpeed = 0.1f;
@@ -238,18 +264,17 @@ void SoccerState_PlayerControll_AttackFinish::Enter(SoccerPlayer* s)
 }
 void SoccerState_PlayerControll_AttackFinish::Execute(SoccerPlayer* s)
 {
-	timer++;
+	
 	Vector2 st = controller::GetStickValue(controller::stick::left, s->m_PlayerInfo.number);
+	timer++;
 
 	m_pMoveClass->SetStickValue(st);
-	//chr_func::AddMoveFront(s, 0.4f, 0.5f);
-	m_pMoveClass->Update();
-
-	chr_func::CreateTransMatrix(s, 0.05f, &s->m_Renderer.m_TransMatrix);
-	if (timer > 50)
+	if (!m_pMoveClass->Update())
 	{
 		s->SetState(new SoccerState_PlayerControll_Move);
 	}
+
+	chr_func::CreateTransMatrix(s, 0.05f, &s->m_Renderer.m_TransMatrix);
 
 }
 void SoccerState_PlayerControll_AttackFinish::Exit(SoccerPlayer* s)
@@ -305,7 +330,11 @@ void SoccerState_PlayerControll_Shot::Enter(SoccerPlayer* s)
 void SoccerState_PlayerControll_Shot::Execute(SoccerPlayer* s)
 {
 
-	m_pShotClass->Update();
+	
+	if (!m_pShotClass->Update())
+	{
+		s->SetState(new SoccerState_PlayerControll_Move);
+	}
 	chr_func::CreateTransMatrix(s, 0.05f, &s->m_Renderer.m_TransMatrix);
 }
 void SoccerState_PlayerControll_Shot::Exit(SoccerPlayer* s)
