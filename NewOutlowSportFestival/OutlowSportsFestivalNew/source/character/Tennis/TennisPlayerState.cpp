@@ -136,10 +136,13 @@ void TennisState_PlayerControll_Counter::Enter(TennisPlayer* t)
 // ステート実行
 void TennisState_PlayerControll_Counter::Execute(TennisPlayer* t)
 {
-	if (controller::GetLeave(controller::button::_R1, t->m_PlayerInfo.number))
-	{// [R1離す] でカウンター
-		m_pCounter->SetPoseEndFlg();
-	}
+	// ボタン更新
+	controller::button::button_state button_state;
+	button_state = controller::GetButtonState(
+		controller::button::_R1, 
+		t->m_PlayerInfo.number
+		);
+	m_pCounter->SetButtonState(button_state);
 
 	//更新
 	if (m_pCounter->Update() == false)
@@ -183,15 +186,21 @@ CharacterCounter* TennisState_PlayerControll_Counter::CreateCounterClass(TennisP
 		}
 
 		// 構え開始
-		void CounterPoseStart()override
+		void PoseStart()override
 		{
 			m_pTennis->m_Renderer.SetMotion(TennisPlayer::_mt_CounterPose);
 		}
 
 		// 構え終了
-		void CounterPoseEnd()override
+		void PoseEnd()override
 		{// カウンター
 			m_pTennis->m_Renderer.SetMotion(TennisPlayer::_mt_Counter);
+		}
+
+		// カウンターできるボールが現れた
+		void BallEnter()override
+		{
+			MyDebugString("CounterBall is Enter.\n");
 		}
 
 		// レベルアップ
@@ -202,16 +211,22 @@ CharacterCounter* TennisState_PlayerControll_Counter::CreateCounterClass(TennisP
 		}
 
 		// カウンター開始
-		void CounterStart(int level)override
+		void SwingStart()override
 		{
 			m_pTennis->m_Renderer.SetMotion(TennisPlayer::_mt_Counter);
 		}
 
 		// カウンター終了
-		void CounterEnd()override
+		void SwingEnd()override
 		{// 通常移動へ
 			m_pTennis->m_Renderer.SetMotion(TennisPlayer::_mt_Stand);
 			m_pTennis->SetState(new TennisState_PlayerControll_Move());
+		}
+
+		// 打ち返したとき
+		void HitBall(bool is_just)override
+		{
+			MyDebugString("Hit Ball.\n");
 		}
 	};
 
@@ -219,9 +234,9 @@ CharacterCounter* TennisState_PlayerControll_Counter::CreateCounterClass(TennisP
 	CharacterCounter::CounterParams params;
 	params.MaxPoseFrame = 60;
 	params.LevelUpFrame = 45;
-	params.MoveDownSpeed = 0.2f;
-	params.CounterTotalFrame = 30;
+	params.SwingTotalFrame = 30;
 	params.CounterMoveFrame = 5;
+	params.MoveDownSpeed = 0.2f;
 	params.CanCounterArea = 10.0f;
 
 	return new CharacterCounter(

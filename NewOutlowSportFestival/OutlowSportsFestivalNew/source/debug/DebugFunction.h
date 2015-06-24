@@ -88,7 +88,7 @@ if (!(expr)){\
 	\
 	wchar_t t[256], ti[600]; \
 	swprintf_s<256>(t, str, __VA_ARGS__); \
-	swprintf_s<600>(ti, L"　%s　の行番号　%d　でエラーが発生しました \n %s \n式(%s) \n実行を続けますか？", __FILEW__, __LINE__, t, #expr); \
+	swprintf_s<600>(ti, L"　%s　の行番号　%d　でエラーが発生しました \n %s \n式(%s) \n実行を続けますか？", __FILEW__, __LINE__, t, L#expr); \
 	MessageBeep(MB_OK); \
 	MessageBoxW(0, ti, L"MyAssertError!!!", MB_YESNO);\
 }\

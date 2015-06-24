@@ -65,8 +65,8 @@ bool sceneGamePlay::Initialize()
 		pl.player_type = PlayerType::_Player;
 		pl.strong_type = StrongType::__ErrorType;
 
-		BaseballPlayer* bp = new BaseballPlayer(pl);
-		bp->SetState(new BaseballState_PlayerControll_Move());
+		TennisPlayer* bp = new TennisPlayer(pl);
+		bp->SetState(new TennisState_PlayerControll_Move());
 	}
 
 
