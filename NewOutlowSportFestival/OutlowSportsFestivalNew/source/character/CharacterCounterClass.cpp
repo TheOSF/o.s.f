@@ -3,6 +3,8 @@
 #include "CharacterBase.h"
 #include "CharacterFunction.h"
 
+#include "CharacterMoveClass.h"
+
 #include "../Ball/Ball.h"
 
 
@@ -12,214 +14,254 @@
 
 // コンストラクタ
 CharacterCounter::CharacterCounter(
-	const int                       maxLevel,           // 最大レベル
-	const CounterParams& counterParams, // カウンターパラメータ
-	CharacterBase*            pCharacter,        // 動かしたいキャラクター
-	Event*                          pEvent               // カウンターイベント
+	CharacterBase*                             pParent,                          // 動かしたいキャラクター
+	const CounterParams&                  counterParams,               // カウンターパラメータ
+	CounterEvent*                               pCounterEvent                // カウンターイベント
 	) :
-	m_ButtonState(controller::button::bs_up),
-	m_StickValue(0, 0),
-	m_NowLevel(0),
-	m_Step(CounterStep::cs_pose),
 	m_CounterParams(counterParams),
-	m_MaxLevel(maxLevel),
-	m_pCharacter(pCharacter),
-	m_pEvent(pEvent),
-	m_LevelUpTimer(0),
-	m_MoveTimer(0),
-	m_PoseTimer(0),
-	m_SwingTimer(0),
-	m_pCounterBallOwner(nullptr),
+	m_StickValue(0, 0),
+	m_ButtonState(controller::button::bs_down),
+	m_NowLevel(0),
+	m_Step(_cs_pose),
+	m_IsJust(false),
+	m_Timer({ 0 }),
+	m_pParent(pParent),
+	m_pCounterEvent(pCounterEvent),
 	m_pCounterBall(nullptr),
-	m_CounterPos(pCharacter->m_Params.pos)
+	m_pCounterBallParent(nullptr),
+	m_CounterPos(m_pParent->m_Params.pos)
 {
-	
+
 }
 
 
 // デストラクタ
 CharacterCounter::~CharacterCounter()
 {
-	delete m_pEvent;
+	delete m_pCounterEvent;
 }
 
 
 // 更新
-bool CharacterCounter::Update()
+void CharacterCounter::Update()
 {
-	// 通常移動更新
-	UsualMoveUpdate();
+	// 移動更新
+	UpdateUsualMove();
 
 	// 更新
-	m_pEvent->Update();
+	m_pCounterEvent->Update();
 
-	if (m_Step & cs_pose)
-	{// 構え中
-
+	// 構え中
+	if (m_Step & _cs_pose)
+	{
 		// カウンターできるボールを探す
-		this->SerchCounterBall();
+		SerchCounterBall();
 
+		UpdateLevelUp();
 		UpdatePose();
 	}
 
-
-	if (m_Step & cs_move_to_ball)
-	{// 移動中
-		UpdateMove();
+	// ボールに向かって移動中
+	if (m_Step & _cs_move_to_ball)
+	{
+		UpdateMoveToBall();
 	}
 
-
-	if (m_Step & cs_swing)
-	{// スイング中
+	// スイング中
+	if (m_Step & _cs_swing)
+	{
 		UpdateSwing();
 	}
 
-	return true;
 }
 
 
 // レベルアップの更新
 void CharacterCounter::UpdateLevelUp()
 {
-	if ((m_NowLevel < m_MaxLevel) &&
-		(m_Step & (cs_pose | cs_move_to_ball)))
+	if (m_NowLevel < m_CounterParams.MaxCounterLevel)
 	{
-		if (m_LevelUpTimer == m_CounterParams.LevelUpFrame)
-		{// レベルアップ
-			m_LevelUpTimer = 0;
+		if (m_Timer.LevelUp == m_CounterParams.LevelUpFrame)
+		{
+			m_Timer.LevelUp = 0;
 			m_NowLevel++;
-			m_pEvent->LevelUp(m_NowLevel);
+			m_Timer.Pose = 0;
+
+			// レベルアップイベント
+			m_pCounterEvent->LevelUp(m_NowLevel);
 		}
 	}
+
+	// タイマー更新
+	m_Timer.LevelUp++;
 }
 
 
 // 構え中の更新
 void CharacterCounter::UpdatePose()
 {
-	if (m_PoseTimer == 0)
-	{// 構え開始
-		m_pEvent->PoseStart();
-	}
+	// 構え終了?
+	bool is_pose_end = false;
 
-	if (((m_NowLevel == m_MaxLevel) && m_PoseTimer == m_CounterParams.MaxPoseFrame) ||
-		(m_ButtonState == controller::button::bs_up))
-	{// 構え終了
-		m_Step &= ~cs_pose;
-		m_pEvent->PoseEnd();
+	if (m_Timer.Pose == 0)
+	{
+		if (m_NowLevel == 0)
+		{
+			// 構え開始イベント
+			m_pCounterEvent->PoseStart();
+		}
 	}
 
 	if (m_ButtonState == controller::button::bs_up)
-	{// 構え終了
-		m_Step &= ~cs_pose;
-		m_pEvent->PoseEnd();
-
-		// ボタンが離されたらスイング
-		m_Step |= cs_swing;
+	{
+		is_pose_end = true;
 	}
 
-	// タイマー更新
-	m_PoseTimer++;
+	if (m_NowLevel == m_CounterParams.MaxCounterLevel)
+	{
+		if (m_Timer.Pose == m_CounterParams.MaxPoseFrame)
+		{
+			is_pose_end = true;
+		}
+	}
+
+	if (is_pose_end == true)
+	{
+		// 構え終了
+		m_Step &= ~_cs_pose;
+		m_Step |= _cs_move_to_ball;
+		m_pCounterEvent->PoseEnd();
+	}
+	else
+	{
+		// タイマー更新
+		m_Timer.Pose++;
+	}
+
+	
 }
 
 
 // 移動中の更新
-void CharacterCounter::UpdateMove()
+void CharacterCounter::UpdateUsualMove()
 {
-	if (m_MoveTimer == m_CounterParams.CounterMoveFrame)
-	{// 移動終了
-		m_Step &= ~cs_move_to_ball;
+	chr_func::XZMoveDown(m_pParent, m_CounterParams.MoveDownSpeed);
 
-		// ボールを打つ
-		this->HitBall();
-
-		return;
-	}
-
-	// 移動
-	MoveToBall();
-
-	// タイマー更新
-	m_MoveTimer++;
+	chr_func::PositionUpdate(m_pParent);
 }
 
 
 // スイング中の更新
 void CharacterCounter::UpdateSwing()
 {
-	if (m_SwingTimer == 0)
-	{// スイング開始
-
-		m_pEvent->SwingStart();
+	if (m_Timer.Swing == 0)
+	{
+		// スイング開始
+		m_pCounterEvent->SwingStart();
 	}
 
 
-	if (m_SwingTimer == m_CounterParams.SwingTotalFrame)
-	{// スイング終了
-
-		m_pEvent->SwingEnd();
+	if (m_Timer.Swing == m_CounterParams.SwingTotalFrame)
+	{
+		// スイング終了
+		m_pCounterEvent->SwingEnd();
 	}
 
 	// タイマー更新
-	m_SwingTimer++;
+	m_Timer.Swing++;
 }
 
 
-// 通常の移動更新
-void CharacterCounter::UsualMoveUpdate()
+// ボールに向かって移動する
+void CharacterCounter::UpdateMoveToBall()
 {
-	// 減速
-	chr_func::XZMoveDown(m_pCharacter, m_CounterParams.MoveDownSpeed);
-
-	// 座標更新
-	chr_func::PositionUpdate(m_pCharacter);
-
-}
-
-
-// ボールに向かって動く
-void CharacterCounter::MoveToBall()
-{
-	if (m_pCounterBall)
+	// ボールに向かって移動
+	if (IsCanCounter() == true)
 	{
-		float t = 1.0f / m_CounterParams.CounterMoveFrame;
+		Vector3& pos = m_pParent->m_Params.pos;
+		float t = 1.0f / m_CounterParams.MoveToBallFrame;
 
-		Vector3 &pos = m_pCharacter->m_Params.pos;
-
-		pos = pos * (1.0f - t) + m_CounterPos*t;
+		pos = pos*(1.0f - t) + m_CounterPos*t;
 	}
+
+	if (m_Timer.MoveToBall == m_CounterParams.MoveToBallFrame)
+	{
+		// 移動終了
+		m_Step &= ~_cs_move_to_ball;
+		m_Step |= _cs_swing;
+
+		// 打ち返す
+		HitBall();
+	}
+
+	// タイマー更新
+	m_Timer.MoveToBall++;
 }
 
 
-// ボールを打ち返す
-void CharacterCounter::HitBall()
+// カウンターできるかどうか
+bool CharacterCounter::IsCanCounter()
 {
+	// if 文のネストが...
+	bool is_ball_params_ok = false;
+	m_IsJust = false;
+
 	if (m_pCounterBall &&
 		BallBase::isCanCounter(m_pCounterBall) == true)
 	{// カウンターできるボールかどうか
 
-		if (m_pCounterBallOwner &&
-			m_pCounterBallOwner != m_pCharacter &&
-			m_pCounterBallOwner == m_pCounterBall->m_Params.pParent
+		if (m_pCounterBallParent &&
+			m_pCounterBallParent != m_pParent &&
+			m_pCounterBallParent == m_pCounterBall->m_Params.pParent
 			)
 		{// 打ったのが自分じゃない かつ 移動中にほかの人にカウンターされていない
-
-			// とりあえずボール打った人のところへ返す
-			Vector3 vec = m_pCounterBallOwner->m_Params.pos - m_pCharacter->m_Params.pos;
-
-			// 移動速度設定
-			vec.Normalize();
-			vec *= m_pCounterBall->m_Params.move.Length();
-
-			// 移動方向転換
-			m_pCounterBall->m_Params.move = vec;
-
-			// 打った人変更
-			m_pCounterBall->m_Params.pParent = m_pCharacter;
-
-			// 打ち返しイベント
-			m_pEvent->HitBall(false);
+			is_ball_params_ok = true;
 		}
+	}
+
+	if (is_ball_params_ok == true)
+	{
+		Vector3 vec = m_pParent->m_Params.pos - m_pCounterBall->m_Params.pos;
+		float length = vec.Length();
+		vec.Normalize();
+
+		float dot = Vector3Dot(vec, m_pCounterBall->m_Params.move);
+
+		if (dot > 0.0f)
+		{
+			if (length >= m_CounterParams.DamageReceiveArea)
+			{
+				// ジャストかどうか
+				m_IsJust = length <= m_CounterParams.JustCounterArea;
+
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+// ボールを打ち返す
+void CharacterCounter::HitBall()
+{
+	if (IsCanCounter() == true)
+	{
+		// とりあえずボール打った人のところへ返す
+		Vector3 vec = m_pCounterBallParent->m_Params.pos - m_pParent->m_Params.pos;
+
+		// 移動速度設定
+		vec.Normalize();
+		vec *= m_pCounterBall->m_Params.move.Length();
+
+		// 移動方向転換
+		m_pCounterBall->m_Params.move = vec;
+
+		// 打った人変更
+		m_pCounterBall->m_Params.pParent = m_pParent;
+
+		// 打ち返しイベント
+		m_pCounterEvent->HitBall(m_IsJust);
 	}
 }
 
@@ -229,23 +271,28 @@ bool CharacterCounter::SerchCounterBall()
 {
 	bool result =  DefBallMgr.GetCounterBall(
 		&m_pCounterBall,
-		m_pCharacter->m_Params.pos,
+		m_pParent->m_Params.pos,
 		&m_CounterPos,
-		m_CounterParams.CanCounterArea,
-		m_CounterParams.CounterMoveFrame
+		m_CounterParams.NormalCounterArea,
+		m_CounterParams.MoveToBallFrame
 		);
 
 	if (result == false)
 	{
-		m_pCounterBallOwner = nullptr;
+		// 見つからなかった
+		m_pCounterBallParent = nullptr;
 		m_pCounterBall = nullptr;
-		m_CounterPos = m_pCharacter->m_Params.pos;
+		m_CounterPos = m_pParent->m_Params.pos;
 		return false;
 	}
 
-	m_Step |= cs_move_to_ball;
-	m_pCounterBallOwner = m_pCounterBall->m_Params.pParent;
-	m_pEvent->BallEnter();
+	if (~m_Step & _cs_move_to_ball)
+	{
+		m_Step |= _cs_move_to_ball;
+		m_pCounterBallParent = m_pCounterBall->m_Params.pParent;
+		m_pCounterEvent->BallEnter();
+	}
+	
 	return true;
 }
 

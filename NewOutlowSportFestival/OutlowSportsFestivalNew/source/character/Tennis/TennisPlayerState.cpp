@@ -111,7 +111,7 @@ void TennisState_PlayerControll_Move::Execute(TennisPlayer* t)
 	}
 
 	if (controller::GetTRG(controller::button::_R1, t->m_PlayerInfo.number))
-	{// [R1] で [カウンター構え]
+	{// [R1] で [カウンター]
 		t->SetState(new TennisState_PlayerControll_Counter());
 	}
 }
@@ -120,6 +120,8 @@ void TennisState_PlayerControll_Move::Exit(TennisPlayer* t)
 {
 	delete m_pMoveClass;
 }
+
+
 
 //***************************************************
 //		プレイヤー操作の カウンタークラス
@@ -138,6 +140,7 @@ void TennisState_PlayerControll_Counter::Execute(TennisPlayer* t)
 {
 	// ボタン更新
 	controller::button::button_state button_state;
+
 	button_state = controller::GetButtonState(
 		controller::button::_R1, 
 		t->m_PlayerInfo.number
@@ -145,10 +148,10 @@ void TennisState_PlayerControll_Counter::Execute(TennisPlayer* t)
 	m_pCounter->SetButtonState(button_state);
 
 	//更新
-	if (m_pCounter->Update() == false)
-	{
-		return;
-	}
+	m_pCounter->Update();
+
+	//モデルのワールド変換行列を更新
+	chr_func::CreateTransMatrix(t, 0.05f, &t->m_Renderer.m_TransMatrix);
 }
 
 
@@ -162,7 +165,7 @@ void TennisState_PlayerControll_Counter::Exit(TennisPlayer* t)
 // カウンター構えクラス作成
 CharacterCounter* TennisState_PlayerControll_Counter::CreateCounterClass(TennisPlayer* t)
 {
-	class CounterEvent : public CharacterCounter::Event
+	class CounterEvent : public CharacterCounter::CounterEvent
 	{
 		TennisPlayer* m_pTennis;
 		int m_CounterLevel;
@@ -177,12 +180,6 @@ CharacterCounter* TennisState_PlayerControll_Counter::CreateCounterClass(TennisP
 		{
 			// モデル更新
 			m_pTennis->m_Renderer.Update(1);
-
-			// 転送行列更新
-			chr_func::CreateTransMatrix(
-				m_pTennis,
-				0.05f,
-				&m_pTennis->m_Renderer.m_TransMatrix);
 		}
 
 		// 構え開始
@@ -200,7 +197,7 @@ CharacterCounter* TennisState_PlayerControll_Counter::CreateCounterClass(TennisP
 		// カウンターできるボールが現れた
 		void BallEnter()override
 		{
-			MyDebugString("CounterBall is Enter.\n");
+			//MyDebugString("CounterBall is Enter.\n");
 		}
 
 		// レベルアップ
@@ -226,23 +223,59 @@ CharacterCounter* TennisState_PlayerControll_Counter::CreateCounterClass(TennisP
 		// 打ち返したとき
 		void HitBall(bool is_just)override
 		{
-			MyDebugString("Hit Ball.\n");
+			//MyDebugString("Hit Ball.\n");
 		}
 	};
 
 	// パラメータ設定
 	CharacterCounter::CounterParams params;
+	params.MaxCounterLevel = 3;
 	params.MaxPoseFrame = 60;
 	params.LevelUpFrame = 45;
-	params.SwingTotalFrame = 30;
-	params.CounterMoveFrame = 5;
+	params.SwingTotalFrame = 15;
+	params.MoveToBallFrame = 2;
+	params.NormalCounterArea = 10.0f;
+	params.JustCounterArea = 5.0f;
+	params.DamageReceiveArea = 0.5f;
 	params.MoveDownSpeed = 0.2f;
-	params.CanCounterArea = 10.0f;
+
+
+	//ダメージイベントクラスの作成
+	class TennisDamageHitEvent :public DamageManager::HitEventBase
+	{
+		TennisPlayer* m_pTennis;
+	public:
+		TennisDamageHitEvent(TennisPlayer* pTennis) :
+			m_pTennis(pTennis){}
+
+		//当たった時にそのダメージの種類から、それぞれのステートに派生させる
+		bool Hit(DamageBase* pDmg)
+		{
+			bool ret = true;
+
+			switch (pDmg->type)
+			{
+			case DamageBase::Type::_WeekDamage:
+				//m_pTennis->SetState();	ステートができていないため
+				break;
+			case DamageBase::Type::_VanishDamage:
+				//m_pTennis->SetState();
+				break;
+			case DamageBase::Type::_UpDamage:
+				//m_pTennis->SetState();
+				break;
+			default:
+				ret = false;
+				break;
+			}
+
+			return ret;
+		}
+	};
 
 	return new CharacterCounter(
-		3,
-		params,
 		t,
+		params,
 		new CounterEvent(t)
 		);
 }
