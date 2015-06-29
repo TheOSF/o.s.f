@@ -57,7 +57,7 @@ bool sceneGamePlay::Initialize()
 	pStage = new iexMesh("DATA\\STAGE\\Stage.IMO");
 
 	//ÉLÉÉÉâÉNÉ^çÏê¨
-	{
+	if(0){
 		CharacterBase::PlayerInfo pl;
 
 		pl.chr_type = CharacterType::_Baseball;
@@ -74,6 +74,17 @@ bool sceneGamePlay::Initialize()
 		CharacterBase::PlayerInfo pl;
 
 		pl.chr_type = CharacterType::_Tennis;
+		pl.number = (PlayerNum::Value)0;
+		pl.player_type = PlayerType::_Player;
+		pl.strong_type = StrongType::__ErrorType;
+
+		TennisPlayer* tp = new TennisPlayer(pl);
+		tp->SetState(new TennisState_PlayerControll_Move());
+	}
+	{
+		CharacterBase::PlayerInfo pl;
+
+		pl.chr_type = CharacterType::_Tennis;
 		pl.number = (PlayerNum::Value)1;
 		pl.player_type = PlayerType::_Player;
 		pl.strong_type = StrongType::__ErrorType;
@@ -83,7 +94,8 @@ bool sceneGamePlay::Initialize()
 		tp->m_Params.pos.x += 40;
 	}
 
-	{ // Effekseer
+	{
+		// Effekseer
 		pEffekseerSystem = new EffekseerSystem(iexSystem::Device);
 		pEffekseerEffectManager = pEffekseerSystem->CreateManager();
 
@@ -141,7 +153,7 @@ bool sceneGamePlay::Initialize()
 			);
 
 
-		//// è∞
+		// è∞
 		DefBulletSystem.AddRigidBox(
 			0.0f,
 			RigidBody::ct_static,
