@@ -145,6 +145,7 @@
     <ClCompile Include="source\character\CharacterShotAttackClass.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrossePlayer.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrossePlayerState.cpp" />
+    <ClCompile Include="source\character\Soccer\SoccerDash.cpp" />
     <ClCompile Include="source\character\Soccer\SoccerPlayer.cpp" />
     <ClCompile Include="source\character\Soccer\SoccerPlayerState.cpp" />
     <ClCompile Include="source\character\Soccer\SoccerSliding.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="source\character\CharacterShotAttackClass.h" />
     <ClInclude Include="source\character\Lacrosse\LacrossePlayer.h" />
     <ClInclude Include="source\character\Lacrosse\LacrossePlayerState.h" />
+    <ClInclude Include="source\character\Soccer\SoccerDash.h" />
     <ClInclude Include="source\character\Soccer\SoccerPlayer.h" />
     <ClInclude Include="source\character\Soccer\SoccerPlayerState.h" />
     <ClInclude Include="source\character\Soccer\SoccerSliding.h" />

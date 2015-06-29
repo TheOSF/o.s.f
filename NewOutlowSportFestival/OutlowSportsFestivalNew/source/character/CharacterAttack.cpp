@@ -28,6 +28,21 @@ bool CharacterNearAttack::Update()
 	{
 		// 攻撃開始
 		m_pAttackEvent->AttackStart();
+
+		// 移動
+		chr_func::AddMoveFront(
+			m_pCharacter,
+			m_Params.speed,
+			m_Params.speed
+			);
+
+		// 移動方向補正
+		chr_func::AddXZMove(
+			m_pCharacter,
+			m_StickValue.x,
+			m_StickValue.y,
+			m_Params.speed
+			);
 		// 向き補正
 		chr_func::AngleControll(
 			m_pCharacter,
@@ -64,13 +79,13 @@ void CharacterNearAttack::SetStickValue(CrVector2 StickValue)
 {
 	m_StickValue = StickValue;
 }
-bool CharacterNearAttack::is_End()
+// コンボできるかどうか
+bool CharacterNearAttack::CanDoCombo()const
 {
-
-	if (m_timer > 35){
-		m_timer = 0;
-		return true;
-	}
-	else
-		return false;
+	return (m_timer >= m_Params.CanDoComboFrame);
+}
+// コンボ実行できるかどうか
+bool CharacterNearAttack::CanGoNextCombo()const
+{
+	return (m_timer >= m_Params.GoNextComboFrame);
 }

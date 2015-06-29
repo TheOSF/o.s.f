@@ -21,7 +21,8 @@ public:
 		float speed;        //スピード(残存)
 		float damage;       //ダメージ
 		float TurnSpeed;	//角度変化スピード
-		//int   NextMotion;
+		int    CanDoComboFrame;       // 次のコンボ受付フレーム
+		int    GoNextComboFrame;      // コンボを実行するフレーム
 	};
 
 	class AttackEvent
@@ -42,6 +43,11 @@ public:
 	~CharacterNearAttack();
 
 	bool Update();	//更新
+	// コンボできるかどうか
+	bool CanDoCombo()const;
+
+	// コンボ実行できるかどうか
+	bool CanGoNextCombo()const;
 	bool is_End();	//更新
 	void SetStickValue(CrVector2 StickValue);
 private:

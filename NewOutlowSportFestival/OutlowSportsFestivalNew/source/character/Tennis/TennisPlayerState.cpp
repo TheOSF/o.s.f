@@ -209,7 +209,8 @@ CharacterCounter* TennisState_PlayerControll_Counter::CreateCounterClass(TennisP
 
 		// カウンター終了
 		void CounterEnd()override
-		{// 通常移動へ
+		{
+			// 通常移動へ
 			m_pTennis->m_Renderer.SetMotion(TennisPlayer::_mt_Stand);
 			m_pTennis->SetState(new TennisState_PlayerControll_Move());
 		}

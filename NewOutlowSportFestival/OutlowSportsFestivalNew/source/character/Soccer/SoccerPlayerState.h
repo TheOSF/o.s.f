@@ -5,8 +5,10 @@
 #include "../../Ball/UsualBall.h"
 #include "../CharacterMoveClass.h"
 #include "SoccerSliding.h"
+#include "SoccerDash.h"
 #include "../CharacterAttack.h"
 #include "../CharacterShotAttackClass.h"
+#include "../CharacterCounterClass.h"
 
 
 //****************************************************
@@ -69,10 +71,33 @@ public:
 	void Execute(SoccerPlayer* s);
 	void Exit(SoccerPlayer* s);
 };
+//プレイヤー操作の射撃クラス
 class SoccerState_PlayerControll_Shot :public SoccerState
 {
 private:
 	CharacterShotAttack*		m_pShotClass;
+public:
+	void Enter(SoccerPlayer* s);
+	void Execute(SoccerPlayer* s);
+	void Exit(SoccerPlayer* s);
+};
+//プレイヤー操作のカウンタークラス
+class SoccerState_PlayerControll_Counter : public SoccerState
+{
+private:
+	CharacterCounter* CreateCounterClass(SoccerPlayer* t);
+	CharacterCounter*		m_pCounterClass;
+public:
+	void Enter(SoccerPlayer* s);
+	void Execute(SoccerPlayer* s);
+	void Exit(SoccerPlayer* s);
+
+};
+//プレイヤー操作の固有技(ダッシュ)クラス
+class SoccerState_PlayerControll_Dash : public SoccerState
+{
+private:
+	SoccerDash*		m_pMoveClass;
 public:
 	void Enter(SoccerPlayer* s);
 	void Execute(SoccerPlayer* s);
