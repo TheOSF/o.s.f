@@ -2,80 +2,129 @@
 
 #include "iextreme.h"
 
+#include "../GameSystem/GameController.h"
+#include "../Damage/Damage.h"
+
 class CharacterBase;
 class BallBase;
 
-//***************************************************
-//		キャラクター共通 カウンタークラス
-//***************************************************
+
+//****************************************************************
+//		キャラクタ共通のカウンタークラス
+//****************************************************************
 class CharacterCounter
 {
 public:
-	// カウンターパラメータ
-	struct CounterParams
+	// 行動状態
+	enum CounterStep
 	{
-		int MaxPoseFrame;          // 最大タメ持続フレーム
-		int LevelUpFrame;           // レベルアップするフレーム
-		int CounterTotalFrame;   // カウンター振り始めてから終わるまでのフレーム
-		int CounterMoveFrame;  // カウンターの移動にかけるフレーム数
-		float MoveDownSpeed;   // 減速割合
-		float CanCounterArea;    // カウンターのできる範囲
+		_cs_pose = 1 << 0,
+		_cs_swing = 1 << 1,
+		_cs_move_to_ball = 1 << 2,
 	};
 
-	// カウンターイベントクラス
-	class Event
+	// パラメータ
+	struct CounterParams
+	{
+		int MaxCounterLevel;            // カウンターの最大レベル
+		int MaxPoseFrame;               // 最大タメ持続フレーム
+		int LevelUpFrame;                 // レベルアップするフレーム
+		int SwingTotalFrame;            // カウンター振り始めてから終わるまでのフレーム
+		int MoveToBallFrame;           // ボールに向かって移動するフレーム
+		float NormalCounterArea;    // カウンターのできる範囲
+		float JustCounterArea;         // ジャストカウンターエリア
+		float DamageReceiveArea;  // ボールがこの距離より近いとダメージ判定を優先する
+		float MoveDownSpeed;        // 減速割合
+	};
+
+	// イベント
+	class CounterEvent
 	{
 	public:
-		virtual ~Event(){}
-		virtual void Update() = 0;                       // 更新
-		virtual void CounterPoseStart() = 0;       // 構えスタート
-		virtual void CounterPoseEnd() = 0;        // 構え終了
-		virtual void LevelUp(int level) = 0;          // レベルアップ
-		virtual void CounterStart(int level) = 0;  // カウンター開始
-		virtual void CounterEnd() = 0;                // カウンター終了
+		virtual~CounterEvent(){}
+		virtual void Update() = 0;                   // 更新
+		virtual void PoseStart() = 0;               // 構え開始
+		virtual void PoseEnd() = 0;                 // 構え終了
+		virtual void BallEnter() = 0;                // カウンターできるボールが現れた
+		virtual void LevelUp(int level) = 0;     // レベルアップ
+		virtual void SwingStart() = 0;             // スイング開始
+		virtual void SwingEnd() = 0;               // スイング終了
+		virtual void HitBall(bool is_just) = 0;  // 打ち返したとき
 	};
 
 	// コンストラクタ
 	CharacterCounter(
-		const int                       maxLevel,           // 最大レベル
-		const CounterParams& counterParams, // カウンターパラメータ
-		CharacterBase*            pCharacter,        // 動かしたいキャラクター
-		Event*                          pEvent               // カウンターイベント
+		CharacterBase*                             pParent,                          // 動かしたいキャラクター
+		const CounterParams&                  counterParams,               // カウンターパラメータ
+		CounterEvent*                               pCounterEvent                // カウンターイベント
 		);
 
 	// デストラクタ
 	~CharacterCounter();
 
+
 	// 更新
-	bool Update();
-
-	// level が最大レベルかどうか
-	bool IsMaxLevel(int level)const;
-
-	// 現在最大レベルかどうか
-	bool IsMaxLevel()const;
-
-	// レベル取得
-	inline int GetLevel()const{ return m_NowLevel; }
-
-	// 溜めフラグセット
-	void SetPoseEndFlg();
+	void Update();
 
 	// スティックの値セット
 	inline void SetStickValue(CrVector2 stickValue){ m_StickValue = stickValue; }
 
-private:
-	const int                      m_MaxLevel;                   // レベルアップパラメータ
-	int                               m_NowLevel;                   // 現在のレベル
-	int                               m_Timer;                         // タイマー
-	int                               m_TotalPoseFrame;         // 溜めが終わるまでの全フレーム
-	bool                            m_PoseFlg;                      // 溜めフラグ
-	Vector2                       m_StickValue;                 // スティックの入力状態
-	const CounterParams m_CounterParams;         // カウンターパラメータ
-	CharacterBase*          m_pCharacter;               // 動かしたいキャラクター
-	Event*                        m_pEvent;                      // カウンターイベント
-	BallBase*                   m_pCounterBall;             // カウンターする予定のボール
-	CharacterBase*         m_pCounterBallOwner;  // カウンターしたいボールを打った人
-	Vector3                      m_CounterPos;               // カウンターする位置
+	// ボタンの値セット
+	inline void SetButtonState(controller::button::button_state buttonState){ m_ButtonState = buttonState; }
 
+private:
+	// 移動更新
+	void UpdateUsualMove();
+
+	// レベルアップ更新
+	void UpdateLevelUp();
+
+	// 構え更新
+	void UpdatePose();
+
+	// スイング更新
+	void UpdateSwing();
+
+	// ボールに向かって移動する
+	void UpdateMoveToBall();
+	
+
+	// カウンターできるかどうか
+	bool IsCanCounter();
+
+	// ボールを打ち返す
+	void HitBall();
+
+	// カウンターできるボールを探す
+	bool SerchCounterBall();
+
+private:
+	typedef controller::button::button_state button_state;
+
+	// パラメータ
+	const CounterParams m_CounterParams;
+	Vector2                       m_StickValue;
+	button_state               m_ButtonState;
+	int                               m_NowLevel;
+	int                               m_Step;
+	bool                             m_IsJust;
+
+	// タイマー
+	struct Timer
+	{
+		int LevelUp;      // レベルアップ
+		int Swing;         // スイング
+		int Pose;           // 最大ため持続
+		int MoveToBall; // ボールに向かって移動する
+	} m_Timer;
+
+	// データ
+	CharacterBase*           m_pParent;
+	CounterEvent*             m_pCounterEvent;
+
+	// カウンター用
+	BallBase*           m_pCounterBall;
+	CharacterBase* m_pCounterBallParent;
+	Vector3              m_CounterPos;
 };
+

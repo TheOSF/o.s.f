@@ -44,6 +44,12 @@ bool controller::GetPush(button::button_type x, CONTROLLER_NUM num)
 	return KEY(button_key_code[x], num) != 0;
 }
 
+// コントローラの状態取得
+controller::button::button_state controller::GetButtonState(controller::button::button_type x, CONTROLLER_NUM num)
+{
+	return (controller::button::button_state)(KEY(button_key_code[x], num));
+}
+
 //スティックの傾きの値を得る
 Vector2 controller::GetStickValue(stick::stick_type x, CONTROLLER_NUM num)
 {
@@ -57,7 +63,6 @@ Vector2 controller::GetStickValue(stick::stick_type x, CONTROLLER_NUM num)
 
 	return ret;
 }
-
 
 //指定したコントローラーを振動させる
 void controller::SetVibration(RATIO power, int frame, CONTROLLER_NUM num)
