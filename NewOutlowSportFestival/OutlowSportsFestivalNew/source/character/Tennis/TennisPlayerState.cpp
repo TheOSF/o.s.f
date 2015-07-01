@@ -223,7 +223,14 @@ CharacterCounter* TennisState_PlayerControll_Counter::CreateCounterClass(TennisP
 		// 打ち返したとき
 		void HitBall(bool is_just)override
 		{
-			//MyDebugString("Hit Ball.\n");
+			if (is_just)
+			{
+				MyDebugString("JUST.\n");
+			}
+			else{
+				MyDebugString("NORMAL.\n");
+			}
+			
 		}
 	};
 
@@ -236,42 +243,9 @@ CharacterCounter* TennisState_PlayerControll_Counter::CreateCounterClass(TennisP
 	params.MoveToBallFrame = 2;
 	params.NormalCounterArea = 10.0f;
 	params.JustCounterArea = 5.0f;
-	params.DamageReceiveArea = 0.5f;
+	params.DamageReceiveArea = 0.0f;
 	params.MoveDownSpeed = 0.2f;
 
-
-	//ダメージイベントクラスの作成
-	class TennisDamageHitEvent :public DamageManager::HitEventBase
-	{
-		TennisPlayer* m_pTennis;
-	public:
-		TennisDamageHitEvent(TennisPlayer* pTennis) :
-			m_pTennis(pTennis){}
-
-		//当たった時にそのダメージの種類から、それぞれのステートに派生させる
-		bool Hit(DamageBase* pDmg)
-		{
-			bool ret = true;
-
-			switch (pDmg->type)
-			{
-			case DamageBase::Type::_WeekDamage:
-				//m_pTennis->SetState();	ステートができていないため
-				break;
-			case DamageBase::Type::_VanishDamage:
-				//m_pTennis->SetState();
-				break;
-			case DamageBase::Type::_UpDamage:
-				//m_pTennis->SetState();
-				break;
-			default:
-				ret = false;
-				break;
-			}
-
-			return ret;
-		}
-	};
 
 	return new CharacterCounter(
 		t,
