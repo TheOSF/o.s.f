@@ -443,9 +443,14 @@ CharacterShotAttack* LacrosseState_PlayerControllShotAttack::CreateAttackClass(L
 	params.MoveDownSpeed           = 0.2f;   // å∏ë¨äÑçá
 
 	// ê∂ê¨ÇµÇƒï‘Ç∑
+	/*
 	return new CharacterShotAttack(
 		t,
 		new HitBallEvent(t),
-		params);
+		params,
+		);
+		*/
+
+	return 0;
 }
 

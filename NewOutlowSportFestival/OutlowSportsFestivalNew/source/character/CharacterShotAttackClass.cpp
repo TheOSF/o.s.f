@@ -11,13 +11,15 @@
 CharacterShotAttack::CharacterShotAttack(
 	CharacterBase* pCharacter,
 	Event* pEvent,
-	const AttackParams& attack_params
+	const AttackParams& attack_params,
+	HitEventBase*    pHitEventBase
 	) :
 	m_AttackParams(attack_params),
 	m_StickValue(0, 0),
 	m_pCharacter(pCharacter),
 	m_Timer(0),
-	m_pEvent(pEvent)
+	m_pEvent(pEvent),
+	m_pHitEventBase(pHitEventBase)
 {
 
 }
@@ -27,6 +29,7 @@ CharacterShotAttack::CharacterShotAttack(
 CharacterShotAttack::~CharacterShotAttack()
 {
 	delete m_pEvent;
+	delete m_pHitEventBase;
 }
 
 
@@ -69,6 +72,9 @@ bool CharacterShotAttack::Update()
 
 	// タイマー更新
 	m_Timer++;
+
+	// ダメージ判定をとる
+	chr_func::DamageCheck(m_pCharacter, m_pHitEventBase);
 
 	return true;
 }

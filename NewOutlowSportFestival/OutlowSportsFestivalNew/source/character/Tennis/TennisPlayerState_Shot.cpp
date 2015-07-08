@@ -1,5 +1,6 @@
 #include "TennisPlayerState_Shot.h"
 #include "TennisPlayerState_UsualMove.h"
+#include "Tennis_HitEvent.h"
 #include "../../GameSystem/GameController.h"
 #include "../CharacterFunction.h"
 #include "../../Ball/UsualBall.h"
@@ -81,7 +82,8 @@ void TennisState_PlayerControll_Shot::Enter(TennisPlayer* t)
 	m_pShotClass = new CharacterShotAttack(
 		t,
 		new ShotEvent(t),
-		atk
+		atk,
+		new TennisHitEvent(t)
 		);
 }
 

@@ -33,7 +33,6 @@ static EffekseerSystem* pEffekseerSystem;
 static EffekseerEffectManager* pEffekseerEffectManager;
 static EffekseerEffect* pEffekseerEffect;
 
-
 //*****************************************************************************************************************************
 //
 //	初期化
@@ -280,23 +279,28 @@ void	sceneGamePlay::Update()
 void	sceneGamePlay::Render()
 {
 	DefCamera.Clear();
+	
+	//デバッグ用描画切り替え
+	if (GetKeyState('L'))
+	{
+		// Bullet Physics
+		DefBulletSystem.DebugDrawWorld();
+	}
+	else
+	{
 
-	//pStage->Render();
+		pStage->Render();
+		//
+		DefRendererMgr.DeferredRender();
+		DefRendererMgr.ForwardRender();
 
-	//
+		{// Effekseer
+			pEffekseerSystem->BeginRendering();
+			pEffekseerEffectManager->RenderAllInstances();
+			pEffekseerSystem->EndRendering();
+		};
 
-	//DefRendererMgr.DeferredRender();
-	//DefRendererMgr.ForwardRender();
-
-	//{// Effekseer
-	//	pEffekseerSystem->BeginRendering();
-	//	pEffekseerEffectManager->RenderAllInstances();
-	//	pEffekseerSystem->EndRendering();
-	//};
+	}
 
 	
-
-	{// Bullet Physics
-		DefBulletSystem.DebugDrawWorld();
-	};
 }
