@@ -1,4 +1,6 @@
 #include "CharacterManager.h"
+#include "CharacterFunction.h"
+
 
 CharacterManager* CharacterManager::m_pInstance = nullptr;
 
@@ -23,6 +25,25 @@ const CharacterManager::CharacterMap&
 	CharacterManager::GetCharacterMap()const
 {
 	return m_CharacterMap;
+}
+
+//キャラクタの生存人数を取得
+UINT CharacterManager::GetCharacterLiveCount()const
+{
+	UINT ret = 0;
+
+	for (auto it = m_CharacterMap.begin();
+		it != m_CharacterMap.end();
+		++it)
+	{
+		//死んでいなかった場合
+		if (!chr_func::isDie(it->first))
+		{
+			++ret;
+		}
+	}
+
+	return ret;
 }
 
 CharacterManager::CharacterManager()

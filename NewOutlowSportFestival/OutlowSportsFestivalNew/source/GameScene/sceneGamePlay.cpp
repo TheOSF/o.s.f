@@ -7,7 +7,7 @@
 #include	"../character/CharacterManager.h"
 
 #include	"../character/Tennis/TennisPlayer.h"
-#include	"../character/Tennis/TennisPlayerState.h"
+#include	"../character/Tennis/TennisPlayerState_UsualMove.h"
 #include	"../character/Soccer/SoccerPlayer.h"
 #include	"../character/Soccer/SoccerPlayerState.h"
 #include	"../character/Baseball/BaseballPlayer.h"
@@ -57,7 +57,8 @@ bool sceneGamePlay::Initialize()
 	pStage = new iexMesh("DATA\\STAGE\\Stage.IMO");
 
 	//ƒLƒƒƒ‰ƒNƒ^ì¬
-	if(0){
+	if(0)
+	{
 		CharacterBase::PlayerInfo pl;
 
 		pl.chr_type = CharacterType::_Baseball;
@@ -234,7 +235,8 @@ void	sceneGamePlay::Update()
 			delete pEffekseerEffect;
 			pEffekseerEffect = pEffekseerEffectManager->PlayEffect(0);
 		}
-		else{
+		else
+		{
 			pEffekseerEffect->m_Params.Angle.Y += 0.02f;
 			pEffekseerEffect->Update();
 		}

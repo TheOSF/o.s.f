@@ -2,6 +2,7 @@
 
 #include "iextreme.h"
 #include "../GameSystem/ForwardDecl.h"
+#include "../Damage/Damage.h"
 
 //***************************************************
 //		キャラクター共通 ひるみクラス
@@ -27,13 +28,13 @@ public:
 		virtual void Update(float speed) = 0;       // 更新(引数はモーションスピード)
 		virtual void Start() = 0;     // ひるみ開始
 		virtual void End() = 0;      // ひるみ終了
-		virtual void DamageHit(LpDamageBase pDmg) = 0;	//ダメージを受けた際に呼ばれる
 	};
 
 	// コンストラクタ
 	CharacterDamageMotion(
 		CharacterBase* pCharacter,
 		Event* pEvent,
+		DamageManager::HitEventBase* pHitEvent, 
 		const Params& params
 		);
 
@@ -44,11 +45,12 @@ public:
 	void Update();
 
 private:
-	bool				m_Start;
-	bool				m_End;
-	Params		        m_Params;      // パラメータ
-	CharacterBase*      m_pCharacter;  // キャラクター
-	int                 m_Timer;       // タイマー
-	Event*              m_pEvent;      // イベント
+	bool				           m_Start;
+	bool				           m_End;
+	Params		                   m_Params;      // パラメータ
+	CharacterBase*                 m_pCharacter;  // キャラクター
+	int                            m_Timer;       // タイマー
+	Event*                         m_pEvent;      // イベント
+	DamageManager::HitEventBase*   m_pHitEvent;   //　ヒットイベント
 };
 

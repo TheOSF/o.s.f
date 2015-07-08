@@ -73,7 +73,7 @@ void DamageManager::HitCheckSphere(
 			HitEvent.Hit(it->second))
 		{
 			//“–‚½‚Á‚½‰ñ”ƒJƒEƒ“ƒg‚ð‘«‚·
-			it->second->HitCount++;
+			++it->second->HitCount;
 		}
 	}
 }
