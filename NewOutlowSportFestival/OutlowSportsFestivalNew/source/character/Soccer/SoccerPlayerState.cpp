@@ -53,7 +53,7 @@ void SoccerState_PlayerControll_Move::Execute(SoccerPlayer* s)
 	// [△] で ショット
 	if (controller::GetTRG(controller::button::sankaku, s->m_PlayerInfo.number))
 	{
-		s->SetState(new SoccerState_PlayerControll_Shot);
+		s->SetState(new SoccerState_PlayerControll_Attack);
 	}
 	// [R1] で カウンター
 	if (controller::GetTRG(controller::button::_R1, s->m_PlayerInfo.number))
@@ -331,17 +331,14 @@ void SoccerState_PlayerControll_Shot::Enter(SoccerPlayer* s)
 			new UsualBall(param, DamageBase::Type::_WeekDamage, 1);
 		}
 	};
-	class SoccerHitEvent :public DamageManager::HitEventBase
-	{
-		
-	}
+	
 	CharacterShotAttack::AttackParams p;
 
 	p.ShotFrame = 10;
 	p.AllFrame = 35;
 	p.MoveDownSpeed = 0.2f;
 
-	m_pShotClass = new CharacterShotAttack(s, new SoccerShotEvent(s),p);
+	//m_pShotClass = new CharacterShotAttack(s, new SoccerShotEvent(s),p);
 }
 void SoccerState_PlayerControll_Shot::Execute(SoccerPlayer* s)
 {
@@ -394,10 +391,10 @@ CharacterCounter* SoccerState_PlayerControll_Counter::CreateCounterClass(SoccerP
 
 		}
 		// 構え開始
-		void CounterPoseStart()override
+		/*void CounterPoseStart()override
 		{
 			m_pSoccer->m_Renderer.SetMotion(SoccerPlayer::_ms_Counter);
-		}
+		}*/
 		// 構え終了
 		void CounterPoseEnd()
 		{
@@ -426,12 +423,13 @@ CharacterCounter* SoccerState_PlayerControll_Counter::CreateCounterClass(SoccerP
 	p.LevelUpFrame = 45;
 	p.MoveDownSpeed = 0.2f;
 
-	return new CharacterCounter(
+	/*return new CharacterCounter(
 		3,
 		p,
 		s,
 		new SoccerCounterEvent(s)
-		);
+		);*/
+	return 0;
 }
 void SoccerState_PlayerControll_Dash::Enter(SoccerPlayer* s)
 {
