@@ -1,6 +1,6 @@
 #include "CharacterFunction.h"
 #include "CharacterBase.h"
-#include "../Ball/Ball.h"
+#include "../../Ball/Ball.h"
 
 
 //座標に移動量を更新する
@@ -102,6 +102,11 @@ void chr_func::AngleControll(CharacterBase* p, CrVector3 view_pos)
 	mepos.Normalize();
 
 	p->m_Params.angle = acosf(mepos.z);
+
+	if (mepos.x < 0)
+	{
+		p->m_Params.angle = -p->m_Params.angle;
+	}
 }
 
 //現在の位置、現在のangle、Scaleをもとに変換行列を生成する

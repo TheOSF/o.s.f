@@ -2,8 +2,8 @@
 
 #include "iextreme.h"
 
-#include "../GameSystem/GameController.h"
-#include "../Damage/Damage.h"
+#include "../../GameSystem/GameController.h"
+#include "../../Damage/Damage.h"
 
 class CharacterBase;
 class BallBase;

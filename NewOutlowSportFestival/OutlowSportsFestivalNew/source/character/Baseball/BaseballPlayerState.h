@@ -3,7 +3,7 @@
 
 #include "BaseballPlayer.h"
 
-#include "../CharacterMoveClass.h"
+#include "../Template/CharacterMoveClass.h"
 
 //****************************************************
 //	野球プレイヤーの操作クラスヘッダー

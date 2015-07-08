@@ -3,9 +3,9 @@
 
 #include "SoccerPlayer.h"
 #include "../../Ball/UsualBall.h"
-#include "../CharacterMoveClass.h"
-#include "../CharacterSliding.h"
-#include "../CharacterAttack.h"
+#include "../Template/CharacterMoveClass.h"
+#include "../Template/CharacterSliding.h"
+#include "../Template/CharacterAttack.h"
 
 
 //****************************************************

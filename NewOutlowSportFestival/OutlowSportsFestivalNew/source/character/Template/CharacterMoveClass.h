@@ -4,7 +4,7 @@
 class CharacterBase;
 
 #include "iextreme.h"
-#include "../Damage/Damage.h"
+#include "../../Damage/Damage.h"
 
 
 //****************************************************************

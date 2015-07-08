@@ -1,7 +1,7 @@
 #ifndef __CHARACTER_MANAGER_H__
 #define __CHARACTER_MANAGER_H__
 
-#include "../GameSystem/ForwardDecl.h"
+#include "../../GameSystem/ForwardDecl.h"
 #include <map>
 
 //****************************************************************

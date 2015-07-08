@@ -1,11 +1,11 @@
 #include "BaseballPlayerState.h"
 #include "../../GameSystem/GameController.h"
-#include "../CharacterFunction.h"
+#include "../Template/CharacterFunction.h"
 
-#include "../CharacterEvasionClass.h"
+#include "../Template/CharacterEvasionClass.h"
 #include "../../Ball/UsualBall.h"
 #include "../../Damage/Damage.h"
-#include "../CharacterCounterClass.h"
+#include "../Template/CharacterCounterClass.h"
 
 //***************************************
 //Å@à⁄ìÆ

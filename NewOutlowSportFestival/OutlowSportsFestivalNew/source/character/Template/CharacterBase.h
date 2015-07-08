@@ -1,8 +1,8 @@
 #ifndef __CHARACTER_BASE_H__
 #define __CHARACTER_BASE_H__
 
-#include "../GameSystem/GameObject.h"
-#include "../GameSystem/GameSystem.h"
+#include "../../GameSystem/GameObject.h"
+#include "../../GameSystem/GameSystem.h"
 
 #include "iextreme.h"
 

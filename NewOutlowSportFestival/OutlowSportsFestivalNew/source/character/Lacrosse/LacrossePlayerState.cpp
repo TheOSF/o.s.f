@@ -1,10 +1,10 @@
 #include "LacrossePlayerState.h"
 #include "../../GameSystem/GameController.h"
-#include "../CharacterFunction.h"
+#include "../Template/CharacterFunction.h"
 
-#include "../CharacterMoveClass.h"
-#include "../CharacterShotAttackClass.h"
-#include "../CharacterEvasionClass.h"
+#include "../Template/CharacterMoveClass.h"
+#include "../Template/CharacterShotAttackClass.h"
+#include "../Template/CharacterEvasionClass.h"
 #include "LacrosseAttackClose.h"
 #include "LacrosseCounterPoseClass.h"
 

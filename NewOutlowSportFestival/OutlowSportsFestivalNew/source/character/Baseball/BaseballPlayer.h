@@ -1,9 +1,9 @@
 #ifndef __BASEBALL_PLAYER_H__
 #define __BASEBALL_PLAYER_H__
 
-#include "../CharacterBase.h"
-#include "../CharacterRenderer.h"
-#include "../CharacterStateTemplate.h"	
+#include "../Template/CharacterBase.h"
+#include "../Template/CharacterRenderer.h"
+#include "../Template/CharacterStateTemplate.h"	
 
 class BaseballPlayer;
 

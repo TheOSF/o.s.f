@@ -10,6 +10,150 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="IEX\IEX_2DObject.cpp" />
+    <ClCompile Include="IEX\IEX_3DObject.cpp" />
+    <ClCompile Include="IEX\IEX_Audio.cpp" />
+    <ClCompile Include="IEX\IEX_Direct3D.cpp" />
+    <ClCompile Include="IEX\IEX_Input.cpp" />
+    <ClCompile Include="IEX\IEX_Light.cpp" />
+    <ClCompile Include="IEX\IEX_Math.cpp" />
+    <ClCompile Include="IEX\IEX_Mesh.cpp" />
+    <ClCompile Include="IEX\IEX_Particle.cpp" />
+    <ClCompile Include="IEX\IEX_Polygon.cpp" />
+    <ClCompile Include="IEX\IEX_RenderState.cpp" />
+    <ClCompile Include="IEX\IEX_Shader.cpp" />
+    <ClCompile Include="IEX\IEX_SkinMesh.cpp" />
+    <ClCompile Include="IEX\IEX_System.cpp" />
+    <ClCompile Include="IEX\IEX_Texture.cpp" />
+    <ClCompile Include="IEX\IEX_View.cpp" />
+    <ClCompile Include="source\Ball\Ball.cpp" />
+    <ClCompile Include="source\Ball\UsualBall.cpp" />
+    <ClCompile Include="source\brendanimation\BlendAnimationMesh.cpp" />
+    <ClCompile Include="source\Camera\Camera.cpp" />
+    <ClCompile Include="source\Camera\CameraState.cpp" />
+    <ClCompile Include="source\character\Amefoot\AmefootPlayer.cpp" />
+    <ClCompile Include="source\character\Amefoot\AmefootPlayerState.cpp" />
+    <ClCompile Include="source\character\Baseball\BaseballPlayer.cpp" />
+    <ClCompile Include="source\character\Baseball\BaseballPlayerState.cpp" />
+    <ClCompile Include="source\character\Lacrosse\LacrosseAttackClose.cpp" />
+    <ClCompile Include="source\character\Lacrosse\LacrosseCounterClass.cpp" />
+    <ClCompile Include="source\character\Lacrosse\LacrosseCounterPoseClass.cpp" />
+    <ClCompile Include="source\character\Lacrosse\LacrossePlayer.cpp" />
+    <ClCompile Include="source\character\Lacrosse\LacrossePlayerState.cpp" />
+    <ClCompile Include="source\character\Soccer\SoccerPlayer.cpp" />
+    <ClCompile Include="source\character\Soccer\SoccerPlayerState.cpp" />
+    <ClCompile Include="source\character\Template\CharacterAttack.cpp" />
+    <ClCompile Include="source\character\Template\CharacterBase.cpp" />
+    <ClCompile Include="source\character\Template\CharacterCounterClass.cpp" />
+    <ClCompile Include="source\character\Template\CharacterDamageMotion.cpp" />
+    <ClCompile Include="source\character\Template\CharacterDamageVanish.cpp" />
+    <ClCompile Include="source\character\Template\CharacterEvasionClass.cpp" />
+    <ClCompile Include="source\character\Template\CharacterFunction.cpp" />
+    <ClCompile Include="source\character\Template\CharacterManager.cpp" />
+    <ClCompile Include="source\character\Template\CharacterMoveClass.cpp" />
+    <ClCompile Include="source\character\Template\CharacterRenderer.cpp" />
+    <ClCompile Include="source\character\Template\CharacterShotAttackClass.cpp" />
+    <ClCompile Include="source\character\Template\CharacterSliding.cpp" />
+    <ClCompile Include="source\character\Tennis\TennisPlayer.cpp" />
+    <ClCompile Include="source\character\Tennis\TennisPlayerState_Attack.cpp" />
+    <ClCompile Include="source\character\Tennis\TennisPlayerState_Counter.cpp" />
+    <ClCompile Include="source\character\Tennis\TennisPlayerState_DamageMotionWeak.cpp" />
+    <ClCompile Include="source\character\Tennis\TennisPlayerState_Shot.cpp" />
+    <ClCompile Include="source\character\Tennis\TennisPlayerState_UsualMove.cpp" />
+    <ClCompile Include="source\character\Tennis\Tennis_HitEvent.cpp" />
+    <ClCompile Include="source\Collision\Collision.cpp" />
+    <ClCompile Include="source\Collision\MeshCollider.cpp" />
+    <ClCompile Include="source\Damage\Damage.cpp" />
+    <ClCompile Include="source\GameScene\sceneGamePlay.cpp" />
+    <ClCompile Include="source\GameScene\sceneMain.cpp" />
+    <ClCompile Include="source\GameSystem\GameController.cpp" />
+    <ClCompile Include="source\GameSystem\GameObject.cpp" />
+    <ClCompile Include="source\GameSystem\GameState.cpp" />
+    <ClCompile Include="source\GameSystem\ResourceManager.cpp" />
+    <ClCompile Include="source\IexSystem\Framework.cpp" />
+    <ClCompile Include="source\IexSystem\System.cpp" />
+    <ClCompile Include="source\IexSystem\WinMain.cpp" />
+    <ClCompile Include="source\Library\Bullet\BulletDebug.cpp" />
+    <ClCompile Include="source\Library\Bullet\BulletSystem.cpp" />
+    <ClCompile Include="source\Library\Effekseer\EffekseerEffect.cpp" />
+    <ClCompile Include="source\Library\Effekseer\EffekseerEffectManager.cpp" />
+    <ClCompile Include="source\Library\Effekseer\EffekseerSystem.cpp" />
+    <ClCompile Include="source\Render\MeshRenderer.cpp" />
+    <ClCompile Include="source\Render\Renderer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IEX\DebugDrawManager.h" />
+    <ClInclude Include="IEX\iextreme.h" />
+    <ClInclude Include="IEX\ogg\codec.h" />
+    <ClInclude Include="IEX\ogg\ogg.h" />
+    <ClInclude Include="IEX\ogg\os_types.h" />
+    <ClInclude Include="IEX\ogg\vorbisenc.h" />
+    <ClInclude Include="IEX\ogg\vorbisfile.h" />
+    <ClInclude Include="source\Ball\Ball.h" />
+    <ClInclude Include="source\Ball\UsualBall.h" />
+    <ClInclude Include="source\brendanimation\BlendAnimationMesh.h" />
+    <ClInclude Include="source\Camera\Camera.h" />
+    <ClInclude Include="source\Camera\CameraState.h" />
+    <ClInclude Include="source\character\Amefoot\AmefootPlayer.h" />
+    <ClInclude Include="source\character\Amefoot\AmefootPlayerState.h" />
+    <ClInclude Include="source\character\Baseball\BaseballPlayer.h" />
+    <ClInclude Include="source\character\Baseball\BaseballPlayerState.h" />
+    <ClInclude Include="source\character\Lacrosse\LacrosseAttackClose.h" />
+    <ClInclude Include="source\character\Lacrosse\LacrosseCounterClass.h" />
+    <ClInclude Include="source\character\Lacrosse\LacrosseCounterPoseClass.h" />
+    <ClInclude Include="source\character\Lacrosse\LacrossePlayer.h" />
+    <ClInclude Include="source\character\Lacrosse\LacrossePlayerState.h" />
+    <ClInclude Include="source\character\Soccer\SoccerPlayer.h" />
+    <ClInclude Include="source\character\Soccer\SoccerPlayerState.h" />
+    <ClInclude Include="source\character\Template\CharacterAttack.h" />
+    <ClInclude Include="source\character\Template\CharacterBase.h" />
+    <ClInclude Include="source\character\Template\CharacterCounterClass.h" />
+    <ClInclude Include="source\character\Template\CharacterDamageMotion.h" />
+    <ClInclude Include="source\character\Template\CharacterDamageVanish.h" />
+    <ClInclude Include="source\character\Template\CharacterEvasionClass.h" />
+    <ClInclude Include="source\character\Template\CharacterFunction.h" />
+    <ClInclude Include="source\character\Template\CharacterManager.h" />
+    <ClInclude Include="source\character\Template\CharacterMoveClass.h" />
+    <ClInclude Include="source\character\Template\CharacterRenderer.h" />
+    <ClInclude Include="source\character\Template\CharacterShotAttackClass.h" />
+    <ClInclude Include="source\character\Template\CharacterSliding.h" />
+    <ClInclude Include="source\character\Template\CharacterStateTemplate.h" />
+    <ClInclude Include="source\character\Tennis\TennisPlayer.h" />
+    <ClInclude Include="source\character\Tennis\TennisPlayerState_Attack.h" />
+    <ClInclude Include="source\character\Tennis\TennisPlayerState_Counter.h" />
+    <ClInclude Include="source\character\Tennis\TennisPlayerState_DamageMotionWeak.h" />
+    <ClInclude Include="source\character\Tennis\TennisPlayerState_Shot.h" />
+    <ClInclude Include="source\character\Tennis\TennisPlayerState_UsualMove.h" />
+    <ClInclude Include="source\character\Tennis\Tennis_HitEvent.h" />
+    <ClInclude Include="source\Collision\Collision.h" />
+    <ClInclude Include="source\Collision\MeshCollider.h" />
+    <ClInclude Include="source\Damage\Damage.h" />
+    <ClInclude Include="source\debug\DebugFunction.h" />
+    <ClInclude Include="source\GameScene\SceneGamePlay.h" />
+    <ClInclude Include="source\GameScene\sceneMain.h" />
+    <ClInclude Include="source\GameSystem\ForwardDecl.h" />
+    <ClInclude Include="source\GameSystem\GameController.h" />
+    <ClInclude Include="source\GameSystem\GameObject.h" />
+    <ClInclude Include="source\GameSystem\GameState.h" />
+    <ClInclude Include="source\GameSystem\GameSystem.h" />
+    <ClInclude Include="source\GameSystem\ResourceManager.h" />
+    <ClInclude Include="source\IexSystem\Framework.h" />
+    <ClInclude Include="source\IexSystem\Scene.h" />
+    <ClInclude Include="source\IexSystem\System.h" />
+    <ClInclude Include="source\Library\Bullet\BulletDebug.h" />
+    <ClInclude Include="source\Library\Bullet\BulletSystem.h" />
+    <ClInclude Include="source\Library\Effekseer\EffekseerEffect.h" />
+    <ClInclude Include="source\Library\Effekseer\EffekseerEffectManager.h" />
+    <ClInclude Include="source\Library\Effekseer\EffekseerSystem.h" />
+    <ClInclude Include="source\Render\MeshRenderer.h" />
+    <ClInclude Include="source\Render\Renderer.h" />
+    <ClInclude Include="source\utillity\Collision.h" />
+    <ClInclude Include="source\utillity\NonCopyable.h" />
+    <ClInclude Include="source\utillity\SafeMethod.h" />
+    <ClInclude Include="source\utillity\Singleton.h" />
+    <ClInclude Include="source\utillity\StateTemplate.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C9433152-1C2D-4F56-9C7A-1FBCA2E5D65F}</ProjectGuid>
     <RootNamespace>IEX2009</RootNamespace>
@@ -88,7 +232,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>./IEX/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./IEX/;./SOURCE/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>
@@ -106,154 +250,9 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="IEX\IEX_2DObject.cpp" />
-    <ClCompile Include="IEX\IEX_3DObject.cpp" />
-    <ClCompile Include="IEX\IEX_Audio.cpp" />
-    <ClCompile Include="IEX\IEX_Direct3D.cpp" />
-    <ClCompile Include="IEX\IEX_Input.cpp" />
-    <ClCompile Include="IEX\IEX_Light.cpp" />
-    <ClCompile Include="IEX\IEX_Math.cpp" />
-    <ClCompile Include="IEX\IEX_Mesh.cpp" />
-    <ClCompile Include="IEX\IEX_Particle.cpp" />
-    <ClCompile Include="IEX\IEX_Polygon.cpp" />
-    <ClCompile Include="IEX\IEX_RenderState.cpp" />
-    <ClCompile Include="IEX\IEX_Shader.cpp" />
-    <ClCompile Include="IEX\IEX_SkinMesh.cpp" />
-    <ClCompile Include="IEX\IEX_System.cpp" />
-    <ClCompile Include="IEX\IEX_Texture.cpp" />
-    <ClCompile Include="IEX\IEX_View.cpp" />
-    <ClCompile Include="source\Ball\Ball.cpp" />
-    <ClCompile Include="source\Ball\UsualBall.cpp" />
-    <ClCompile Include="source\brendanimation\BlendAnimationMesh.cpp" />
-    <ClCompile Include="source\Camera\Camera.cpp" />
-    <ClCompile Include="source\Camera\CameraState.cpp" />
-    <ClCompile Include="source\character\Amefoot\AmefootPlayer.cpp" />
-    <ClCompile Include="source\character\Amefoot\AmefootPlayerState.cpp" />
-    <ClCompile Include="source\character\Baseball\BaseballPlayer.cpp" />
-    <ClCompile Include="source\character\Baseball\BaseballPlayerState.cpp" />
-    <ClCompile Include="source\character\CharacterAttack.cpp" />
-    <ClCompile Include="source\character\CharacterBase.cpp" />
-    <ClCompile Include="source\character\CharacterCounterClass.cpp" />
-    <ClCompile Include="source\character\CharacterDamageMotion.cpp" />
-    <ClCompile Include="source\character\CharacterFunction.cpp" />
-    <ClCompile Include="source\character\CharacterManager.cpp" />
-    <ClCompile Include="source\character\CharacterMoveClass.cpp" />
-    <ClCompile Include="source\character\CharacterRenderer.cpp" />
-    <ClCompile Include="source\character\CharacterSliding.cpp" />
-    <ClCompile Include="source\character\Lacrosse\LacrosseAttackClose.cpp" />
-    <ClCompile Include="source\character\Lacrosse\LacrosseCounterClass.cpp" />
-    <ClCompile Include="source\character\Lacrosse\LacrosseCounterPoseClass.cpp" />
-    <ClCompile Include="source\character\CharacterEvasionClass.cpp" />
-    <ClCompile Include="source\character\CharacterShotAttackClass.cpp" />
-    <ClCompile Include="source\character\Lacrosse\LacrossePlayer.cpp" />
-    <ClCompile Include="source\character\Lacrosse\LacrossePlayerState.cpp" />
-    <ClCompile Include="source\character\Soccer\SoccerPlayer.cpp" />
-    <ClCompile Include="source\character\Soccer\SoccerPlayerState.cpp" />
-    <ClCompile Include="source\character\Tennis\TennisPlayer.cpp" />
-    <ClCompile Include="source\character\Tennis\TennisPlayerState_DamageMotionWeak.cpp" />
-    <ClCompile Include="source\character\Tennis\Tennis_HitEvent.cpp" />
-    <ClCompile Include="source\character\Tennis\TennisPlayerState_Shot.cpp" />
-    <ClCompile Include="source\character\Tennis\TennisPlayerState_Attack.cpp" />
-    <ClCompile Include="source\character\Tennis\TennisPlayerState_Counter.cpp" />
-    <ClCompile Include="source\character\Tennis\TennisPlayerState_UsualMove.cpp" />
-    <ClCompile Include="source\Collision\Collision.cpp" />
-    <ClCompile Include="source\Collision\MeshCollider.cpp" />
-    <ClCompile Include="source\Damage\Damage.cpp" />
-    <ClCompile Include="source\GameScene\sceneGamePlay.cpp" />
-    <ClCompile Include="source\GameScene\sceneMain.cpp" />
-    <ClCompile Include="source\GameSystem\GameController.cpp" />
-    <ClCompile Include="source\GameSystem\GameObject.cpp" />
-    <ClCompile Include="source\GameSystem\GameState.cpp" />
-    <ClCompile Include="source\IexSystem\Framework.cpp" />
-    <ClCompile Include="source\IexSystem\System.cpp" />
-    <ClCompile Include="source\IexSystem\WinMain.cpp" />
-    <ClCompile Include="source\Library\Bullet\BulletDebug.cpp" />
-    <ClCompile Include="source\Library\Bullet\BulletSystem.cpp">
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">iextreme.h;debug/DebugFunction.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">iextreme.h;debug/DebugFunction.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="source\Library\Effekseer\EffekseerEffect.cpp" />
-    <ClCompile Include="source\Library\Effekseer\EffekseerEffectManager.cpp" />
-    <ClCompile Include="source\Library\Effekseer\EffekseerSystem.cpp" />
-    <ClCompile Include="source\Render\MeshRenderer.cpp" />
-    <ClCompile Include="source\Render\Renderer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="IEX\DebugDrawManager.h" />
-    <ClInclude Include="IEX\iextreme.h" />
-    <ClInclude Include="source\Ball\Ball.h" />
-    <ClInclude Include="source\Ball\UsualBall.h" />
-    <ClInclude Include="source\brendanimation\BlendAnimationMesh.h" />
-    <ClInclude Include="source\Camera\Camera.h" />
-    <ClInclude Include="source\Camera\CameraState.h" />
-    <ClInclude Include="source\character\Amefoot\AmefootPlayer.h" />
-    <ClInclude Include="source\character\Amefoot\AmefootPlayerState.h" />
-    <ClInclude Include="source\character\Baseball\BaseballPlayer.h" />
-    <ClInclude Include="source\character\Baseball\BaseballPlayerState.h" />
-    <ClInclude Include="source\character\CharacterAttack.h" />
-    <ClInclude Include="source\character\CharacterBase.h" />
-    <ClInclude Include="source\character\CharacterCounterClass.h" />
-    <ClInclude Include="source\character\CharacterDamageMotion.h" />
-    <ClInclude Include="source\character\CharacterFunction.h" />
-    <ClInclude Include="source\character\CharacterManager.h" />
-    <ClInclude Include="source\character\CharacterMoveClass.h" />
-    <ClInclude Include="source\character\CharacterRenderer.h" />
-    <ClInclude Include="source\character\CharacterSliding.h" />
-    <ClInclude Include="source\character\CharacterStateTemplate.h" />
-    <ClInclude Include="source\character\Lacrosse\LacrosseAttackClose.h" />
-    <ClInclude Include="source\character\Lacrosse\LacrosseCounterClass.h" />
-    <ClInclude Include="source\character\Lacrosse\LacrosseCounterPoseClass.h" />
-    <ClInclude Include="source\character\CharacterEvasionClass.h" />
-    <ClInclude Include="source\character\CharacterShotAttackClass.h" />
-    <ClInclude Include="source\character\Lacrosse\LacrossePlayer.h" />
-    <ClInclude Include="source\character\Lacrosse\LacrossePlayerState.h" />
-    <ClInclude Include="source\character\Soccer\SoccerPlayer.h" />
-    <ClInclude Include="source\character\Soccer\SoccerPlayerState.h" />
-    <ClInclude Include="source\character\Tennis\TennisPlayer.h" />
-    <ClInclude Include="source\character\Tennis\TennisPlayerState_DamageMotionWeak.h" />
-    <ClInclude Include="source\character\Tennis\Tennis_HitEvent.h" />
-    <ClInclude Include="source\character\Tennis\TennisPlayerState_Shot.h" />
-    <ClInclude Include="source\character\Tennis\TennisPlayerState_Attack.h" />
-    <ClInclude Include="source\character\Tennis\TennisPlayerState_Counter.h" />
-    <ClInclude Include="source\character\Tennis\TennisPlayerState_UsualMove.h" />
-    <ClInclude Include="source\Collision\Collision.h" />
-    <ClInclude Include="source\Collision\MeshCollider.h" />
-    <ClInclude Include="source\Damage\Damage.h" />
-    <ClInclude Include="source\debug\DebugFunction.h" />
-    <ClInclude Include="source\GameScene\SceneGamePlay.h" />
-    <ClInclude Include="source\GameScene\sceneMain.h" />
-    <ClInclude Include="source\GameSystem\ForwardDecl.h" />
-    <ClInclude Include="source\GameSystem\GameController.h" />
-    <ClInclude Include="source\GameSystem\GameObject.h" />
-    <ClInclude Include="source\GameSystem\GameState.h" />
-    <ClInclude Include="source\GameSystem\GameSystem.h" />
-    <ClInclude Include="source\IexSystem\Framework.h" />
-    <ClInclude Include="source\IexSystem\Scene.h" />
-    <ClInclude Include="source\IexSystem\System.h" />
-    <ClInclude Include="source\Library\Bullet\BulletDebug.h" />
-    <ClInclude Include="source\Library\Bullet\BulletSystem.h" />
-    <ClInclude Include="source\Library\Effekseer\EffekseerEffect.h" />
-    <ClInclude Include="source\Library\Effekseer\EffekseerEffectManager.h" />
-    <ClInclude Include="source\Library\Effekseer\EffekseerSystem.h" />
-    <ClInclude Include="source\Render\MeshRenderer.h" />
-    <ClInclude Include="source\Render\Renderer.h" />
-    <ClInclude Include="source\utillity\Collision.h" />
-    <ClInclude Include="source\utillity\NonCopyable.h" />
-    <ClInclude Include="source\utillity\SafeMethod.h" />
-    <ClInclude Include="source\utillity\Singleton.h" />
-    <ClInclude Include="source\utillity\StateTemplate.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DATA\Shader\2D.fx" />
-    <CustomBuild Include="DATA\Shader\3DEx.fx">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Outputs)</Outputs>
-    </CustomBuild>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

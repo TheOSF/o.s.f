@@ -1,7 +1,7 @@
 #include "CameraState.h"
-#include "../character/CharacterManager.h"
-#include "../character/CharacterFunction.h"
-#include "../character/CharacterBase.h"
+#include "../character/Template/CharacterManager.h"
+#include "../character/Template/CharacterFunction.h"
+#include "../character/Template/CharacterBase.h"
 
 //試合時のカメラステート
 

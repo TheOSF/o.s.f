@@ -4,9 +4,9 @@
 //		LacrossePlayer.h
 //***************************************************
 
-#include "../CharacterBase.h"
-#include "../CharacterStateTemplate.h"
-#include "../CharacterRenderer.h"
+#include "../Template/CharacterBase.h"
+#include "../Template/CharacterStateTemplate.h"
+#include "../Template/CharacterRenderer.h"
 
 
 // ステートマシン型名付け

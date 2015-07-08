@@ -1,9 +1,9 @@
 #ifndef __SOCCER_PLAYER_H__
 #define __SOCCER_PLAYER_H__
 
-#include "../CharacterBase.h"
-#include "../CharacterRenderer.h"
-#include "../CharacterStateTemplate.h"	
+#include "../Template/CharacterBase.h"
+#include "../Template/CharacterRenderer.h"
+#include "../Template/CharacterStateTemplate.h"	
 
 class SoccerPlayer;
 

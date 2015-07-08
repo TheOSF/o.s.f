@@ -4,7 +4,7 @@
 #include	"sceneGamePlay.h"
 #include	"../Ball/Ball.h"
 #include	"../Camera/Camera.h"
-#include	"../character/CharacterManager.h"
+#include	"../character/Template/CharacterManager.h"
 
 #include	"../character/Tennis/TennisPlayer.h"
 #include	"../character/Tennis/TennisPlayerState_UsualMove.h"
@@ -12,6 +12,7 @@
 #include	"../character/Soccer/SoccerPlayerState.h"
 #include	"../character/Baseball/BaseballPlayer.h"
 #include	"../character/Baseball/BaseballPlayerState.h"
+#include    "../GameSystem/ResourceManager.h"
 
 // Effekseer
 #include "../Library/Effekseer/EffekseerSystem.h"
@@ -29,9 +30,9 @@
 static LPIEXMESH pStage;
 static LPIEXMESH pAF_Ball;
 
-static EffekseerSystem* pEffekseerSystem;
+static EffekseerSystem*        pEffekseerSystem;
 static EffekseerEffectManager* pEffekseerEffectManager;
-static EffekseerEffect* pEffekseerEffect;
+static EffekseerEffect*        pEffekseerEffect;
 
 //*****************************************************************************************************************************
 //

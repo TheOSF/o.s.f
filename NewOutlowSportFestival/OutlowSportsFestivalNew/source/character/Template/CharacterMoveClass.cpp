@@ -1,9 +1,9 @@
 #include "CharacterMoveClass.h"
 #include "CharacterFunction.h"
 #include "CharacterBase.h"
-#include "../Damage/Damage.h"
-#include "../Ball/Ball.h"
-#include "../Camera/Camera.h"
+#include "../../Damage/Damage.h"
+#include "../../Ball/Ball.h"
+#include "../../Camera/Camera.h"
 
 //****************************************************************
 //		キャラクタ共通の動きクラス
