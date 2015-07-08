@@ -67,6 +67,26 @@ RigidBody::~RigidBody()
 }
 
 
+// 転送行列を取得 ※スケーリングなし
+void RigidBody::Get_TransMatrix(Matrix& mat)
+{
+	Matrix R, T;
+	btTransform transform = pRigidBody->getWorldTransform();
+	btVector3 pos = transform.getOrigin();
+	btQuaternion rot = transform.getRotation();
+
+	D3DXQUATERNION r(rot.x(), rot.y(), rot.z(), -rot.w());
+
+	D3DXMatrixIdentity(&T);
+	D3DXMatrixIdentity(&R);
+
+	D3DXMatrixTranslation(&T, pos.x(), pos.y(), pos.z());
+	D3DXMatrixRotationQuaternion(&R, &r);
+	
+	mat = R*T;
+}
+
+
 // キネマティックオブジェクトを動かす
 bool RigidBody::TransformKinematicObject(const Vector3& pos, const Vector3& angle)
 {
@@ -225,7 +245,8 @@ RigidBody* BulletSystem::AddRigidMesh(
 	RigidBody::CollisionTypes collisionType,
 	float friction,
 	float restitution,
-	const Vector3&velocity
+	const Vector3&velocity,
+	const Vector3& localInertia
 	)
 {
 	// メッシュ取得
@@ -295,6 +316,7 @@ RigidBody* BulletSystem::AddRigidMesh(
 
 	// 回転設定
 	Vector3 angle = pMesh->GetAngle();
+
 	transform.setRotation(
 		btQuaternion(-angle.x, angle.y, angle.z)
 		);
@@ -303,12 +325,11 @@ RigidBody* BulletSystem::AddRigidMesh(
 	btCollisionShape* pbtCollisionShape = pbtShape;
 
 
-	btVector3 localInertia(0, 0, 0);
 	btRigidBody::btRigidBodyConstructionInfo rigidBodyInfo(
-		mass, 
-		new btDefaultMotionState(transform), 
+		mass,
+		new btDefaultMotionState(transform),
 		pbtCollisionShape,
-		localInertia
+		btVector3(localInertia.x, localInertia.y, localInertia.z)
 		);
 
 	// 反発係数

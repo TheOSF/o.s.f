@@ -154,7 +154,12 @@
     <ClCompile Include="source\character\Soccer\SoccerPlayer.cpp" />
     <ClCompile Include="source\character\Soccer\SoccerPlayerState.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayer.cpp" />
-    <ClCompile Include="source\character\Tennis\TennisPlayerState.cpp" />
+    <ClCompile Include="source\character\Tennis\TennisPlayerState_DamageMotionWeak.cpp" />
+    <ClCompile Include="source\character\Tennis\Tennis_HitEvent.cpp" />
+    <ClCompile Include="source\character\Tennis\TennisPlayerState_Shot.cpp" />
+    <ClCompile Include="source\character\Tennis\TennisPlayerState_Attack.cpp" />
+    <ClCompile Include="source\character\Tennis\TennisPlayerState_Counter.cpp" />
+    <ClCompile Include="source\character\Tennis\TennisPlayerState_UsualMove.cpp" />
     <ClCompile Include="source\Collision\Collision.cpp" />
     <ClCompile Include="source\Collision\MeshCollider.cpp" />
     <ClCompile Include="source\Damage\Damage.cpp" />
@@ -162,6 +167,7 @@
     <ClCompile Include="source\GameScene\sceneMain.cpp" />
     <ClCompile Include="source\GameSystem\GameController.cpp" />
     <ClCompile Include="source\GameSystem\GameObject.cpp" />
+    <ClCompile Include="source\GameSystem\GameState.cpp" />
     <ClCompile Include="source\IexSystem\Framework.cpp" />
     <ClCompile Include="source\IexSystem\System.cpp" />
     <ClCompile Include="source\IexSystem\WinMain.cpp" />
@@ -209,7 +215,12 @@
     <ClInclude Include="source\character\Soccer\SoccerPlayer.h" />
     <ClInclude Include="source\character\Soccer\SoccerPlayerState.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayer.h" />
-    <ClInclude Include="source\character\Tennis\TennisPlayerState.h" />
+    <ClInclude Include="source\character\Tennis\TennisPlayerState_DamageMotionWeak.h" />
+    <ClInclude Include="source\character\Tennis\Tennis_HitEvent.h" />
+    <ClInclude Include="source\character\Tennis\TennisPlayerState_Shot.h" />
+    <ClInclude Include="source\character\Tennis\TennisPlayerState_Attack.h" />
+    <ClInclude Include="source\character\Tennis\TennisPlayerState_Counter.h" />
+    <ClInclude Include="source\character\Tennis\TennisPlayerState_UsualMove.h" />
     <ClInclude Include="source\Collision\Collision.h" />
     <ClInclude Include="source\Collision\MeshCollider.h" />
     <ClInclude Include="source\Damage\Damage.h" />
@@ -219,6 +230,7 @@
     <ClInclude Include="source\GameSystem\ForwardDecl.h" />
     <ClInclude Include="source\GameSystem\GameController.h" />
     <ClInclude Include="source\GameSystem\GameObject.h" />
+    <ClInclude Include="source\GameSystem\GameState.h" />
     <ClInclude Include="source\GameSystem\GameSystem.h" />
     <ClInclude Include="source\IexSystem\Framework.h" />
     <ClInclude Include="source\IexSystem\Scene.h" />

@@ -54,9 +54,6 @@ void CharacterCounter::Update()
 	// 構え中
 	if (m_Step & _cs_pose)
 	{
-		// カウンターできるボールを探す
-		SerchCounterBall();
-
 		UpdateLevelUp();
 		UpdatePose();
 	}
@@ -131,6 +128,15 @@ void CharacterCounter::UpdatePose()
 		m_Step &= ~_cs_pose;
 		m_Step |= _cs_move_to_ball;
 		m_pCounterEvent->PoseEnd();
+
+		// ボール探す
+		SerchCounterBall();
+
+		// タイミング判定
+		if (IsCanCounter() == true)
+		{
+			CalcHitTiming();
+		}
 	}
 	else
 	{
@@ -175,23 +181,27 @@ void CharacterCounter::UpdateSwing()
 // ボールに向かって移動する
 void CharacterCounter::UpdateMoveToBall()
 {
-	// ボールに向かって移動
-	if (IsCanCounter() == true)
-	{
-		Vector3& pos = m_pParent->m_Params.pos;
-		float t = 1.0f / m_CounterParams.MoveToBallFrame;
+	bool is_end = m_Timer.MoveToBall == m_CounterParams.MoveToBallFrame;
 
-		pos = pos*(1.0f - t) + m_CounterPos*t;
-	}
-
-	if (m_Timer.MoveToBall == m_CounterParams.MoveToBallFrame)
+	if (is_end == true)
 	{
 		// 移動終了
 		m_Step &= ~_cs_move_to_ball;
 		m_Step |= _cs_swing;
+	}
 
-		// 打ち返す
-		HitBall();
+	if (IsCanCounter() == true)
+	{
+		// ボールに向かって移動
+		Vector3& pos = m_pParent->m_Params.pos;
+		float t = 1.0f / m_CounterParams.MoveToBallFrame;
+
+		pos = pos*(1.0f - t) + m_CounterPos*t;
+
+		if (is_end == true)
+		{
+			HitBall();
+		}
 	}
 
 	// タイマー更新
@@ -202,10 +212,6 @@ void CharacterCounter::UpdateMoveToBall()
 // カウンターできるかどうか
 bool CharacterCounter::IsCanCounter()
 {
-	// if 文のネストが...
-	bool is_ball_params_ok = false;
-	m_IsJust = false;
-
 	if (m_pCounterBall &&
 		BallBase::isCanCounter(m_pCounterBall) == true)
 	{// カウンターできるボールかどうか
@@ -215,54 +221,33 @@ bool CharacterCounter::IsCanCounter()
 			m_pCounterBallParent == m_pCounterBall->m_Params.pParent
 			)
 		{// 打ったのが自分じゃない かつ 移動中にほかの人にカウンターされていない
-			is_ball_params_ok = true;
-		}
-	}
-
-	if (is_ball_params_ok == true)
-	{
-		Vector3 vec = m_pParent->m_Params.pos - m_pCounterBall->m_Params.pos;
-		float length = vec.Length();
-		vec.Normalize();
-
-		float dot = Vector3Dot(vec, m_pCounterBall->m_Params.move);
-
-		if (dot > 0.0f)
-		{
-			if (length >= m_CounterParams.DamageReceiveArea)
-			{
-				// ジャストかどうか
-				m_IsJust = length <= m_CounterParams.JustCounterArea;
-
-				return true;
-			}
+			return true;
 		}
 	}
 
 	return false;
 }
 
+
 // ボールを打ち返す
 void CharacterCounter::HitBall()
 {
-	if (IsCanCounter() == true)
-	{
-		// とりあえずボール打った人のところへ返す
-		Vector3 vec = m_pCounterBallParent->m_Params.pos - m_pParent->m_Params.pos;
+	// とりあえずボール打った人のところへ返す
+	Vector3 vec = m_pCounterBallParent->m_Params.pos - m_pParent->m_Params.pos;
 
-		// 移動速度設定
-		vec.Normalize();
-		vec *= m_pCounterBall->m_Params.move.Length();
+	// 移動速度設定
+	vec.Normalize();
+	vec *= m_pCounterBall->m_Params.move.Length();
 
-		// 移動方向転換
-		m_pCounterBall->m_Params.move = vec;
+	// 移動方向転換
+	m_pCounterBall->m_Params.move = vec;
 
-		// 打った人変更
-		m_pCounterBall->m_Params.pParent = m_pParent;
+	// 打った人変更
+	m_pCounterBall->m_Params.pParent = m_pParent;
 
-		// 打ち返しイベント
-		m_pCounterEvent->HitBall(m_IsJust);
-	}
+	// 打ち返しイベント
+	m_pCounterEvent->HitBall(m_IsJust);
+
 }
 
 
@@ -273,7 +258,7 @@ bool CharacterCounter::SerchCounterBall()
 		&m_pCounterBall,
 		m_pParent->m_Params.pos,
 		&m_CounterPos,
-		m_CounterParams.NormalCounterArea,
+		m_CounterParams.NormalCounterArea+5.0f,
 		m_CounterParams.MoveToBallFrame
 		);
 
@@ -286,14 +271,30 @@ bool CharacterCounter::SerchCounterBall()
 		return false;
 	}
 
-	if (~m_Step & _cs_move_to_ball)
-	{
-		m_Step |= _cs_move_to_ball;
-		m_pCounterBallParent = m_pCounterBall->m_Params.pParent;
-		m_pCounterEvent->BallEnter();
-	}
+	m_pCounterBallParent = m_pCounterBall->m_Params.pParent;
+	m_pCounterEvent->BallEnter();
 	
 	return true;
 }
 
+
+// タイミング判定
+void CharacterCounter::CalcHitTiming()
+{
+	Vector3 vec = m_pParent->m_Params.pos - m_pCounterBall->m_Params.pos;
+	float length = vec.Length();
+
+	float dot = Vector3Dot(m_pCounterBall->m_Params.move, vec);
+
+	if (dot >= 0.0f)
+	{
+		if (length >= m_CounterParams.DamageReceiveArea && length <= m_CounterParams.NormalCounterArea)
+		{
+			if (length <= m_CounterParams.JustCounterArea)
+			{
+				m_IsJust = true;
+			}
+		}
+	}
+}
 

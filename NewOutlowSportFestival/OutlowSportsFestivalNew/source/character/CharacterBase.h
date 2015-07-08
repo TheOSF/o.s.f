@@ -31,6 +31,7 @@ public:
 		Vector3				move;		//ˆÚ“®—Ê
 		float				hitScale;	//‚ ‚½‚è”»’è‚Ì‰~‚Ì‘å‚«‚³
 		float				angle;		//ƒAƒ“ƒOƒ‹(ƒ‰ƒWƒAƒ“)
+		float				maxHP;		//Å‘å‘Ì—Í‚O`
 		float				HP;			//‚O`
 		float				SP;			//‚O`‚P‚O‚O
 	};

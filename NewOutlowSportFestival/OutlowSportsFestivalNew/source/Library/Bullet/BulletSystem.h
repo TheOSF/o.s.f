@@ -58,6 +58,9 @@ struct RigidBody
 	// デストラクタ
 	~RigidBody();
 
+	// 転送行列を取得 ※スケーリングなし
+	void Get_TransMatrix(Matrix& mat);
+
 	// キネマティックオブジェクトを動かす
 	bool TransformKinematicObject(const Vector3& pos, const Vector3& angle);
 
@@ -118,7 +121,8 @@ public:
 		RigidBody::CollisionTypes collisionType,
 		float friction,
 		float restitution,
-		const Vector3&velocity
+		const Vector3&velocity,
+		const Vector3& localInertia = Vector3(0, 0, 0)
 		);
 
 	// Boxをワールドに追加

@@ -97,6 +97,7 @@ private:
 	bool EraceDamage(DamageBase* pDmg);
 };
 
+typedef DamageManager::HitEventBase HitEventBase;
 
 #define DefDamageMgr (DamageManager::GetInstance())
 

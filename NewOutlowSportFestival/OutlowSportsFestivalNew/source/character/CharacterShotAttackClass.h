@@ -1,6 +1,7 @@
 #pragma once
 
 #include "iextreme.h"
+#include "../Damage/Damage.h"
 
 class CharacterBase;
 
@@ -35,7 +36,8 @@ public:
 	CharacterShotAttack(
 		CharacterBase* pCharacter,
 		Event* pEvent,
-		const AttackParams& attack_params
+		const AttackParams& attack_params,
+		HitEventBase*    pHitEventBase
 		);
 
 	// デストラクタ
@@ -53,5 +55,6 @@ private:
 	CharacterBase*       m_pCharacter;          // キャラクター
 	int                            m_Timer;                  // タイマー
 	Event*                     m_pEvent;                // 攻撃イベント
+	HitEventBase*    m_pHitEventBase;  //ダメージを受けた時に呼び出されるイベント
 };
 
