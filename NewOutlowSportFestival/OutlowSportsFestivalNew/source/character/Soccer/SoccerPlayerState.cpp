@@ -331,6 +331,10 @@ void SoccerState_PlayerControll_Shot::Enter(SoccerPlayer* s)
 			new UsualBall(param, DamageBase::Type::_WeekDamage, 1);
 		}
 	};
+	class SoccerHitEvent :public DamageManager::HitEventBase
+	{
+		
+	}
 	CharacterShotAttack::AttackParams p;
 
 	p.ShotFrame = 10;
@@ -360,14 +364,7 @@ void SoccerState_PlayerControll_Counter::Enter(SoccerPlayer* s)
 }
 void SoccerState_PlayerControll_Counter::Execute(SoccerPlayer* s)
 {
-	if (controller::GetLeave(controller::button::_R1, s->m_PlayerInfo.number))
-	{// [R1離す] でカウンター
-		m_pCounterClass->SetPoseEndFlg();
-	}
-	if (!m_pCounterClass->Update())
-	{
-		return;
-	}
+	
 }
 void SoccerState_PlayerControll_Counter::Exit(SoccerPlayer* s)
 {
@@ -375,7 +372,7 @@ void SoccerState_PlayerControll_Counter::Exit(SoccerPlayer* s)
 }
 CharacterCounter* SoccerState_PlayerControll_Counter::CreateCounterClass(SoccerPlayer* s)
 {
-	class SoccerCounterEvent :public CharacterCounter::Event
+	class SoccerCounterEvent :public CharacterCounter::CounterEvent
 	{
 		SoccerPlayer* m_pSoccer;
 		int m_CounterLevel;
@@ -427,7 +424,6 @@ CharacterCounter* SoccerState_PlayerControll_Counter::CreateCounterClass(SoccerP
 
 	p.MaxPoseFrame = 60;
 	p.LevelUpFrame = 45;
-	p.CounterTotalFrame = 60;
 	p.MoveDownSpeed = 0.2f;
 
 	return new CharacterCounter(
