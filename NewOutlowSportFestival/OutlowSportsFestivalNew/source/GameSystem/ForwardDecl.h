@@ -20,4 +20,14 @@ typedef CharacterUsualMove* LpCharacterUsualMove;
 class CharacterShotAttack;
 typedef CharacterShotAttack* LpCharacterShotAttack;
 	 
+class DamageBase;
+typedef DamageBase* LpDamageBase;
+
+
+class CharacterCounter;
+typedef CharacterCounter* LpCharacterCounter;
+
+class CharacterShotAttack;
+typedef CharacterShotAttack* LpCharacterShotAttack;
+
 #endif

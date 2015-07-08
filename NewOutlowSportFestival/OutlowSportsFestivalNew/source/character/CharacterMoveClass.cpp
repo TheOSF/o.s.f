@@ -70,18 +70,12 @@ void CharacterUsualMove::Update()
 		}
 	}
 
-	//あたり判定をとる
-	ShpereParam sp;
-
-	sp.pos = m_pParent->m_Params.pos;
-	sp.pos.y += BallBase::UsualBallShotY;
-	sp.size = m_pParent->m_Params.hitScale;
-
-	DefDamageMgr.HitCheckSphere(sp, *m_pHitEventBase);
-
 
 	//位置の更新
 	chr_func::PositionUpdate(m_pParent);
+
+	//ダメージ判定をとる
+	chr_func::DamageCheck(m_pParent, m_pHitEventBase);
 }
 
 void CharacterUsualMove::SetStickValue(CrVector2 StickValue)

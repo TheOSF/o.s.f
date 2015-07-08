@@ -116,7 +116,7 @@ void UsualBall::UpdateMesh()
 
 	Matrix m;
 
-	D3DXMatrixScaling(&m, 0.003f, 0.003f, 0.003f);	//大きさはボールによって変える必要がある
+	D3DXMatrixScaling(&m, 0.009f, 0.009f, 0.009f);	//大きさはボールによって変える必要がある
 
 	m._41 = m_BallBase.m_Params.pos.x;
 	m._42 = m_BallBase.m_Params.pos.y;

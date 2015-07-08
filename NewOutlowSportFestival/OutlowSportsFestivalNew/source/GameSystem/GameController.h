@@ -40,6 +40,13 @@ namespace controller
 
 			max,//ボタンタイプ最大数
 		};
+
+		enum button_state
+		{
+			bs_up,
+			bs_down,
+			bs_trg,
+		};
 	}
 	namespace stick{
 		enum stick_type
@@ -57,6 +64,11 @@ namespace controller
 	bool	GetLeave(button::button_type x, CONTROLLER_NUM num);
 	//押しているかどうか
 	bool	GetPush(button::button_type x, CONTROLLER_NUM num);
+
+	// コントローラの状態取得
+	button::button_state GetButtonState(button::button_type x, CONTROLLER_NUM num);
+
+
 	//スティックの傾きの値を得る
 	Vector2 GetStickValue(stick::stick_type x, CONTROLLER_NUM num);
 
