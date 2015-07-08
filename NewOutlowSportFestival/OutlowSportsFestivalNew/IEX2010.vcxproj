@@ -126,6 +126,7 @@
     <ClCompile Include="IEX\IEX_Texture.cpp" />
     <ClCompile Include="IEX\IEX_View.cpp" />
     <ClCompile Include="source\Ball\Ball.cpp" />
+    <ClCompile Include="source\Ball\MilderHoming.cpp" />
     <ClCompile Include="source\Ball\UsualBall.cpp" />
     <ClCompile Include="source\brendanimation\BlendAnimationMesh.cpp" />
     <ClCompile Include="source\Camera\Camera.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="IEX\DebugDrawManager.h" />
     <ClInclude Include="IEX\iextreme.h" />
     <ClInclude Include="source\Ball\Ball.h" />
+    <ClInclude Include="source\Ball\MilderHoming.h" />
     <ClInclude Include="source\Ball\UsualBall.h" />
     <ClInclude Include="source\brendanimation\BlendAnimationMesh.h" />
     <ClInclude Include="source\Camera\Camera.h" />

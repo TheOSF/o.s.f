@@ -65,8 +65,8 @@ bool sceneGamePlay::Initialize()
 		pl.player_type = PlayerType::_Player;
 		pl.strong_type = StrongType::__ErrorType;
 
-		TennisPlayer* bp = new TennisPlayer(pl);
-		bp->SetState(new TennisState_PlayerControll_Move());
+		BaseballPlayer* bp = new BaseballPlayer(pl);
+		bp->SetState(new BaseballState_PlayerControll_Move());
 	}
 
 
@@ -80,7 +80,20 @@ bool sceneGamePlay::Initialize()
 
 		TennisPlayer* tp = new TennisPlayer(pl);
 		tp->SetState(new TennisState_PlayerControll_Move());
-		tp->m_Params.pos.x += 40;
+		tp->m_Params.pos.x += 20;
+	}
+
+	{
+		CharacterBase::PlayerInfo pl;
+
+		pl.chr_type = CharacterType::_Tennis;
+		pl.number = (PlayerNum::Value)1;
+		pl.player_type = PlayerType::_Player;
+		pl.strong_type = StrongType::__ErrorType;
+
+		TennisPlayer* tp2 = new TennisPlayer(pl);
+		tp2->SetState(new TennisState_PlayerControll_Move());
+		tp2->m_Params.pos.x += 10;
 	}
 
 	{ // Effekseer
