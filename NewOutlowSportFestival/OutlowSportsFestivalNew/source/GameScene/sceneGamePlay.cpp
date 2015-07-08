@@ -10,6 +10,8 @@
 #include	"../character/Tennis/TennisPlayerState.h"
 #include	"../character/Soccer/SoccerPlayer.h"
 #include	"../character/Soccer/SoccerPlayerState.h"
+#include	"../character/VolleyBall/VolleyBallPlayer.h"
+#include	"../character/VolleyBall/VolleyBallPlayerState.h"
 
 
 // Effekseer
@@ -59,13 +61,13 @@ bool sceneGamePlay::Initialize()
 	{
 		CharacterBase::PlayerInfo pl;
 
-		pl.chr_type = CharacterType::_Soccer;
+		pl.chr_type = CharacterType::_Volleyball;
 		pl.number = (PlayerNum::Value)0;
 		pl.player_type = PlayerType::_Player;
 		pl.strong_type = StrongType::__ErrorType;
 
-		SoccerPlayer* tp = new SoccerPlayer(pl);
-		tp->SetState(new SoccerState_PlayerControll_Move());
+		VolleyBallPlayer* tp = new VolleyBallPlayer(pl);
+		tp->SetState(new VolleyBallState_PlayerControll_Move());
 	}
 
 

@@ -480,8 +480,12 @@ void SoccerState_PlayerControll_Dash::Execute(SoccerPlayer* s)
 	{
 		s->SetState(new SoccerState_PlayerControll_Move());
 	}
+	else
+	{
+		m_pMoveClass->SetStickValue(st);
+	}
 
-	m_pMoveClass->SetStickValue(st);
+	
 	m_pMoveClass->Update();
 
 	chr_func::CreateTransMatrix(s, 0.05f, &s->m_Renderer.m_TransMatrix);
