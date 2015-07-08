@@ -10,8 +10,6 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-<<<<<<< HEAD
-=======
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C9433152-1C2D-4F56-9C7A-1FBCA2E5D65F}</ProjectGuid>
     <RootNamespace>IEX2009</RootNamespace>
@@ -90,7 +88,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>./IEX/;./SOURCE/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./IEX/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>
@@ -108,10 +106,8 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
-      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
->>>>>>> c4abe03b37255dbd8036da53888bca9bc4e32b7e
   <ItemGroup>
     <ClCompile Include="IEX\IEX_2DObject.cpp" />
     <ClCompile Include="IEX\IEX_3DObject.cpp" />
@@ -130,7 +126,6 @@
     <ClCompile Include="IEX\IEX_Texture.cpp" />
     <ClCompile Include="IEX\IEX_View.cpp" />
     <ClCompile Include="source\Ball\Ball.cpp" />
-    <ClCompile Include="source\Ball\MilderHoming.cpp" />
     <ClCompile Include="source\Ball\UsualBall.cpp" />
     <ClCompile Include="source\brendanimation\BlendAnimationMesh.cpp" />
     <ClCompile Include="source\Camera\Camera.cpp" />
@@ -139,10 +134,6 @@
     <ClCompile Include="source\character\Amefoot\AmefootPlayerState.cpp" />
     <ClCompile Include="source\character\Baseball\BaseballPlayer.cpp" />
     <ClCompile Include="source\character\Baseball\BaseballPlayerState.cpp" />
-<<<<<<< HEAD
-=======
-    <ClCompile Include="source\character\Baseball\BaseballPlayerState_DamageMotionWeak.cpp" />
-    <ClCompile Include="source\character\Baseball\Baseball_HitEvent.cpp" />
     <ClCompile Include="source\character\CharacterAttack.cpp" />
     <ClCompile Include="source\character\CharacterBase.cpp" />
     <ClCompile Include="source\character\CharacterCounterClass.cpp" />
@@ -151,44 +142,23 @@
     <ClCompile Include="source\character\CharacterManager.cpp" />
     <ClCompile Include="source\character\CharacterMoveClass.cpp" />
     <ClCompile Include="source\character\CharacterRenderer.cpp" />
->>>>>>> c4abe03b37255dbd8036da53888bca9bc4e32b7e
+    <ClCompile Include="source\character\CharacterSliding.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseAttackClose.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseCounterClass.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrosseCounterPoseClass.cpp" />
+    <ClCompile Include="source\character\CharacterEvasionClass.cpp" />
+    <ClCompile Include="source\character\CharacterShotAttackClass.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrossePlayer.cpp" />
     <ClCompile Include="source\character\Lacrosse\LacrossePlayerState.cpp" />
-    <ClCompile Include="source\character\Soccer\SoccerDash.cpp" />
     <ClCompile Include="source\character\Soccer\SoccerPlayer.cpp" />
     <ClCompile Include="source\character\Soccer\SoccerPlayerState.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="source\character\Template\CharacterAttack.cpp" />
-    <ClCompile Include="source\character\Template\CharacterBase.cpp" />
-    <ClCompile Include="source\character\Template\CharacterCounterClass.cpp" />
-    <ClCompile Include="source\character\Template\CharacterDamageMotion.cpp" />
-    <ClCompile Include="source\character\Template\CharacterDamageVanish.cpp" />
-    <ClCompile Include="source\character\Template\CharacterEvasionClass.cpp" />
-    <ClCompile Include="source\character\Template\CharacterFunction.cpp" />
-    <ClCompile Include="source\character\Template\CharacterManager.cpp" />
-    <ClCompile Include="source\character\Template\CharacterMoveClass.cpp" />
-    <ClCompile Include="source\character\Template\CharacterRenderer.cpp" />
-    <ClCompile Include="source\character\Template\CharacterShotAttackClass.cpp" />
-    <ClCompile Include="source\character\Template\CharacterSliding.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayer.cpp" />
-=======
-    <ClCompile Include="source\character\Soccer\SoccerSliding.cpp" />
-    <ClCompile Include="source\character\Tennis\TennisPlayer.cpp" />
-    <ClCompile Include="source\character\VolleyBall\VolleyBallPlayer.cpp" />
-    <ClCompile Include="source\character\VolleyBall\VolleyBallPlayerState.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayerState_DamageMotionWeak.cpp" />
     <ClCompile Include="source\character\Tennis\Tennis_HitEvent.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayerState_Shot.cpp" />
->>>>>>> c4abe03b37255dbd8036da53888bca9bc4e32b7e
     <ClCompile Include="source\character\Tennis\TennisPlayerState_Attack.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayerState_Counter.cpp" />
-    <ClCompile Include="source\character\Tennis\TennisPlayerState_DamageMotionWeak.cpp" />
-    <ClCompile Include="source\character\Tennis\TennisPlayerState_Shot.cpp" />
     <ClCompile Include="source\character\Tennis\TennisPlayerState_UsualMove.cpp" />
-    <ClCompile Include="source\character\Tennis\Tennis_HitEvent.cpp" />
     <ClCompile Include="source\Collision\Collision.cpp" />
     <ClCompile Include="source\Collision\MeshCollider.cpp" />
     <ClCompile Include="source\Damage\Damage.cpp" />
@@ -197,12 +167,14 @@
     <ClCompile Include="source\GameSystem\GameController.cpp" />
     <ClCompile Include="source\GameSystem\GameObject.cpp" />
     <ClCompile Include="source\GameSystem\GameState.cpp" />
-    <ClCompile Include="source\GameSystem\ResourceManager.cpp" />
     <ClCompile Include="source\IexSystem\Framework.cpp" />
     <ClCompile Include="source\IexSystem\System.cpp" />
     <ClCompile Include="source\IexSystem\WinMain.cpp" />
     <ClCompile Include="source\Library\Bullet\BulletDebug.cpp" />
-    <ClCompile Include="source\Library\Bullet\BulletSystem.cpp" />
+    <ClCompile Include="source\Library\Bullet\BulletSystem.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">iextreme.h;debug/DebugFunction.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">iextreme.h;debug/DebugFunction.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
     <ClCompile Include="source\Library\Effekseer\EffekseerEffect.cpp" />
     <ClCompile Include="source\Library\Effekseer\EffekseerEffectManager.cpp" />
     <ClCompile Include="source\Library\Effekseer\EffekseerSystem.cpp" />
@@ -212,13 +184,7 @@
   <ItemGroup>
     <ClInclude Include="IEX\DebugDrawManager.h" />
     <ClInclude Include="IEX\iextreme.h" />
-    <ClInclude Include="IEX\ogg\codec.h" />
-    <ClInclude Include="IEX\ogg\ogg.h" />
-    <ClInclude Include="IEX\ogg\os_types.h" />
-    <ClInclude Include="IEX\ogg\vorbisenc.h" />
-    <ClInclude Include="IEX\ogg\vorbisfile.h" />
     <ClInclude Include="source\Ball\Ball.h" />
-    <ClInclude Include="source\Ball\MilderHoming.h" />
     <ClInclude Include="source\Ball\UsualBall.h" />
     <ClInclude Include="source\brendanimation\BlendAnimationMesh.h" />
     <ClInclude Include="source\Camera\Camera.h" />
@@ -227,10 +193,6 @@
     <ClInclude Include="source\character\Amefoot\AmefootPlayerState.h" />
     <ClInclude Include="source\character\Baseball\BaseballPlayer.h" />
     <ClInclude Include="source\character\Baseball\BaseballPlayerState.h" />
-<<<<<<< HEAD
-=======
-    <ClInclude Include="source\character\Baseball\BaseballPlayerState_DamageMotionWeak.h" />
-    <ClInclude Include="source\character\Baseball\Baseball_HitEvent.h" />
     <ClInclude Include="source\character\CharacterAttack.h" />
     <ClInclude Include="source\character\CharacterBase.h" />
     <ClInclude Include="source\character\CharacterCounterClass.h" />
@@ -241,45 +203,22 @@
     <ClInclude Include="source\character\CharacterRenderer.h" />
     <ClInclude Include="source\character\CharacterSliding.h" />
     <ClInclude Include="source\character\CharacterStateTemplate.h" />
->>>>>>> c4abe03b37255dbd8036da53888bca9bc4e32b7e
     <ClInclude Include="source\character\Lacrosse\LacrosseAttackClose.h" />
     <ClInclude Include="source\character\Lacrosse\LacrosseCounterClass.h" />
     <ClInclude Include="source\character\Lacrosse\LacrosseCounterPoseClass.h" />
+    <ClInclude Include="source\character\CharacterEvasionClass.h" />
+    <ClInclude Include="source\character\CharacterShotAttackClass.h" />
     <ClInclude Include="source\character\Lacrosse\LacrossePlayer.h" />
     <ClInclude Include="source\character\Lacrosse\LacrossePlayerState.h" />
-    <ClInclude Include="source\character\Soccer\SoccerDash.h" />
     <ClInclude Include="source\character\Soccer\SoccerPlayer.h" />
     <ClInclude Include="source\character\Soccer\SoccerPlayerState.h" />
-<<<<<<< HEAD
-    <ClInclude Include="source\character\Template\CharacterAttack.h" />
-    <ClInclude Include="source\character\Template\CharacterBase.h" />
-    <ClInclude Include="source\character\Template\CharacterCounterClass.h" />
-    <ClInclude Include="source\character\Template\CharacterDamageMotion.h" />
-    <ClInclude Include="source\character\Template\CharacterDamageVanish.h" />
-    <ClInclude Include="source\character\Template\CharacterEvasionClass.h" />
-    <ClInclude Include="source\character\Template\CharacterFunction.h" />
-    <ClInclude Include="source\character\Template\CharacterManager.h" />
-    <ClInclude Include="source\character\Template\CharacterMoveClass.h" />
-    <ClInclude Include="source\character\Template\CharacterRenderer.h" />
-    <ClInclude Include="source\character\Template\CharacterShotAttackClass.h" />
-    <ClInclude Include="source\character\Template\CharacterSliding.h" />
-    <ClInclude Include="source\character\Template\CharacterStateTemplate.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayer.h" />
-=======
-    <ClInclude Include="source\character\Soccer\SoccerSliding.h" />
-    <ClInclude Include="source\character\Tennis\TennisPlayer.h" />
-    <ClInclude Include="source\character\VolleyBall\VolleyBallPlayer.h" />
-    <ClInclude Include="source\character\VolleyBall\VolleyBallPlayerState.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayerState_DamageMotionWeak.h" />
     <ClInclude Include="source\character\Tennis\Tennis_HitEvent.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayerState_Shot.h" />
->>>>>>> c4abe03b37255dbd8036da53888bca9bc4e32b7e
     <ClInclude Include="source\character\Tennis\TennisPlayerState_Attack.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayerState_Counter.h" />
-    <ClInclude Include="source\character\Tennis\TennisPlayerState_DamageMotionWeak.h" />
-    <ClInclude Include="source\character\Tennis\TennisPlayerState_Shot.h" />
     <ClInclude Include="source\character\Tennis\TennisPlayerState_UsualMove.h" />
-    <ClInclude Include="source\character\Tennis\Tennis_HitEvent.h" />
     <ClInclude Include="source\Collision\Collision.h" />
     <ClInclude Include="source\Collision\MeshCollider.h" />
     <ClInclude Include="source\Damage\Damage.h" />
@@ -291,7 +230,6 @@
     <ClInclude Include="source\GameSystem\GameObject.h" />
     <ClInclude Include="source\GameSystem\GameState.h" />
     <ClInclude Include="source\GameSystem\GameSystem.h" />
-    <ClInclude Include="source\GameSystem\ResourceManager.h" />
     <ClInclude Include="source\IexSystem\Framework.h" />
     <ClInclude Include="source\IexSystem\Scene.h" />
     <ClInclude Include="source\IexSystem\System.h" />
@@ -308,105 +246,14 @@
     <ClInclude Include="source\utillity\Singleton.h" />
     <ClInclude Include="source\utillity\StateTemplate.h" />
   </ItemGroup>
-  <PropertyGroup Label="Globals">
-    <ProjectGuid>{C9433152-1C2D-4F56-9C7A-1FBCA2E5D65F}</ProjectGuid>
-    <RootNamespace>IEX2009</RootNamespace>
-    <Keyword>Win32Proj</Keyword>
-  </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <CharacterSet>MultiByte</CharacterSet>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v120</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v120</PlatformToolset>
-  </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
-  <PropertyGroup>
-    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(DXSDK_DIR)include;$(ProjectDir)\library\bullet\src;$(ProjectDir)\library\effekseer\include;$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(DXSDK_DIR)lib/x86;$(ProjectDir)\library\bullet\lib\Debug;$(ProjectDir)\library\effekseer\lib\Debug;$(LibraryPath)</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(DXSDK_DIR)include;$(ProjectDir)\library\bullet\src;$(ProjectDir)\library\effekseer\include;$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(DXSDK_DIR)lib/x86;$(ProjectDir)\library\bullet\lib\Release;$(ProjectDir)\library\effekseer\lib\Release;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <EmbedManifest>false</EmbedManifest>
-  </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <PreBuildEvent>
-      <Command>
+  <ItemGroup>
+    <None Include="DATA\Shader\2D.fx" />
+    <CustomBuild Include="DATA\Shader\3DEx.fx">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </Command>
-    </PreBuildEvent>
-    <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>./IEX/;./SOURCE/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
-      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <ForcedIncludeFiles>iextreme.h;debug/DebugFunction.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
-    </ClCompile>
-    <Link>
-      <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
-      <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
-      <TargetMachine>MachineX86</TargetMachine>
-      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-    </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>./IEX/;./SOURCE/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <ForcedIncludeFiles>iextreme.h;debug/DebugFunction.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
-      <TargetMachine>MachineX86</TargetMachine>
-      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-    </Link>
-  </ItemDefinitionGroup>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

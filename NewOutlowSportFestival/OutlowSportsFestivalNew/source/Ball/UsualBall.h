@@ -21,7 +21,7 @@ public:
 		float				damage_val		//ダメージ量
 		);
 	~UsualBall();
-	
+
 	//ボールのメッシュを返すファクトリー関数
 	static bool GetBallMesh(
 		CharacterType::Value	type,	//ボールのキャラクタタイプ
@@ -30,8 +30,7 @@ public:
 
 	bool Update();
 	bool Msg(MsgType mt);
-	//　セッター
-	void setBallParamPos(BallBase::Params p){ m_BallBase.m_Params = p; }
+
 private:
 	BallBase			m_BallBase;
 	LpMeshRenderer		m_pMeshRenderer;
@@ -43,7 +42,6 @@ private:
 	bool isOutofField()const;
 	void UpdateDamageClass();
 	void UpdateMesh();
-
 };
 
 #endif

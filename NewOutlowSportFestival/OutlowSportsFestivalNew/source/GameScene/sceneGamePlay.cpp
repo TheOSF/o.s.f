@@ -4,7 +4,7 @@
 #include	"sceneGamePlay.h"
 #include	"../Ball/Ball.h"
 #include	"../Camera/Camera.h"
-#include	"../character/Template/CharacterManager.h"
+#include	"../character/CharacterManager.h"
 
 #include	"../character/Tennis/TennisPlayer.h"
 #include	"../character/Tennis/TennisPlayerState_UsualMove.h"
@@ -12,7 +12,6 @@
 #include	"../character/Soccer/SoccerPlayerState.h"
 #include	"../character/Baseball/BaseballPlayer.h"
 #include	"../character/Baseball/BaseballPlayerState.h"
-#include    "../GameSystem/ResourceManager.h"
 
 // Effekseer
 #include "../Library/Effekseer/EffekseerSystem.h"
@@ -30,9 +29,9 @@
 static LPIEXMESH pStage;
 static LPIEXMESH pAF_Ball;
 
-static EffekseerSystem*        pEffekseerSystem;
+static EffekseerSystem* pEffekseerSystem;
 static EffekseerEffectManager* pEffekseerEffectManager;
-static EffekseerEffect*        pEffekseerEffect;
+static EffekseerEffect* pEffekseerEffect;
 
 //*****************************************************************************************************************************
 //
@@ -57,7 +56,7 @@ bool sceneGamePlay::Initialize()
 	pStage = new iexMesh("DATA\\STAGE\\Stage.IMO");
 
 	//ƒLƒƒƒ‰ƒNƒ^ì¬
-	//if(0)
+	if(0)
 	{
 		CharacterBase::PlayerInfo pl;
 
@@ -66,12 +65,12 @@ bool sceneGamePlay::Initialize()
 		pl.player_type = PlayerType::_Player;
 		pl.strong_type = StrongType::__ErrorType;
 
-		BaseballPlayer* bp = new BaseballPlayer(pl);
-		bp->SetState(new BaseballState_PlayerControll_Move());
+		TennisPlayer* bp = new TennisPlayer(pl);
+		bp->SetState(new TennisState_PlayerControll_Move());
 	}
 
 
-	/*{
+	{
 		CharacterBase::PlayerInfo pl;
 
 		pl.chr_type = CharacterType::_Tennis;
@@ -81,7 +80,7 @@ bool sceneGamePlay::Initialize()
 
 		TennisPlayer* tp = new TennisPlayer(pl);
 		tp->SetState(new TennisState_PlayerControll_Move());
-	}*/
+	}
 	{
 		CharacterBase::PlayerInfo pl;
 
@@ -92,20 +91,7 @@ bool sceneGamePlay::Initialize()
 
 		TennisPlayer* tp = new TennisPlayer(pl);
 		tp->SetState(new TennisState_PlayerControll_Move());
-		tp->m_Params.pos.x += 20;
-	}
-
-	{
-		CharacterBase::PlayerInfo pl;
-
-		pl.chr_type = CharacterType::_Tennis;
-		pl.number = (PlayerNum::Value)1;
-		pl.player_type = PlayerType::_Player;
-		pl.strong_type = StrongType::__ErrorType;
-
-		TennisPlayer* tp2 = new TennisPlayer(pl);
-		tp2->SetState(new TennisState_PlayerControll_Move());
-		tp2->m_Params.pos.x += 10;
+		tp->m_Params.pos.x += 40;
 	}
 
 	{
@@ -161,23 +147,28 @@ bool sceneGamePlay::Initialize()
 			pAF_Ball,
 			1.0f,
 			RigidBody::ct_dynamic,
-			0.05f,
+			0.2f,
 			1.0f,
-			Vector3(5,0,0)
+			Vector3(5, 0, 0),
+			Vector3(5, 0, 0)
 			);
 
+		
+		for (int i = 0; i < 17; i++)
+		{
+			// °
+			DefBulletSystem.AddRigidBox(
+				0.0f,
+				RigidBody::ct_static,
+				Vector3(0, -10*i, 0),
+				Vector3(0, 0, 0),
+				Vector3(100, 10, 100),
+				0.2f,
+				0.75f,
+				Vector3(0, 0, 0)
+				);
+		}
 
-		// °
-		DefBulletSystem.AddRigidBox(
-			0.0f,
-			RigidBody::ct_static,
-			Vector3(0, -10, 0),
-			Vector3(0, 0, 0),
-			Vector3(100, 10, 100),
-			0.05f,
-			0.75f,
-			Vector3(0, 0, 0)
-			);
 	};
 
 	return true;
@@ -263,16 +254,15 @@ void	sceneGamePlay::Update()
 
 		if (KEY(KEY_SPACE, 0) == 3)
 		{
-			// Sphere
-			DefBulletSystem.AddRigidSphere(
+			// Mesh
+			DefBulletSystem.AddRigidMesh(
+				pAF_Ball,
 				1.0f,
 				RigidBody::ct_dynamic,
-				Vector3(10, 30, 0),
-				Vector3(0, 0, 0),
+				0.2f,
 				1.0f,
-				0.0f,
-				1.0f,
-				Vector3(0, -10, 0)
+				Vector3(5, 0, 0),
+				Vector3(5, 0, 0)
 				);
 		}
 
@@ -302,9 +292,9 @@ void	sceneGamePlay::Render()
 	}
 	else
 	{
-
 		pStage->Render();
-		//
+
+
 		DefRendererMgr.DeferredRender();
 		DefRendererMgr.ForwardRender();
 
@@ -313,8 +303,5 @@ void	sceneGamePlay::Render()
 			pEffekseerEffectManager->RenderAllInstances();
 			pEffekseerSystem->EndRendering();
 		};
-
 	}
-
-	
 }

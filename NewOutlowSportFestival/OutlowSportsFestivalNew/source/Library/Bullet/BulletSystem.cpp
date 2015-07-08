@@ -368,6 +368,12 @@ RigidBody* BulletSystem::AddRigidMesh(
 
 		// マスクタイプ設定
 		maskType = RigidBody::ct_dynamic;
+
+		// 静的剛体に設定
+		pbtRigidBody->setCollisionFlags(
+			pbtRigidBody->getCollisionFlags() | btCollisionObject::CF_STATIC_OBJECT
+			);
+
 		break;
 
 
@@ -399,7 +405,7 @@ RigidBody* BulletSystem::AddRigidMesh(
 
 	// RigidBodyクラス生成
 	RigidBody* pRigidBody = new RigidBody(
-		RigidBody::ct_kinematic, 
+		collisionType, 
 		pbtCollisionShape,
 		pbtRigidBody, 
 		pbtTriangleMesh

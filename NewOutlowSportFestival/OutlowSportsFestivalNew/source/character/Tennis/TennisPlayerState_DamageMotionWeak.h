@@ -2,7 +2,7 @@
 #define __TENNIS_PLAYER_STATE_DAMAGEMOTION_WEAK_H__
 
 #include "TennisPlayer.h"
-#include "../Template/CharacterDamageMotion.h"
+#include "../CharacterDamageMotion.h"
 
 //***************************************************
 //		テニスキャラクタの弱ひるみステート

@@ -1,6 +1,6 @@
 #include "LacrossePlayer.h"
 #include "LacrosseAttackClose.h"
-#include "../Template/CharacterFunction.h"
+#include "../CharacterFunction.h"
 
 
 //***************************************************

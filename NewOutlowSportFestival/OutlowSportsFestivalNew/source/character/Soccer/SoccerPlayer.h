@@ -1,9 +1,9 @@
 #ifndef __SOCCER_PLAYER_H__
 #define __SOCCER_PLAYER_H__
 
-#include "../Template/CharacterBase.h"
-#include "../Template/CharacterRenderer.h"
-#include "../Template/CharacterStateTemplate.h"	
+#include "../CharacterBase.h"
+#include "../CharacterRenderer.h"
+#include "../CharacterStateTemplate.h"	
 
 class SoccerPlayer;
 
@@ -30,15 +30,13 @@ public:
 		_ms_Damage,
 		_ms_Blowing,
 		_ms_Scrub,
-		_ms_GetUp,
 		_ms_Shot2,
 		_ms_Win,
 		_ms_Lose,
-		_ms_Command,
+		_ms_Counter,
+		_ms_Dammy,
 		_ms_Atk2,
 		_ms_Atk3,
-		_ms_Counter,
-		_ms_Crap
 	};
 
 	SoccerPlayer(const CharacterBase::PlayerInfo& info);

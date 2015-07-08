@@ -20,7 +20,7 @@ bool TennisHitEvent::Hit(DamageBase* pDmg)
 	switch (pDmg->type)
 	{
 	case DamageBase::Type::_WeekDamage:
-		//ã‚Ğ‚é‚İ
+		//ãUŒ‚
 		m_pTennis->SetState(new TennisState_DamageMotion_Weak(m_pTennis, pDmg->vec));
 		return true;
 

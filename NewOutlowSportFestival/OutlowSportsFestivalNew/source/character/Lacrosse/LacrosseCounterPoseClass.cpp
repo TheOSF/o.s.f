@@ -1,6 +1,6 @@
 #include "LacrossePlayer.h"
 #include "LacrosseCounterPoseClass.h"
-#include "../Template/CharacterFunction.h"
+#include "../CharacterFunction.h"
 
 //***************************************************
 //		ラクロス用 カウンター構えクラス

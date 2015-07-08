@@ -122,9 +122,6 @@ if (!(expr)){\
 #define MessageBoxPlusA(str,...)
 #define MessageBoxPlusW(str,...)
 
-#define MyAssert(expr,str,...)
-#define MyAssertA(expr,str,...)
-#define MyAssertW(expr,str,...)
 
 #endif	
 

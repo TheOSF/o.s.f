@@ -1,5 +1,5 @@
 #include "GameState.h"
-#include "../character/Template/CharacterManager.h"
+#include "../character/CharacterManager.h"
 
 #include<D3D10.h>
 //*********************************************************

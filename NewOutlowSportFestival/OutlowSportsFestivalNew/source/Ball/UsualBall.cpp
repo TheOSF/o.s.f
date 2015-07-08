@@ -1,5 +1,5 @@
 #include "UsualBall.h"
-#include "../character/Template/CharacterBase.h"
+#include "../character/CharacterBase.h"
 #include "../Render/MeshRenderer.h"
 
 
@@ -20,7 +20,7 @@ UsualBall::UsualBall(
 	//ダメージ判定のパラメータを代入
 	m_Damage.pBall = &m_BallBase;
 	m_Damage.pParent = params.pParent;
-	m_Damage.m_Param.size = 1;	//あたり判定の大きさはボールによって異なる可能性がある
+	m_Damage.m_Param.size = 1;	//大きさはボールによって異なる可能性がある
 	m_Damage.type = damage_type;
 	m_Damage.Value = damage_val;
 	UpdateDamageClass();

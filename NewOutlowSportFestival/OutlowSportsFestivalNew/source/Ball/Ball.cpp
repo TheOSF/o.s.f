@@ -9,20 +9,12 @@ const float BallBase::UsualBallShotY = 2.5f;
 
 BallBase::BallBase()
 {
-#ifdef _DEBUG
 	MyAssert(DefBallMgr.AddBall(this), "É{Å[Éãìoò^Ç…é∏îsÇµÇ‹ÇµÇΩ");
-#else
-	DefBallMgr.AddBall(this);
-#endif
 }
 
 BallBase::~BallBase()
 {
-#ifdef _DEBUG
 	MyAssert(DefBallMgr.EraceBall(this), "É{Å[ÉãçÌèúÇ…é∏îsÇµÇ‹ÇµÇΩ");
-#else
-	DefBallMgr.EraceBall(this);
-#endif
 }
 
 bool BallBase::isCanCounter(const BallBase* pBall)
