@@ -30,13 +30,15 @@ public:
 		_ms_Damage,
 		_ms_Blowing,
 		_ms_Scrub,
+		_ms_GetUp,
 		_ms_Shot2,
 		_ms_Win,
 		_ms_Lose,
-		_ms_Counter,
-		_ms_Dammy,
+		_ms_Command,
 		_ms_Atk2,
 		_ms_Atk3,
+		_ms_Counter,
+		_ms_Crap
 	};
 
 	SoccerPlayer(const CharacterBase::PlayerInfo& info);
