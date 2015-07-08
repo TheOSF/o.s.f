@@ -98,6 +98,9 @@ private:
 	// カウンターできるボールを探す
 	bool SerchCounterBall();
 
+	// タイミング判定
+	void CalcHitTiming();
+
 private:
 	typedef controller::button::button_state button_state;
 
@@ -127,4 +130,6 @@ private:
 	CharacterBase* m_pCounterBallParent;
 	Vector3              m_CounterPos;
 };
+
+
 

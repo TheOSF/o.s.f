@@ -27,7 +27,7 @@
 //
 //*****************************************************************************************************************************
 static LPIEXMESH pStage;
-static LPIEXMESH pTennisBall;
+static LPIEXMESH pAF_Ball;
 
 static EffekseerSystem* pEffekseerSystem;
 static EffekseerEffectManager* pEffekseerEffectManager;
@@ -109,10 +109,10 @@ bool sceneGamePlay::Initialize()
 
 	{// Bullet
 
-		pTennisBall = new IEXMESH("DATA//CHR//Tennis_ball//Tennis_ball.IMO");
-		pTennisBall->SetPos(0, 20, 10);
-		pTennisBall->SetAngle(0, 0, 0);
-		pTennisBall->SetScale(0.03f, 0.03f, 0.03f);
+		pAF_Ball = new IEXMESH("DATA//ball//ball.IMO");
+		pAF_Ball->SetPos(0, 20, 10);
+		pAF_Ball->SetAngle(0.7f, 0.0f, 0.0f);
+		pAF_Ball->SetScale(1.0f, 1.0f, 1.0f);
 
 		DefBulletSystem.StartUp();
 		DefBulletSystem.InitializeBulletPhysics(btVector3(0, -9.8f, 0), iexSystem::Device);
@@ -120,7 +120,7 @@ bool sceneGamePlay::Initialize()
 		// テスト用
 
 		// Box
-		DefBulletSystem.AddRigidBox(
+		/*DefBulletSystem.AddRigidBox(
 			1.0f, 
 			RigidBody::ct_dynamic, 
 			Vector3(0, 30, 0), 
@@ -129,10 +129,10 @@ bool sceneGamePlay::Initialize()
 			0.2f, 
 			1.0f, 
 			Vector3(0, 0, 0)
-			);
+			);*/
 
 		// Sphere
-		DefBulletSystem.AddRigidSphere(
+		/*DefBulletSystem.AddRigidSphere(
 			1.0f,
 			RigidBody::ct_dynamic,
 			Vector3(10, 30, 0),
@@ -141,16 +141,16 @@ bool sceneGamePlay::Initialize()
 			0.2f,
 			1.0f,
 			Vector3(0, -10, 0)
-			);
+			);*/
 
 		// Mesh
 		DefBulletSystem.AddRigidMesh(
-			pTennisBall,
+			pAF_Ball,
 			1.0f,
 			RigidBody::ct_dynamic,
-			0.2f,
+			0.05f,
 			1.0f,
-			Vector3(0,0,0)
+			Vector3(5,0,0)
 			);
 
 
@@ -161,8 +161,8 @@ bool sceneGamePlay::Initialize()
 			Vector3(0, -10, 0),
 			Vector3(0, 0, 0),
 			Vector3(100, 10, 100),
-			0.2f,
-			0.5f,
+			0.05f,
+			0.75f,
 			Vector3(0, 0, 0)
 			);
 	};
@@ -185,7 +185,7 @@ sceneGamePlay::~sceneGamePlay()
 	};
 
 	{// Bullet
-		delete pTennisBall;
+		delete pAF_Ball;
 		DefBulletSystem.ReleaseBulletPhysics();
 		DefBulletSystem.ShutDown(true);
 	};
@@ -281,22 +281,22 @@ void	sceneGamePlay::Render()
 {
 	DefCamera.Clear();
 
-	pStage->Render();
+	//pStage->Render();
 
-	
+	//
 
-	DefRendererMgr.DeferredRender();
-	DefRendererMgr.ForwardRender();
+	//DefRendererMgr.DeferredRender();
+	//DefRendererMgr.ForwardRender();
 
-	{// Effekseer
-		pEffekseerSystem->BeginRendering();
-		pEffekseerEffectManager->RenderAllInstances();
-		pEffekseerSystem->EndRendering();
-	};
-
-	
-
-	//{// Bullet Physics
-	//	DefBulletSystem.DebugDrawWorld();
+	//{// Effekseer
+	//	pEffekseerSystem->BeginRendering();
+	//	pEffekseerEffectManager->RenderAllInstances();
+	//	pEffekseerSystem->EndRendering();
 	//};
+
+	
+
+	{// Bullet Physics
+		DefBulletSystem.DebugDrawWorld();
+	};
 }
