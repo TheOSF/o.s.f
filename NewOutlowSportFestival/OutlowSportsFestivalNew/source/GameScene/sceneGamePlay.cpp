@@ -56,7 +56,7 @@ bool sceneGamePlay::Initialize()
 	pStage = new iexMesh("DATA\\STAGE\\Stage.IMO");
 
 	//ƒLƒƒƒ‰ƒNƒ^ì¬
-	if(0)
+	//if(0)
 	{
 		CharacterBase::PlayerInfo pl;
 
@@ -70,7 +70,7 @@ bool sceneGamePlay::Initialize()
 	}
 
 
-	{
+	/*{
 		CharacterBase::PlayerInfo pl;
 
 		pl.chr_type = CharacterType::_Tennis;
@@ -80,7 +80,7 @@ bool sceneGamePlay::Initialize()
 
 		TennisPlayer* tp = new TennisPlayer(pl);
 		tp->SetState(new TennisState_PlayerControll_Move());
-	}
+	}*/
 	{
 		CharacterBase::PlayerInfo pl;
 

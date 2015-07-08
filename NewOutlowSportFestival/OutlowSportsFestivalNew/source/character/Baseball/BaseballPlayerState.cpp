@@ -1,4 +1,5 @@
 #include "BaseballPlayerState.h"
+#include "Baseball_HitEvent.h"
 #include "../../GameSystem/GameController.h"
 #include "../CharacterFunction.h"
 #include "../CharacterManager.h"
@@ -339,7 +340,8 @@ CharacterShotAttack* BaseballState_PlayerControll_ShotAttack_B::CreateShotAttack
 	return m_pShotAttackClass_B = new CharacterShotAttack(
 		b,
 		new ShotAttackEvent_B(b),
-		atk
+		atk,
+		new  BaseballHitEvent(b)
 		);
 }
 
@@ -441,6 +443,7 @@ CharacterShotAttack* BaseballState_PlayerControll_ShotAttack_P::CreateShotAttack
 	return m_pShotAttackClass_P = new CharacterShotAttack(
 		b,
 		new ShotAttackEvent_P(b),
-		atk
+		atk,
+		new  BaseballHitEvent(b)
 		);
 }
