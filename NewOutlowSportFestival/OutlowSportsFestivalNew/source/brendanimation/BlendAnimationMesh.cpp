@@ -15,9 +15,11 @@
 //------------------------------------------------------
 BlendAnimationMesh::BlendAnimationMesh(char* filename)
 {
-
+#ifdef _DEBUG
 	MyAssert(LoadObject(filename), "読み込みに失敗しました。ファイル名 %s \n", filename);
-
+#else
+	LoadObject(filename);
+#endif
 	for (int i = 0; i<16; i++) Param[i] = 0;
 
 	bLoad = TRUE;

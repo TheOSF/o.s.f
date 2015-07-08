@@ -1,14 +1,20 @@
 #include "BaseballPlayerState.h"
 #include "Baseball_HitEvent.h"
 #include "../../GameSystem/GameController.h"
+<<<<<<< HEAD
+#include "../Template/CharacterFunction.h"
+
+#include "../Template/CharacterEvasionClass.h"
+=======
 #include "../CharacterFunction.h"
 #include "../CharacterManager.h"
 #include "../CharacterEvasionClass.h"
 
+>>>>>>> c4abe03b37255dbd8036da53888bca9bc4e32b7e
 #include "../../Ball/UsualBall.h"
 #include "../../Ball/MilderHoming.h"
 #include "../../Damage/Damage.h"
-#include "../CharacterCounterClass.h"
+#include "../Template/CharacterCounterClass.h"
 
 //***************************************
 //Å@à⁄ìÆ

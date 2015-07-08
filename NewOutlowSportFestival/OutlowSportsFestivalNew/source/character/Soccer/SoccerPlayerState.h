@@ -3,12 +3,18 @@
 
 #include "SoccerPlayer.h"
 #include "../../Ball/UsualBall.h"
+<<<<<<< HEAD
+#include "../Template/CharacterMoveClass.h"
+#include "../Template/CharacterSliding.h"
+#include "../Template/CharacterAttack.h"
+=======
 #include "../CharacterMoveClass.h"
 #include "SoccerSliding.h"
 #include "SoccerDash.h"
 #include "../CharacterAttack.h"
 #include "../CharacterShotAttackClass.h"
 #include "../CharacterCounterClass.h"
+>>>>>>> c4abe03b37255dbd8036da53888bca9bc4e32b7e
 
 
 //****************************************************

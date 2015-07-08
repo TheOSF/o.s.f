@@ -1,7 +1,7 @@
 #pragma once
 
 #include "iextreme.h"
-#include "../Damage/Damage.h"
+#include "../../Damage/Damage.h"
 
 class CharacterBase;
 

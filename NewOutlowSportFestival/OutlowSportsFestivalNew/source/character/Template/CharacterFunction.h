@@ -2,8 +2,8 @@
 #define __CHARACTER_FUNCTION_H__
 
 #include "iextreme.h"
-#include "../GameSystem/ForwardDecl.h"
-#include "../Damage/Damage.h"
+#include "../../GameSystem/ForwardDecl.h"
+#include "../../Damage/Damage.h"
 
 class CharacterBase;
 

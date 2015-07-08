@@ -1,10 +1,16 @@
 #ifndef __BASEBALL_PLAYER_H__
 #define __BASEBALL_PLAYER_H__
 
+<<<<<<< HEAD
+#include "../Template/CharacterBase.h"
+#include "../Template/CharacterRenderer.h"
+#include "../Template/CharacterStateTemplate.h"	
+=======
 #include "../CharacterBase.h"
 #include "../CharacterRenderer.h"
 #include "../CharacterStateTemplate.h"	
 #include "../../Ball/UsualBall.h"
+>>>>>>> c4abe03b37255dbd8036da53888bca9bc4e32b7e
 
 class BaseballPlayer;
 

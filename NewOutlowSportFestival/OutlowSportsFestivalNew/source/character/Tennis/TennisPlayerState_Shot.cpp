@@ -2,12 +2,12 @@
 #include "TennisPlayerState_UsualMove.h"
 #include "Tennis_HitEvent.h"
 #include "../../GameSystem/GameController.h"
-#include "../CharacterFunction.h"
+#include "../Template/CharacterFunction.h"
 #include "../../Ball/UsualBall.h"
 #include "../../Damage/Damage.h"
-#include "../CharacterCounterClass.h"
-#include "../CharacterMoveClass.h"
-#include "../CharacterShotAttackClass.h"
+#include "../Template/CharacterCounterClass.h"
+#include "../Template/CharacterMoveClass.h"
+#include "../Template/CharacterShotAttackClass.h"
 
 
 //****************************************************

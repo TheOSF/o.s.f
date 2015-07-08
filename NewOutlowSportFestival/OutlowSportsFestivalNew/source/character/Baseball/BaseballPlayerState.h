@@ -3,8 +3,13 @@
 
 #include "BaseballPlayer.h"
 
+<<<<<<< HEAD
+#include "../Template/CharacterMoveClass.h"
+
+=======
 #include "../CharacterMoveClass.h"
 #include "../CharacterShotAttackClass.h"
+>>>>>>> c4abe03b37255dbd8036da53888bca9bc4e32b7e
 //****************************************************
 //	野球プレイヤーの操作クラスヘッダー
 //****************************************************

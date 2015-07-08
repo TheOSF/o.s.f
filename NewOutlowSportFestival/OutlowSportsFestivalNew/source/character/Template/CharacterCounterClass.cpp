@@ -5,7 +5,7 @@
 
 #include "CharacterMoveClass.h"
 
-#include "../Ball/Ball.h"
+#include "../../Ball/Ball.h"
 
 
 //***************************************************

@@ -1,7 +1,7 @@
 #include "SoccerPlayerState.h"
 #include "../../GameSystem/GameController.h"
-#include "../CharacterFunction.h"
-#include "../CharacterBase.h"
+#include "../Template/CharacterFunction.h"
+#include "../Template/CharacterBase.h"
 
 void SoccerState_PlayerControll_Move::Enter(SoccerPlayer* s)
 {

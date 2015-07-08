@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __CHARACTER_DAMAGE_VANISH_H__
+#define __CHARACTER_DAMAGE_VANISH_H__
 
 #include "iextreme.h"
 #include "../GameSystem/ForwardDecl.h"
@@ -7,7 +8,7 @@
 //***************************************************
 //		キャラクター共通 ひるみクラス
 //***************************************************
-class CharacterDamageMotion
+class CharacterDamageVanish
 {
 public:
 	// パラメータ
@@ -31,15 +32,15 @@ public:
 	};
 
 	// コンストラクタ
-	CharacterDamageMotion(
+	CharacterDamageVanish(
 		CharacterBase* pCharacter,
 		Event* pEvent,
-		DamageManager::HitEventBase* pHitEvent, 
+		DamageManager::HitEventBase* pHitEvent,
 		const Params& params
 		);
 
 	// デストラクタ
-	~CharacterDamageMotion();
+	~CharacterDamageVanish();
 
 	// 更新
 	void Update();
@@ -54,3 +55,4 @@ private:
 	DamageManager::HitEventBase*   m_pHitEvent;   //　ヒットイベント
 };
 
+#endif

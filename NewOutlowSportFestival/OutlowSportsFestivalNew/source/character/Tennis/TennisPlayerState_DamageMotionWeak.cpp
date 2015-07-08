@@ -1,7 +1,7 @@
 #include "TennisPlayerState_DamageMotionWeak.h"
 #include "TennisPlayerState_UsualMove.h"
 #include "Tennis_HitEvent.h"
-#include "../CharacterFunction.h"
+#include "../Template/CharacterFunction.h"
 
 TennisState_DamageMotion_Weak::TennisState_DamageMotion_Weak(
 	TennisPlayer* pTennis,

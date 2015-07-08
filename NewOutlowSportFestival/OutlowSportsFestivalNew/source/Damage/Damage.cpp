@@ -10,12 +10,20 @@ Value(1),
 vec(Vector3Zero),
 HitCount(0)
 {
+#ifdef _DEBUG
 	MyAssert(DefDamageMgr.AddDamage(this), "ダメージ登録の失敗");
+#else
+	DefDamageMgr.AddDamage(this);
+#endif
 }
 
 DamageBase::~DamageBase()
 {
+#ifdef _DEBUG
 	MyAssert(DefDamageMgr.EraceDamage(this), "ダメージ削除の失敗");
+#else
+	DefDamageMgr.EraceDamage(this);
+#endif
 }
 
 DamageShpere::DamageShpere():
