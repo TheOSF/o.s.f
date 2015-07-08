@@ -18,7 +18,7 @@ void chr_func::AddXZMove(CharacterBase*p, float x, float z, float max_speed)
 	SetMaxXZspeed(p, max_speed);
 }
 
-//前方向に移動量をタス
+//前方向に移動量を足す
 void chr_func::AddMoveFront(CharacterBase*p, float speed, float max_speed)
 {
 	p->m_Params.move.x += sinf(p->m_Params.angle)*speed;

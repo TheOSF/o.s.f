@@ -4,109 +4,88 @@
 
 
 //****************************************************************
-//		キャラクタ共通の動きクラス
+//		キャラクタ共通の攻撃クラス
 //****************************************************************
 
-CharacterAttack_A::CharacterAttack_A(
+CharacterNearAttack::CharacterNearAttack(
 	CharacterBase*	pParent,
 	const Params&	param,
-	MoveEvent*		pMoveEvent) :
+	AttackEvent*		pMoveEvent) :
 	m_StickValue(0, 0),
-	m_pParent(pParent),
-	m_isRun(false),
-	m_pMoveEvent(pMoveEvent)
+	m_pCharacter(pParent),
+	m_timer(0),
+	m_pAttackEvent(pMoveEvent)
 {
 	m_Params = param;
 }
-
-void CharacterAttack_A::Update()
+CharacterNearAttack::~CharacterNearAttack()
 {
-	bool now = true;
-
-	m_pMoveEvent->Update(now, (m_Params.MaxSpeed > 0.0f) ? (Vector3XZLength(m_pParent->m_Params.move) / m_Params.MaxSpeed) : (0));
-
-	if (now)
+	delete m_pAttackEvent;
+}
+bool CharacterNearAttack::Update()
+{
+	if (m_timer == 0)
 	{
-		chr_func::AddMoveFront(m_pParent, m_Params.Acceleration, m_Params.MaxSpeed);
+		// 攻撃開始
+		m_pAttackEvent->AttackStart();
+
+		// 移動
+		chr_func::AddMoveFront(
+			m_pCharacter,
+			m_Params.speed,
+			m_Params.speed
+			);
+
+		// 移動方向補正
+		chr_func::AddXZMove(
+			m_pCharacter,
+			m_StickValue.x,
+			m_StickValue.y,
+			m_Params.speed
+			);
+		// 向き補正
 		chr_func::AngleControll(
-			m_pParent,
-			m_pParent->m_Params.pos + Vector3(m_StickValue.x, 0, m_StickValue.y),
+			m_pCharacter,
+			m_pCharacter->m_Params.pos + Vector3(m_StickValue.x, 0, m_StickValue.y),
 			m_Params.TurnSpeed
 			);
 	}
-	else
-	{
-		chr_func::XZMoveDown(m_pParent, m_Params.DownSpeed);
-	}
+	// 座標更新
+	chr_func::PositionUpdate(m_pCharacter);
 
-	if (now != m_isRun)
-	{
-		m_isRun = now;
-		if (now)
-		{
-			m_pMoveEvent->RunStart();
-		}
-		else
-		{
-			m_pMoveEvent->StandStart();
-		}
-	}
+	// 減速
+	chr_func::XZMoveDown(
+		m_pCharacter,
+		m_Params.speed);
 
-	chr_func::PositionUpdate(m_pParent);
+	// 更新
+	m_pAttackEvent->Update();
+
+	if (m_timer == m_Params.AttackFrame)
+	{// ダメージ発生フレーム
+		m_pAttackEvent->Assault();
+	}
+	if (m_timer >= m_Params.EndFrame)
+	{// 攻撃終了
+		m_pAttackEvent->AttackEnd();
+		return false;
+	}
+	// タイマー更新
+	m_timer++;
+
+	return true;
 }
-
-void CharacterAttack_A::SetStickValue(CrVector2 StickValue)
+void CharacterNearAttack::SetStickValue(CrVector2 StickValue)
 {
 	m_StickValue = StickValue;
 }
-CharacterAttack_B::CharacterAttack_B(CharacterBase*	pParent,
-	const Params&	param,
-	MoveEvent*		pMoveEvent):
-	m_StickValue(0, 0),
-	m_pParent(pParent),
-	m_isRun(false),
-	m_pMoveEvent(pMoveEvent)
+// コンボできるかどうか
+bool CharacterNearAttack::CanDoCombo()const
 {
-	m_Params = param;
+	return (m_timer >= m_Params.CanDoComboFrame);
 }
-
-void CharacterAttack_B::Update()
+// コンボ実行できるかどうか
+bool CharacterNearAttack::CanGoNextCombo()const
 {
-	bool now = true;
-
-	m_pMoveEvent->Update(now, (m_Params.MaxSpeed > 0.0f) ? (Vector3XZLength(m_pParent->m_Params.move) / m_Params.MaxSpeed) : (0));
-
-	if (now)
-	{
-		chr_func::AddMoveFront(m_pParent, m_Params.Acceleration, m_Params.MaxSpeed);
-		chr_func::AngleControll(
-			m_pParent,
-			m_pParent->m_Params.pos + Vector3(m_StickValue.x, 0, m_StickValue.y),
-			m_Params.TurnSpeed
-			);
-	}
-	else
-	{
-		chr_func::XZMoveDown(m_pParent, m_Params.DownSpeed);
-	}
-
-	if (now != m_isRun)
-	{
-		m_isRun = now;
-		if (now)
-		{
-			m_pMoveEvent->RunStart();
-		}
-		else
-		{
-			m_pMoveEvent->StandStart();
-		}
-	}
-
-	chr_func::PositionUpdate(m_pParent);
-}
-
-void CharacterAttack_B::SetStickValue(CrVector2 StickValue)
-{
-	m_StickValue = StickValue;
+	return (m_timer >= m_Params.GoNextComboFrame);
 }
